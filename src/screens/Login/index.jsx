@@ -1,19 +1,11 @@
 import { useContext, useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
-// import { AuthContext } from '../../contexts/AuthContext';
-// import logo from '../../images/drogatec_Logo.png';
 import { styles } from './styles';
 
 export const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-//   const { loginContext } = useContext(AuthContext);
 
-//   const handleLogin = async () => {
-//     if (username != '' && password != '') {
-//       loginContext(username, password);
-//     }
-//   };
 
   return (
     <View style={styles.containerPrincipal}>
@@ -23,7 +15,7 @@ export const Login = () => {
           <ImageBackground source={logo} style={styles.imagemLogo} />
         </View> */}
 
-        <Text>LOGIN</Text>
+        <Text style={styles.tituloTexto}>E-main</Text>
         <TextInput
           style={styles.input}
           placeholder='INSIRA SEU LOGIN'
@@ -31,7 +23,7 @@ export const Login = () => {
           value={username}
         />
 
-        <Text>SENHA</Text>
+        <Text style={styles.tituloTexto}>Senha</Text>
         <TextInput
           style={styles.input}
           placeholder='INSIRA SUA SENHA'
@@ -40,11 +32,11 @@ export const Login = () => {
           secureTextEntry={true}
         />
 
-        {/* <TouchableOpacity onPress={() => handleLogin()}>
-          <View style={styles.botaoEntrar}>
-            <Text style={styles.entrar}>ENTRAR</Text>
-          </View>
-        </TouchableOpacity> */}
+        <Text>esqueci minha senha</Text>
+
+        <View style={styles.botaoEntrar}>
+          <Text style={styles.entrar}>ENTRAR</Text>
+        </View>
 
       </View>
     </View>
