@@ -22,16 +22,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         borderRadius: 7,
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 2,
-        // },
-        // minHeight: 400,
-        // shadowOpacity: 0.25,
-        // shadowRadius: 3.84,
-
-        // elevation: 5,
+        marginTop: 100
     },
 
     input: {
@@ -55,13 +46,19 @@ export const styles = StyleSheet.create({
         width: 100,
         height: 30,
         borderRadius: 10,
-        marginTop: 30,
+        marginTop: 40,
         color: '#FFFFFF'
     },
 
     entrar: {
         color: 'white',
         fontWeight: 'bold'
+    },
+
+    cadastro: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 18,
     },
 
     logoContainer: {

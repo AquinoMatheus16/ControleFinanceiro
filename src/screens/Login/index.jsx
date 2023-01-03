@@ -25,7 +25,7 @@ export const Login = ({ navigation }) => {
           <ImageBackground source={logo} style={styles.imagemLogo} />
         </View> */}
 
-        <Text style={styles.tituloTexto}>E-main</Text>
+        <Text style={styles.tituloTexto}>E-mail</Text>
         <TextInput
           style={styles.input}
           placeholder='INSIRA SEU EMAIL'
@@ -56,7 +56,14 @@ export const Login = ({ navigation }) => {
         </View>
         </TouchableOpacity>
 
+
       </View>
+        <TouchableOpacity 
+        onPress={() => navigation.navigate('Cadastrar')}>
+        <View>
+          <Text style={styles.cadastro}>Cadastre-se</Text>
+        </View>
+        </TouchableOpacity>
     </View>
   );
 };
