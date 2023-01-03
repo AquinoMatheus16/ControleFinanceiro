@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
 import {AuthContext} from '../../contexts/AuthContext';
-import { styles } from './styles';
+import { styles } from '../Login/styles';
 
-export const Login = ({ navigation }) => {
+export const RecuperarSenha = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   
@@ -42,12 +42,7 @@ export const Login = ({ navigation }) => {
           secureTextEntry={true}
         />
 
-        <TouchableOpacity 
-        onPress={() => navigation.navigate('RecuperarSenha')}>
-        <View>
-          <Text style={styles.entrar}>esqueci minha senha</Text>
-        </View>
-        </TouchableOpacity>
+        <Text>esqueci minha senha</Text>
 
         <TouchableOpacity 
         onPress={() => handleLogin()}>
