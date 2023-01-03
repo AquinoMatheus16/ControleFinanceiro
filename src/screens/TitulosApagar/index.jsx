@@ -1,8 +1,27 @@
-import { Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { styles } from "./styles";
-import { TitulosCard } from "../../components/TitulosCard/Index";
+import { TitulosCard } from "../../components/TitulosCard";
+import { useEffect, useState } from "react";
+import { getTitulo } from "../../services/titulo";
+// import { useNavigation } from "@react-navigation/native";
 
 export const TitulosApagar = () => {
+
+    const [titulos, setTitulos] = useState([]);
+    // const navigation = useNavigation();
+
+    const fetchData = async () => {
+
+        const tituloList = await getTitulo();
+        setTitulos(tituloList);
+        // setItemFiltrado(produtoList);
+
+    };
+
+    useEffect(() => {
+        // navigation.addListener('focus', () => fetchData())
+        fetchData();
+    }, []);
 
     return (
         <View style={styles.containerMian}>
@@ -12,10 +31,12 @@ export const TitulosApagar = () => {
             <Text style={styles.textoTitulo}>Títulos a pagar</Text>
 
             <View style={styles.containerCard}>
-                <TitulosCard />
-                <TitulosCard />
-                <TitulosCard />
-                <TitulosCard />
+                {/* <TitulosCard item={item} /> */}
+                <FlatList
+                    data={titulos}
+                    keyExtractor={item => item.idTitulo}
+                    renderItem={({ item }) => <TitulosCard item={item} />}
+                />
             </View>
         </View>
     )

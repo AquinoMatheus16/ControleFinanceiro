@@ -5,7 +5,8 @@ export const TitulosCard = ({ item }) => {
 
     return (
         <View style={styles.containerMain}>
-            <Text style={styles.texto}>GVUGYUYH</Text>
+            <Text style={styles.texto}>{item.descricao}</Text>
+            {/* <Text style={styles.texto}>jjjddd</Text> */}
         </View>
     )
 };
