@@ -5,6 +5,7 @@ import { RotasPrivadas } from "./RotasPrivadas";
 const Stack = createNativeStackNavigator();
 
 export const RotasPublicas = () => {
+
     return (
         <Stack.Navigator>
             <Stack.Screen name="Login" component={Login} options={{ title: "MEU LOGIN", headerShown: false }} />
@@ -12,4 +13,4 @@ export const RotasPublicas = () => {
             <Stack.Screen name="Privado" component={RotasPrivadas} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
-}
+};
