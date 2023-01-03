@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
+
 
 export const styles = StyleSheet.create({
 
@@ -22,16 +23,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         borderRadius: 7,
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 2,
-        // },
-        // minHeight: 400,
-        // shadowOpacity: 0.25,
-        // shadowRadius: 3.84,
-
-        // elevation: 5,
+        marginTop: 50
     },
 
     input: {
@@ -55,13 +47,19 @@ export const styles = StyleSheet.create({
         width: 100,
         height: 30,
         borderRadius: 10,
-        marginTop: 30,
+        marginTop: 40,
         color: '#FFFFFF'
     },
 
     entrar: {
         color: 'white',
         fontWeight: 'bold'
+    },
+
+    cadastro: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 18,
     },
 
     logoContainer: {
@@ -73,20 +71,20 @@ export const styles = StyleSheet.create({
     },
 
     imagemLogo: {
-        width: 150,
-        height: 150,
-        marginBottom: 30
+        flex: 1,
     },
 
     tituloTexto: {
         fontSize: 18,
         color: '#000000'
     },
-    titulo: {
-        fontSize: 20,
-        color: '#000000',
-        marginTop: 20,
-        marginBottom: 20
+    img: {
+        width: 150,
+        height: 150,
+        marginBottom: 40,
+        borderWidth: 2,
+        borderColor: 'black',
+        borderRadius: 100
     }
 
 });

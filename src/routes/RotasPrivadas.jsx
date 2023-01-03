@@ -9,7 +9,6 @@ import { StatusBar } from 'expo-status-bar';
 import { TitulosApagar } from '../screens/TitulosApagar';
 import { TitulosAreceber } from '../screens/TitulosAreceber';
 import { Periodo } from '../screens/Periodo';
-import { Login } from '../screens/Login';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
@@ -54,7 +53,7 @@ export const RotasPrivadas = () => {
                     component={Conta}
                     options={{ headerShown: false }}
                 />
-                
+
             </Tab.Navigator>
 
             <StatusBar

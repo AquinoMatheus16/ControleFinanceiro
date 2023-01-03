@@ -73,12 +73,20 @@ export const styles = StyleSheet.create({
     },
 
     imagemLogo: {
-        flex: 1,
+        width: 150,
+        height: 150,
+        marginBottom: 30
     },
 
     tituloTexto: {
         fontSize: 18,
         color: '#000000'
+    },
+    titulo: {
+        fontSize: 20,
+        color: '#000000',
+        marginTop: 20,
+        marginBottom: 20
     }
 
 });
