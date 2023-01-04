@@ -2,27 +2,34 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
 
+    scrollView: {
+        flex: 1,
+        backgroundColor: '#0C609C',
+    },
+
     containerMain: {
-        width: 300,
+        marginTop: 30,
         alignItems: 'center',
-        marginTop: 20,
-        borderRadius: 20,
-        padding: 10,
-        // backgroundColor: '#0227FB',
+        justifyContent: 'center'
+    },
+
+    container: {
+        width: "80%",
+        justifyContent: 'center',
+        minHeight: 400,
         backgroundColor: '#FFFFFF',
+        padding: 15,
+        borderRadius: 10,
+        marginBottom: 30
     },
 
     texto: {
         fontSize: 20,
-        // color: '#FFFFFF',
-        color: '#000000',
-        borderBottomWidth: 1,
-        borderBottomColor: '#000000',
-        marginBottom: 10,
-        width:'100%'
+        marginBottom: 15
     },
 
     textoTitulo: {
+        marginLeft: '25%',
         fontSize: 22,
         width: '50%',
         textAlign: 'center',
@@ -31,4 +38,5 @@ export const styles = StyleSheet.create({
         borderBottomColor: '#000000',
         marginBottom: 10
     }
+
 });
