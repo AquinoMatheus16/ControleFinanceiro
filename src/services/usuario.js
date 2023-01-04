@@ -2,31 +2,31 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from './api';
 
 // GET
-// export const getUsuario = async () => {
+export const getUsuario = async () => {
 
-//     try {
-//         const token = await AsyncStorage.getItem("@app_token")
-//         const { data } = await api.get(`/api/usuarios`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
-//         // console.log(data)
+    try {
+        const token = await AsyncStorage.getItem("@app_token")
+        const { data } = await api.get(`/api/usuarios`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
+        // console.log(data)
 
-//         return data;
-//     } catch (e) {
-//         console.error(`Blaa: ${e}`);
-//     }
-// };
+        return data;
+    } catch (e) {
+        console.error(`Blaa: ${e}`);
+    }
+};
 
 // GET ID
-// export const getUsuarioId = async (usuario) => {
-//     try {
-//         const token = await AsyncStorage.getItem("@app_token")
-//         const { data } = await api.get(`/api/usuarios/${titulo.id}`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
-//         // console.log(data)
+export const getUsuarioId = async (id) => {
+    try {
+        const token = await AsyncStorage.getItem("@app_token")
+        const { data } = await api.get(`/api/usuarios/${id}`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
+        // console.log(data)
 
-//         return data;
-//     } catch (e) {
-//         console.error(e);
-//     }
-// };
+        return data;
+    } catch (e) {
+        console.error(e);
+    }
+};
 
 // POST
 export const postUsuario = async (novoUsuario) => {
