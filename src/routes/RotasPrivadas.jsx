@@ -9,6 +9,7 @@ import { StatusBar } from 'expo-status-bar';
 import { TitulosApagar } from '../screens/TitulosApagar';
 import { TitulosAreceber } from '../screens/TitulosAreceber';
 import { Periodo } from '../screens/Periodo';
+import { TitulosDetalhe } from '../screens/TituloDetalhe';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
@@ -21,6 +22,7 @@ const HomeStack = () => {
             <Stack.Screen name='TitulosApagar' component={TitulosApagar} options={{ headerShown: false }} />
             <Stack.Screen name='TitulosAreceber' component={TitulosAreceber} options={{ headerShown: false }} />
             <Stack.Screen name='Periodo' component={Periodo} options={{ headerShown: false }} />
+            <Stack.Screen name='TitulosDetalhe' component={TitulosDetalhe} options={{ headerShown: true }} />
         </Stack.Navigator>
     )
 };
