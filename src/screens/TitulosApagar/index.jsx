@@ -34,7 +34,7 @@ export const TitulosApagar = () => {
                 {/* <TitulosCard item={item} /> */}
                 <FlatList
                     data={titulos}
-                    keyExtractor={item => item.idTitulo}
+                    keyExtractor={item => item.id}
                     renderItem={({ item }) => <TitulosCard item={item} />}
                 />
             </View>

@@ -39,9 +39,9 @@ export const styles = StyleSheet.create({
 
     containerCard: {
         flex: 1,
-        marginTop: 50,
+        marginTop: 20,
         width: '100%',
-        backgroundColor: '#FF3233',
+        // backgroundColor: '#FF3233',
         alignItems: 'center'
     }
 });
