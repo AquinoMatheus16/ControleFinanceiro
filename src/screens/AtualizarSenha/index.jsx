@@ -3,11 +3,23 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { styles } from "./styles";
 import logo from "..//../img/cadeado.png"
+import { async } from "q";
 
 export const AtualizarSenha = () => {
 
+    const { tok } = useParams();
+
     const [senha, setSenha] = useState('');
     const [confirmaSenha, setConfirmaSenha] = useState('');
+
+    const handleSenha = async () => {
+        if(senha != confirmaSenha) {
+            alert("Senhas não são iguais");
+            return;
+        }
+        const token = await AsyncStorage.getItem("@app_token")
+        await api.put(`/api/usuarios/${token}`, senha, { headers: { "Authorization": `${token}`, "Accept": "application/json" } });
+    }
 
 
     return (
@@ -38,6 +50,7 @@ export const AtualizarSenha = () => {
                 />
 
                 <TouchableOpacity
+                onPress={() => handleSenha()}
                 >
                     <View style={styles.botaoEntrar}>
                         <Text style={styles.entrar}>Atualizar</Text>
