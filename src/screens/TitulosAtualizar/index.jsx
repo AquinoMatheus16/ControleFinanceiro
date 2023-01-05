@@ -8,24 +8,23 @@ import { styles } from "./styles";
 
 export const TitulosAtualizar = ({ route }) => {
 
-    const [descricao, setDescricao] = useState("");
-    const [observacao, setObservacao] = useState("");
-    const [valor, setValor] = useState("");
-    const [dataReferencia, setDataReferencia] = useState("");
-    const [dataVencimento, setDataVencimento] = useState("");
+    const { item } = route.params;
+    const [descricao, setDescricao] = useState(item.descricao);
+    const [observacao, setObservacao] = useState(item.observacao);
+    const [valor, setValor] = useState("" + item.valor);
+    const [dataReferencia, setDataReferencia] = useState(item.dataReferencia);
+    const [dataVencimento, setDataVencimento] = useState(item.dataVencimento);
     const [tipo, setTipo] = useState("");
 
-    const [centroDeCusto, setCentroDeCusto] = useState([]);
+    const [centroDeCusto, setCentroDeCusto] = useState(item.centroDeCusto);
     const [data, setData] = useState([]);
     const [centroDeCustoSalvos, setCentroDeCustoSalvos] = useState([]);
     const [selected, setSelected] = useState("");
-    const [centroDeCustoJson, setCentroDeCustoJson] = useState("");
+    const [centroDeCustoJson, setCentroDeCustoJson] = useState(item.centroDeCusto);
 
     const [selectedTipo, setSelectedTipo] = useState([]);
 
     const navigation = useNavigation();
-    const { item } = route.params;
-    console.log("IDID: ", item.id);
 
     const selectTipo = [
         { key: '1', value: 'APAGAR' },
@@ -41,7 +40,6 @@ export const TitulosAtualizar = ({ route }) => {
                 })
                 setData(newArray)
                 setCentroDeCustoSalvos(response)
-                // console.log("centroDeCustoSalvos: ", centroDeCustoSalvos);
             })
             .catch((e) => {
                 console.log(e)
@@ -54,7 +52,6 @@ export const TitulosAtualizar = ({ route }) => {
                 setCentroDeCustoJson(item)
             }
         })
-        // console.log("centroDeCustoJson: ", centroDeCusto)
     }
 
     useEffect(() => {
@@ -62,28 +59,8 @@ export const TitulosAtualizar = ({ route }) => {
         centroDeCustoId()
     }, [centroDeCusto]);
 
-    useEffect(() => {
-        // setDescricao("Conta de luz");
-        // setObservacao("KL NKÇMBFV NDKBGJSDMKV MBJFD ZJHVHBFJ JZFGBUYSGFF");
-        // setValor(1500);
-        // setDataReferencia("2023-12-27T10:40:00.000+00:00");
-        // setDataVencimento(item.dataVencimento);
-        // setCentroDeCusto(item.centroDeCusto.id);
-
-        setDescricao(item.descricao);
-        setObservacao(item.observacao);
-        setValor("" + item.valor);
-        setDataReferencia(item.dataReferencia);
-        setDataVencimento(item.dataVencimento);
-        setCentroDeCusto(item.centroDeCusto.id);
-
-    }, [])
-
-    // console.log("HHHHHHHH", item);
     const put = async () => {
         try {
-
-            console.log("ID: " + item.id);
 
             const novoTitulo = {
                 descricao: descricao,
@@ -93,9 +70,9 @@ export const TitulosAtualizar = ({ route }) => {
                 dataVencimento: dataVencimento,
                 centroDeCusto: centroDeCustoJson,
             }
-            // console.log(novoTitulo);
-            const titulo = JSON.stringify(novoTitulo);
-            // console.log("Titulo: ", titulo);
+
+            JSON.stringify(novoTitulo);
+
             const formData = new FormData();
 
             formData.append('titulos', {
@@ -104,12 +81,9 @@ export const TitulosAtualizar = ({ route }) => {
                 name: 'titulos'
             })
 
-            const id = parseFloat(item.id)
-
             centroDeCustoId();
             const { data } = putTitulo(item, novoTitulo);
-            console.log("Data: ", novoTitulo);
-            console.log("ID: ", item);
+            console.log("novoTitulo: ", novoTitulo);
 
             Alert.alert(
                 'Aviso',
@@ -122,6 +96,8 @@ export const TitulosAtualizar = ({ route }) => {
                 ]
             );
             navigation.goBack();
+
+            console.log("centroDeCusto: ", centroDeCusto);
 
         } catch (error) {
             console.error("Erro: " + error);
@@ -171,7 +147,7 @@ export const TitulosAtualizar = ({ route }) => {
                     inputStyles={{ color: '#FFFFFF' }}
                     searchPlaceholder='Pesquisar'
                     placeholder='Centro de custo'
-                    defaultOption={{ key: item.centroDeCusto.id, value: item.centroDeCusto.descricao }}
+                    defaultOption={{ key: item.id, value: item.centroDeCusto.descricao }}
                 />
 
                 <Text style={styles.texto}>Descrção</Text>
