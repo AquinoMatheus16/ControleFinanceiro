@@ -2,9 +2,30 @@ import { useContext, useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, ImageBackground, ScrollView, Image } from 'react-native';
 import { styles } from './styles';
 import logo from "..//../img/cadeado.png"
+import { api } from '../../services/api';
 
-export const RecuperarSenha = ({ navigation }) => {
-  const [email, setEmail] = useState('');
+export const RecuperarSenha = () => {
+
+  const [envioEmail, setEnvioEmail] = useState("");
+
+  const enviaToken = async () => {
+
+    try {
+
+      if (envioEmail === "" || envioEmail === null) {
+        return (
+          alert("Preencha os campos")
+        )
+      }
+
+      await api.post(`/api/usuarios/recover/${envioEmail}`);
+      alert("E-mail enviado com sucesso!");
+
+    } catch (error) {
+      alert("E-mail inválido");
+    }
+
+  }
 
   return (
     <View style={styles.containerPrincipal}>
@@ -24,12 +45,12 @@ export const RecuperarSenha = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder='INSIRA SEU EMAIL'
-          onChangeText={setEmail}
-          value={email}
+          onChangeText={setEnvioEmail}
+          value={envioEmail}
         />
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('AtualizarSenha')}
+          onPress={() => enviaToken()}
         >
           <View style={styles.botaoEntrar}>
             <Text style={styles.entrar}>ENVIAR</Text>
