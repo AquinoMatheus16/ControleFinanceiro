@@ -1,6 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text } from "react-native";
 import { Home } from '../screens/Home';
 import { CentroDeCusto } from '../screens/CentroDeCusto';
 import { Titulos } from '../screens/Titulo';
@@ -10,6 +9,8 @@ import { TitulosApagar } from '../screens/TitulosApagar';
 import { TitulosAreceber } from '../screens/TitulosAreceber';
 import { Periodo } from '../screens/Periodo';
 import { TitulosDetalhe } from '../screens/TituloDetalhe';
+import { TituloCadastra } from '../screens/TituloCadastra';
+import { HeaderBackButton } from '@react-navigation/elements';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
@@ -22,7 +23,36 @@ const HomeStack = () => {
             <Stack.Screen name='TitulosApagar' component={TitulosApagar} options={{ headerShown: false }} />
             <Stack.Screen name='TitulosAreceber' component={TitulosAreceber} options={{ headerShown: false }} />
             <Stack.Screen name='Periodo' component={Periodo} options={{ headerShown: false }} />
-            <Stack.Screen name='TitulosDetalhe' component={TitulosDetalhe} options={{ headerShown: true }} />
+            <Stack.Screen name='TitulosDetalhe' component={TitulosDetalhe} options={({ navigation }) => ({
+                headerLeft: (props) => (
+                    <HeaderBackButton
+                        {...props}
+                        onPress={() => {
+                            navigation.navigate('TitulosApagar');
+                        }}
+                    />
+                ),
+            })} />
+        </Stack.Navigator>
+    )
+};
+
+const TituloStake = () => {
+
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name='Titulos' component={Titulos} options={{ headerShown: false }} />
+            <Stack.Screen name='TitulosDetalhe' component={TitulosDetalhe} options={({ navigation }) => ({
+                headerLeft: (props) => (
+                    <HeaderBackButton
+                        {...props}
+                        onPress={() => {
+                            navigation.navigate('Titulos');
+                        }}
+                    />
+                ),
+            })} />
+            <Stack.Screen name='Titulos Cadastra' component={TituloCadastra} options={{ headerShown: true }} />
         </Stack.Navigator>
     )
 };
@@ -45,8 +75,8 @@ export const RotasPrivadas = () => {
                 />
 
                 <Tab.Screen
-                    name="Titulos"
-                    component={Titulos}
+                    name="Titulo"
+                    component={TituloStake}
                     options={{ headerShown: false }}
                 />
 
