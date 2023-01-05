@@ -13,13 +13,6 @@ export const styles = StyleSheet.create({
         paddingTop: 20
     },
 
-    // containerInput: {
-    //     width: '80%',
-    //     alignItems: 'center',
-    //     padding: 10,
-    //     borderRadius: 10
-    // },
-
     textInput: {
         borderBottomWidth: 1,
         borderBottomColor: '#FFFFFF',

@@ -1,12 +1,12 @@
+import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { styles } from "./styles";
-import { SelectList } from 'react-native-dropdown-select-list';
-import { postTitulo } from "../../services/titulo";
+import { SelectList } from "react-native-dropdown-select-list";
 import { getCentroDeCusto } from "../../services/centroDeCusto";
-import { useNavigation } from "@react-navigation/native";
+import { putTitulo } from "../../services/titulo";
+import { styles } from "./styles";
 
-export const TituloCadastra = () => {
+export const TitulosAtualizar = ({ route }) => {
 
     const [descricao, setDescricao] = useState("");
     const [observacao, setObservacao] = useState("");
@@ -24,6 +24,8 @@ export const TituloCadastra = () => {
     const [selectedTipo, setSelectedTipo] = useState([]);
 
     const navigation = useNavigation();
+    const { item } = route.params;
+    console.log("IDID: ", item.id);
 
     const selectTipo = [
         { key: '1', value: 'APAGAR' },
@@ -60,8 +62,28 @@ export const TituloCadastra = () => {
         centroDeCustoId()
     }, [centroDeCusto]);
 
-    const post = async () => {
+    useEffect(() => {
+        // setDescricao("Conta de luz");
+        // setObservacao("KL NKÇMBFV NDKBGJSDMKV MBJFD ZJHVHBFJ JZFGBUYSGFF");
+        // setValor(1500);
+        // setDataReferencia("2023-12-27T10:40:00.000+00:00");
+        // setDataVencimento(item.dataVencimento);
+        // setCentroDeCusto(item.centroDeCusto.id);
+
+        setDescricao(item.descricao);
+        setObservacao(item.observacao);
+        setValor("" + item.valor);
+        setDataReferencia(item.dataReferencia);
+        setDataVencimento(item.dataVencimento);
+        setCentroDeCusto(item.centroDeCusto.id);
+
+    }, [])
+
+    // console.log("HHHHHHHH", item);
+    const put = async () => {
         try {
+
+            console.log("ID: " + item.id);
 
             const novoTitulo = {
                 descricao: descricao,
@@ -71,9 +93,9 @@ export const TituloCadastra = () => {
                 dataVencimento: dataVencimento,
                 centroDeCusto: centroDeCustoJson,
             }
-            console.log(novoTitulo);
-            JSON.stringify(novoTitulo);
-
+            // console.log(novoTitulo);
+            const titulo = JSON.stringify(novoTitulo);
+            // console.log("Titulo: ", titulo);
             const formData = new FormData();
 
             formData.append('titulos', {
@@ -82,13 +104,16 @@ export const TituloCadastra = () => {
                 name: 'titulos'
             })
 
+            const id = parseFloat(item.id)
+
             centroDeCustoId();
-            const { data } = postTitulo(novoTitulo);
-            // console.log(data);
+            const { data } = putTitulo(item, novoTitulo);
+            console.log("Data: ", novoTitulo);
+            console.log("ID: ", item);
 
             Alert.alert(
                 'Aviso',
-                'Título cadastrado com suecsso!',
+                'Título atualizado com suecsso!',
                 [
                     {
                         text: "OK",
@@ -99,10 +124,10 @@ export const TituloCadastra = () => {
             navigation.goBack();
 
         } catch (error) {
-            console.error(error);
+            console.error("Erro: " + error);
             Alert.alert(
                 'Aviso',
-                'Erro ao cadastrar.',
+                'Erro ao atualizar.',
                 [
                     {
                         text: "OK",
@@ -113,8 +138,8 @@ export const TituloCadastra = () => {
         };
     };
 
-    return (
 
+    return (
         <ScrollView style={styles.scrollView}>
             <View style={styles.containerMain}>
 
@@ -131,6 +156,7 @@ export const TituloCadastra = () => {
                     inputStyles={{ color: '#FFFFFF' }}
                     searchPlaceholder='Pesquisar'
                     placeholder='Tipo'
+                    defaultOption={{ key: item.tipo, value: item.tipo }}
                 />
 
                 <Text style={styles.textoTituloSelect}>Centro de custo</Text>
@@ -145,6 +171,7 @@ export const TituloCadastra = () => {
                     inputStyles={{ color: '#FFFFFF' }}
                     searchPlaceholder='Pesquisar'
                     placeholder='Centro de custo'
+                    defaultOption={{ key: item.centroDeCusto.id, value: item.centroDeCusto.descricao }}
                 />
 
                 <Text style={styles.texto}>Descrção</Text>
@@ -190,11 +217,11 @@ export const TituloCadastra = () => {
                     value={observacao}
                 />
 
-                <TouchableOpacity onPress={post} style={styles.touchableOpacity}>
-                    <Text>CADASTRAR</Text>
+                <TouchableOpacity onPress={put} style={styles.touchableOpacity}>
+                    <Text>ATUALIZAR</Text>
                 </TouchableOpacity>
 
             </View>
         </ScrollView>
     )
-}
+};

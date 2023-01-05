@@ -11,6 +11,7 @@ import { Periodo } from '../screens/Periodo';
 import { TitulosDetalhe } from '../screens/TituloDetalhe';
 import { TituloCadastra } from '../screens/TituloCadastra';
 import { HeaderBackButton } from '@react-navigation/elements';
+import { TitulosAtualizar } from '../screens/TitulosAtualizar';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
@@ -23,7 +24,7 @@ const HomeStack = () => {
             <Stack.Screen name='TitulosApagar' component={TitulosApagar} options={{ headerShown: false }} />
             <Stack.Screen name='TitulosAreceber' component={TitulosAreceber} options={{ headerShown: false }} />
             <Stack.Screen name='Periodo' component={Periodo} options={{ headerShown: false }} />
-            <Stack.Screen name='TitulosDetalhe' component={TitulosDetalhe} options={({ navigation }) => ({
+            <Stack.Screen name='Titulos ' component={TitulosDetalhe} options={({ navigation }) => ({
                 headerLeft: (props) => (
                     <HeaderBackButton
                         {...props}
@@ -42,7 +43,7 @@ const TituloStake = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name='Titulos' component={Titulos} options={{ headerShown: false }} />
-            <Stack.Screen name='TitulosDetalhe' component={TitulosDetalhe} options={({ navigation }) => ({
+            <Stack.Screen name='Titulos ' component={TitulosAtualizar} options={({ navigation }) => ({
                 headerLeft: (props) => (
                     <HeaderBackButton
                         {...props}
@@ -53,6 +54,7 @@ const TituloStake = () => {
                 ),
             })} />
             <Stack.Screen name='Titulos Cadastra' component={TituloCadastra} options={{ headerShown: true }} />
+            {/* <Stack.Screen name='Titulos Atualizar' component={TitulosAtualizar} options={{ headerShown: true }} /> */}
         </Stack.Navigator>
     )
 };

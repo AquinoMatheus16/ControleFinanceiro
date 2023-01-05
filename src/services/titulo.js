@@ -41,10 +41,10 @@ export const postTitulo = async (novoTitulo) => {
 };
 
 // PUT
-export const putTitulo = async (titulo) => {
+export const putTitulo = async (titulo, novoTitulo) => {
     try {
         const token = await AsyncStorage.getItem("@app_token")
-        const putTitulo = await api.put(`/api/titulos/${titulo.id}`, titulo, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
+        const putTitulo = await api.put(`/api/titulos/${titulo.id}`, novoTitulo, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
 
         return putTitulo;
     } catch (e) {
