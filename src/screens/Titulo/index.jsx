@@ -63,7 +63,6 @@ export const Titulos = () => {
                     renderItem={({ item }) => <TitulosCard item={item} />}
                 />
             </View>
-
         </View>
 
     )
