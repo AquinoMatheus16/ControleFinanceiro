@@ -10,11 +10,8 @@ export const TitulosCard = ({ item }) => {
     const dataV = new Date(item?.dataVencimento)
     const formatdataVencimento = format(dataV, "dd/MM/yyyy");
 
-    // console.log(item.centrosDeCustos);
-    // console.log(item?.centroDeCusto.descricao)
-
     return (
-        <TouchableOpacity onPress={() => navigation.navigate("TitulosDetalhe", { item: item })}>
+        <TouchableOpacity onPress={() => navigation.navigate("Titulos ", { item: item })}>
             <View style={styles.containerMain}>
 
                 {item?.descricao === null ? "" : <Text style={styles.textoTitulo}>{item?.descricao}</Text>}
