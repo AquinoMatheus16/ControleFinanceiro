@@ -8,10 +8,14 @@ import { StatusBar } from 'expo-status-bar';
 import { TitulosApagar } from '../screens/TitulosApagar';
 import { TitulosAreceber } from '../screens/TitulosAreceber';
 import { Periodo } from '../screens/Periodo';
-import { TitulosDetalhe } from '../screens/TituloDetalhe';
 import { TituloCadastra } from '../screens/TituloCadastra';
 import { HeaderBackButton } from '@react-navigation/elements';
 import { TitulosAtualizar } from '../screens/TitulosAtualizar';
+import { TituloDetalheHome } from '../screens/TituloDetalheHome';
+import { TitulosDetalhe } from '../screens/TituloDatalhe';
+import { CentroDeCustoAtualizar } from '../screens/CentroDeCustoAtualizar';
+import { CentroDeCustoCadastrar } from '../screens/CentroDeCustoCadastrar';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
@@ -24,7 +28,7 @@ const HomeStack = () => {
             <Stack.Screen name='TitulosApagar' component={TitulosApagar} options={{ headerShown: false }} />
             <Stack.Screen name='TitulosAreceber' component={TitulosAreceber} options={{ headerShown: false }} />
             <Stack.Screen name='Periodo' component={Periodo} options={{ headerShown: false }} />
-            <Stack.Screen name='Titulos ' component={TitulosDetalhe} options={({ navigation }) => ({
+            <Stack.Screen name='Titulos ' component={TituloDetalheHome} options={({ navigation }) => ({
                 headerLeft: (props) => (
                     <HeaderBackButton
                         {...props}
@@ -43,7 +47,7 @@ const TituloStake = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name='Titulos' component={Titulos} options={{ headerShown: false }} />
-            <Stack.Screen name='Titulos ' component={TitulosAtualizar} options={({ navigation }) => ({
+            <Stack.Screen name='Titulos ' component={TitulosDetalhe} options={({ navigation }) => ({
                 headerLeft: (props) => (
                     <HeaderBackButton
                         {...props}
@@ -54,7 +58,27 @@ const TituloStake = () => {
                 ),
             })} />
             <Stack.Screen name='Titulos Cadastra' component={TituloCadastra} options={{ headerShown: true }} />
-            {/* <Stack.Screen name='Titulos Atualizar' component={TitulosAtualizar} options={{ headerShown: true }} /> */}
+            <Stack.Screen name='Titulos Atualizar' component={TitulosAtualizar} options={{ headerShown: true }} />
+        </Stack.Navigator>
+    )
+};
+
+const CentroDecUstoStake = () => {
+
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name='CentroDeCustoStake' component={CentroDeCusto} options={{ headerShown: false }} />
+            <Stack.Screen name='Centro De Custo Atualizar' component={CentroDeCustoAtualizar} options={({ navigation }) => ({
+                headerLeft: (props) => (
+                    <HeaderBackButton
+                        {...props}
+                        onPress={() => {
+                            navigation.navigate('CentroDeCustoStake');
+                        }}
+                    />
+                ),
+            })} />
+            <Stack.Screen name='Centro De Custo Cadastrar' component={CentroDeCustoCadastrar} options={{ headerShown: true }} />
         </Stack.Navigator>
     )
 };
@@ -72,7 +96,7 @@ export const RotasPrivadas = () => {
 
                 <Tab.Screen
                     name="CentroDeCusto"
-                    component={CentroDeCusto}
+                    component={CentroDecUstoStake}
                     options={{ headerShown: false }}
                 />
 

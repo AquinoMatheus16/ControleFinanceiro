@@ -3,7 +3,7 @@ import { styles } from "./styles";
 import { format } from "date-fns";
 import { ScrollView } from "react-native-gesture-handler";
 
-export const TitulosDetalhe = ({ route }) => {
+export const TituloDetalheHome = ({ route }) => {
 
     const { item } = route.params;
 
