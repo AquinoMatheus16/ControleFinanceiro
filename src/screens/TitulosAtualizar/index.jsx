@@ -95,7 +95,7 @@ export const TitulosAtualizar = ({ route }) => {
                     }
                 ]
             );
-            navigation.goBack();
+            navigation.navigate("Titulos");
 
             console.log("centroDeCusto: ", centroDeCusto);
 
@@ -113,7 +113,6 @@ export const TitulosAtualizar = ({ route }) => {
             );
         };
     };
-
 
     return (
         <ScrollView style={styles.scrollView}>

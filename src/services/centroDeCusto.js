@@ -19,7 +19,7 @@ export const getCentroDeCusto = async () => {
 export const getCentroDeCustoId = async (centroDeCusto) => {
     try {
         const token = await AsyncStorage.getItem("@app_token")
-        const { data } = await api.get(`/api/centroDeCustos/${centroDeCusto.id}`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
+        const { data } = await api.get(`/api/centrodecustos/${centroDeCusto.id}`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
         // console.log(data)
 
         return data;
@@ -32,7 +32,7 @@ export const getCentroDeCustoId = async (centroDeCusto) => {
 export const postCentroDeCusto = async (novoCentroDeCusto) => {
     try {
         const token = await AsyncStorage.getItem("@app_token")
-        const centroDeCusto = await api.post(`/api/centroDeCustos`, novoCentroDeCusto, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
+        const centroDeCusto = await api.post(`/api/centrodecustos`, novoCentroDeCusto, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
 
         return centroDeCusto;
     } catch (e) {
@@ -41,12 +41,12 @@ export const postCentroDeCusto = async (novoCentroDeCusto) => {
 };
 
 // PUT
-export const putCentroDeCusto = async (centroDeCusto) => {
+export const putCentroDeCusto = async (centroDeCusto, novoCentroDeCusto) => {
     try {
         const token = await AsyncStorage.getItem("@app_token")
-        const putCentroDeCusto = await api.put(`/api/centroDeCustos/${centroDeCusto.id}`, centroDeCusto, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
+        const putTitulo = await api.put(`/api/centrodecustos/${centroDeCusto.id}`, novoCentroDeCusto, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
 
-        return putCentroDeCusto;
+        return putTitulo;
     } catch (e) {
         console.error(e);
     }
@@ -56,7 +56,7 @@ export const putCentroDeCusto = async (centroDeCusto) => {
 export const deleteCentroDeCusto = async (id) => {
     try {
         const token = await AsyncStorage.getItem("@app_token")
-        const deletedCentroDeCusto = await api.delete(`/api/centroDeCustos/${id}`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
+        const deletedCentroDeCusto = await api.delete(`/api/centrodecustos/${id}`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
 
         return deletedCentroDeCusto;
     } catch (e) {
