@@ -4,11 +4,14 @@ import { format } from "date-fns";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { deleteTitulo } from "../../services/titulo";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext } from "react";
 
 export const TitulosDetalhe = ({ route }) => {
 
     const { item } = route.params;
     const navigation = useNavigation();
+    const { setLoad } = useContext(AuthContext);
 
     const dataC = new Date(item?.dataCadastro)
     const formatdataCadastro = format(dataC, "dd/MM/yyyy");
@@ -22,7 +25,7 @@ export const TitulosDetalhe = ({ route }) => {
     const dataP = new Date(item?.dataPagamento)
     const formatdataPagamento = format(dataP, "dd/MM/yyyy");
 
-    const confirmarDeletar = () =>
+    const confirmarDeletar = () => {
         Alert.alert(
             "Aviso",
             "Deseja mesmo deletar o título?",
@@ -35,6 +38,7 @@ export const TitulosDetalhe = ({ route }) => {
                 { text: "OK", onPress: () => onDelete() }
             ]
         );
+    }
 
     const onDelete = async () => {
         try {
@@ -51,7 +55,11 @@ export const TitulosDetalhe = ({ route }) => {
                     }
                 ]
             );
+            setLoad(true)
             navigation.goBack();
+            setTimeout(() => {
+                setLoad(false)
+            }, 120);
 
         } catch (e) {
             console.error(e);

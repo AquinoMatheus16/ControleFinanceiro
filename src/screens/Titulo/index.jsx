@@ -1,10 +1,11 @@
-import { Text, View, TouchableOpacity, TextInput, FlatList } from "react-native";
+import { Text, View, TouchableOpacity, TextInput, FlatList, Alert } from "react-native";
 import { styles } from "./styles";
 import { EvilIcons } from '@expo/vector-icons';
 import { getTitulo } from "../../services/titulo";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { TitulosCard } from "../../components/TitulosCard";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const Titulos = () => {
 
@@ -12,6 +13,8 @@ export const Titulos = () => {
     const [itemFiltrado, setItemFiltrado] = useState([]);
     const [busca, setBusca] = useState("");
     const navigation = useNavigation();
+
+    const { load } = useContext(AuthContext);
 
     const fetchData = async () => {
         const tituloList = await getTitulo();
@@ -21,19 +24,23 @@ export const Titulos = () => {
 
     useEffect(() => {
         setItemFiltrado(titulos)
-        navigation.addListener('focus', () => fetchData())
-    }, [titulos]);
+
+    }, []);
 
     useEffect(() => {
+        setTimeout(() => {
+            fetchData();
 
-        fetchData();
-    }, []);
+        }, 150);
+
+    }, [load]);
 
     useEffect(() => {
         const resultado = titulos.filter((titulo) =>
             titulo.descricao.toLowerCase().includes(busca.toLowerCase())
         );
         setItemFiltrado(resultado)
+
     }, [busca]);
 
     return (

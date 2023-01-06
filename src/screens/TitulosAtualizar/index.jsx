@@ -1,10 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { getCentroDeCusto } from "../../services/centroDeCusto";
 import { putTitulo } from "../../services/titulo";
 import { styles } from "./styles";
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const TitulosAtualizar = ({ route }) => {
 
@@ -22,10 +23,10 @@ export const TitulosAtualizar = ({ route }) => {
     const [centroDeCustoSalvos, setCentroDeCustoSalvos] = useState([]);
     const [selected, setSelected] = useState("");
     const [centroDeCustoJson, setCentroDeCustoJson] = useState(item.centroDeCusto);
-
     const [selectedTipo, setSelectedTipo] = useState([]);
-
     const navigation = useNavigation();
+
+    const { setLoad } = useContext(AuthContext);
 
     const selectTipo = [
         { key: '1', value: 'APAGAR' },
@@ -76,14 +77,6 @@ export const TitulosAtualizar = ({ route }) => {
 
             JSON.stringify(novoTitulo);
 
-            const formData = new FormData();
-
-            formData.append('titulos', {
-                "string": JSON.stringify(novoTitulo),
-                type: 'application/json',
-                name: 'titulos'
-            })
-
             centroDeCustoId();
             putTitulo(item, novoTitulo);
 
@@ -97,8 +90,11 @@ export const TitulosAtualizar = ({ route }) => {
                     }
                 ]
             );
+            setLoad(true)
             navigation.navigate("Titulos");
-            // console.log("centroDeCusto: ", centroDeCusto);
+            setTimeout(() => {
+                setLoad(false)
+            }, 120);
 
         } catch (error) {
             console.error("Erro: " + error);
