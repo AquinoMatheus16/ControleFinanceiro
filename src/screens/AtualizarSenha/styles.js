@@ -21,17 +21,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-        borderRadius: 7,
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 2,
-        // },
-        // minHeight: 400,
-        // shadowOpacity: 0.25,
-        // shadowRadius: 3.84,
-
-        // elevation: 5,
+        borderRadius: 7
     },
 
     input: {

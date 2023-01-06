@@ -1,8 +1,23 @@
 import { FlatList, Text, View, ScrollView, TextInput, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { EvilIcons } from '@expo/vector-icons';
+import { getDashBoardTotal } from "../../services/titulo";
+import { useEffect, useState } from "react";
 
 export const Home = ({ navigation }) => {
+
+    const [total, setTotal] = useState("");
+
+    const fetchTotal = async () => {
+
+        const total = await getDashBoardTotal();
+        setTotal(total);
+
+    };
+
+    useEffect(() => {
+        fetchTotal();
+    }, []);
 
     return (
 
@@ -14,7 +29,7 @@ export const Home = ({ navigation }) => {
 
             <View style={styles.homeContainerMain}>
                 <Text style={styles.homeTexto}>Saldo</Text>
-                <Text style={styles.homeNumero}>R$: 00.00</Text>
+                <Text style={styles.homeNumero}>R$: {total.saldo}</Text>
 
                 <Text style={styles.homeTexto2}>Pesquisar</Text>
 

@@ -15,6 +15,20 @@ export const getTitulo = async () => {
     }
 };
 
+// GET
+export const getDashBoardTotal = async () => {
+
+    try {
+        const token = await AsyncStorage.getItem("@app_token")
+        const { data } = await api.get(`/api/dashboard/total`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
+        // console.log(data)
+
+        return data;
+    } catch (e) {
+        console.error(`Blaa: ${e}`);
+    }
+};
+
 // GET ID
 export const getTituloId = async (titulo) => {
     try {
