@@ -28,7 +28,7 @@ export const TitulosDetalhe = ({ route }) => {
             "Deseja mesmo deletar o título?",
             [
                 {
-                    text: "Cancel",
+                    text: "Cancelar",
                     onPress: () => null,
                     style: "cancel"
                 },
@@ -38,8 +38,6 @@ export const TitulosDetalhe = ({ route }) => {
 
     const onDelete = async () => {
         try {
-            // const tokenStorage = await AsyncStorage.getItem("@app_token")
-            // const { data } = await api.delete("/api/produto/" + item.idProduto, { headers: { Authorization: `${tokenStorage}` }, });
 
             deleteTitulo(item.id)
 
@@ -84,17 +82,16 @@ export const TitulosDetalhe = ({ route }) => {
 
                     {item?.tipo === null ? "" : <Text style={styles.texto}>Tipo: {item?.tipo}</Text>}
 
-                    {item?.dataVencimento === null ? "" : <Text style={styles.texto}>Data vencimneto: {formatdataVencimento}</Text>}
+                    {item?.dataVencimento === null ? "" : <Text style={styles.texto}>Data vencimento: {formatdataVencimento}</Text>}
 
                     {item?.dataCadastro === null ? "" : <Text style={styles.texto}>Data cadastro: {formatdataCadastro}</Text>}
 
                     {item?.dataReferencia === null ? "" : <Text style={styles.texto}>Data referência: {formatdataReferencia}</Text>}
 
-                    {item?.dataReferencia === null ? "" : <Text style={styles.texto}>Data referência: {formatdataVencimento}</Text>}
-
                     {item?.dataPagamento === null ? "" : <Text style={styles.texto}>Data pagamento: {formatdataPagamento}</Text>}
 
                     {item?.observacao === null ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
+                    {/* <Text style={styles.texto}>Observação: {item?.observacao}</Text> */}
 
                     <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Titulos Atualizar", { item: item })}>
                         <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>

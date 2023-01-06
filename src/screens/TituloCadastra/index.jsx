@@ -13,6 +13,7 @@ export const TituloCadastra = () => {
     const [valor, setValor] = useState("");
     const [dataReferencia, setDataReferencia] = useState("");
     const [dataVencimento, setDataVencimento] = useState("");
+    const [dataPagamento, setDataPagamento] = useState("");
     const [tipo, setTipo] = useState("");
 
     const [centroDeCusto, setCentroDeCusto] = useState([]);
@@ -69,7 +70,9 @@ export const TituloCadastra = () => {
                 valor: parseInt(valor),
                 dataReferencia: dataReferencia,
                 dataVencimento: dataVencimento,
+                dataPagamento: dataPagamento,
                 centroDeCusto: centroDeCustoJson,
+                observacao: observacao
             }
             console.log(novoTitulo);
             JSON.stringify(novoTitulo);
@@ -178,6 +181,14 @@ export const TituloCadastra = () => {
                     placeholder="Data de vencimento"
                     onChangeText={setDataVencimento}
                     value={dataVencimento}
+                />
+
+                <Text style={styles.texto}>Data de pagamento</Text>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder="Data de vencimento"
+                    onChangeText={setDataPagamento}
+                    value={dataPagamento}
                 />
 
                 <Text style={styles.texto}>Observação</Text>

@@ -14,6 +14,7 @@ export const TitulosAtualizar = ({ route }) => {
     const [valor, setValor] = useState("" + item.valor);
     const [dataReferencia, setDataReferencia] = useState(item.dataReferencia);
     const [dataVencimento, setDataVencimento] = useState(item.dataVencimento);
+    const [dataPagamento, setDataPagamento] = useState(item.dataPagamento);
     const [tipo, setTipo] = useState("");
 
     const [centroDeCusto, setCentroDeCusto] = useState(item.centroDeCusto);
@@ -55,8 +56,8 @@ export const TitulosAtualizar = ({ route }) => {
     }
 
     useEffect(() => {
-        getCentroDeCustos()
-        centroDeCustoId()
+        getCentroDeCustos();
+        centroDeCustoId();
     }, [centroDeCusto]);
 
     const put = async () => {
@@ -68,7 +69,9 @@ export const TitulosAtualizar = ({ route }) => {
                 valor: parseInt(valor),
                 dataReferencia: dataReferencia,
                 dataVencimento: dataVencimento,
+                dataPagamento: dataPagamento,
                 centroDeCusto: centroDeCustoJson,
+                observacao: observacao
             }
 
             JSON.stringify(novoTitulo);
@@ -82,8 +85,7 @@ export const TitulosAtualizar = ({ route }) => {
             })
 
             centroDeCustoId();
-            const { data } = putTitulo(item, novoTitulo);
-            console.log("novoTitulo: ", novoTitulo);
+            putTitulo(item, novoTitulo);
 
             Alert.alert(
                 'Aviso',
@@ -96,8 +98,7 @@ export const TitulosAtualizar = ({ route }) => {
                 ]
             );
             navigation.navigate("Titulos");
-
-            console.log("centroDeCusto: ", centroDeCusto);
+            // console.log("centroDeCusto: ", centroDeCusto);
 
         } catch (error) {
             console.error("Erro: " + error);
@@ -180,6 +181,14 @@ export const TitulosAtualizar = ({ route }) => {
                     placeholder="Data de vencimento"
                     onChangeText={setDataVencimento}
                     value={dataVencimento}
+                />
+
+                <Text style={styles.texto}>Data de pagamento</Text>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder="Data de pagamento"
+                    onChangeText={setDataPagamento}
+                    value={dataPagamento}
                 />
 
                 <Text style={styles.texto}>Observação</Text>
