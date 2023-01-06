@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from './styles';
 import { useNavigation } from "@react-navigation/native";
 import { postCentroDeCusto } from "../../services/centroDeCusto";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const CentroDeCustoCadastrar = () => {
 
     const navigation = useNavigation();
     const [descricao, setDescricao] = useState("");
     const [observacao, setObservacao] = useState("");
+    const { setLoad } = useContext(AuthContext);
 
     const post = async () => {
         try {
@@ -17,19 +19,10 @@ export const CentroDeCustoCadastrar = () => {
                 descricao: descricao,
                 observacao: observacao
             }
-            // console.log(novoCentroDeCusto);
+
             JSON.stringify(novoCentroDeCusto);
 
-            const formData = new FormData();
-
-            formData.append('centrodecustos', {
-                "string": JSON.stringify(novoCentroDeCusto),
-                type: 'application/json',
-                name: 'centrodecustos'
-            })
-
-            const { data } = postCentroDeCusto(novoCentroDeCusto);
-            console.log(data);
+            postCentroDeCusto(novoCentroDeCusto);
 
             Alert.alert(
                 'Aviso',
@@ -41,7 +34,11 @@ export const CentroDeCustoCadastrar = () => {
                     }
                 ]
             );
+            setLoad(true)
             navigation.goBack();
+            setTimeout(() => {
+                setLoad(false)
+            }, 120);
 
         } catch (error) {
             console.error(error);

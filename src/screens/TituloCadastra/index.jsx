@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { SelectList } from 'react-native-dropdown-select-list';
 import { postTitulo } from "../../services/titulo";
 import { getCentroDeCusto } from "../../services/centroDeCusto";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const TituloCadastra = () => {
 
@@ -25,6 +26,7 @@ export const TituloCadastra = () => {
     const [selectedTipo, setSelectedTipo] = useState([]);
 
     const navigation = useNavigation();
+    const { setLoad } = useContext(AuthContext);
 
     const selectTipo = [
         { key: '1', value: 'APAGAR' },
@@ -74,20 +76,11 @@ export const TituloCadastra = () => {
                 centroDeCusto: centroDeCustoJson,
                 observacao: observacao
             }
-            console.log(novoTitulo);
+
             JSON.stringify(novoTitulo);
 
-            const formData = new FormData();
-
-            formData.append('titulos', {
-                "string": JSON.stringify(novoTitulo),
-                type: 'application/json',
-                name: 'titulos'
-            })
-
             centroDeCustoId();
-            const { data } = postTitulo(novoTitulo);
-            // console.log(data);
+            postTitulo(novoTitulo);
 
             Alert.alert(
                 'Aviso',
@@ -99,7 +92,12 @@ export const TituloCadastra = () => {
                     }
                 ]
             );
+
+            setLoad(true)
             navigation.goBack();
+            setTimeout(() => {
+                setLoad(false)
+            }, 120);
 
         } catch (error) {
             console.error(error);

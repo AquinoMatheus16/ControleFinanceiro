@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
+import { AuthContext } from "../../contexts/AuthContext";
 import { putCentroDeCusto } from "../../services/centroDeCusto";
 import { styles } from "./styles";
 
@@ -10,6 +11,21 @@ export const CentroDeCustoAtualizar = ({ route }) => {
     const navigation = useNavigation();
     const [descricao, setDescricao] = useState(item.descricao);
     const [observacao, setObservacao] = useState(item.observacao);
+    const { setLoad } = useContext(AuthContext);
+
+    const confirmarAtualizar = () =>
+    Alert.alert(
+        "Aviso",
+        "Deseja mesmo atualizar o centro de custo?",
+        [
+            {
+                text: "Cancelar",
+                onPress: () => null,
+                style: "cancel"
+            },
+            { text: "OK", onPress: () => put() }
+        ]
+    );
 
     const put = async () => {
         try {
@@ -21,16 +37,8 @@ export const CentroDeCustoAtualizar = ({ route }) => {
 
             JSON.stringify(novoCentroDeCusto);
 
-            const formData = new FormData();
-
-            formData.append('centrodecustos', {
-                "string": JSON.stringify(novoCentroDeCusto),
-                type: 'application/json',
-                name: 'centrodecustos'
-            })
-
-            const { data } = putCentroDeCusto(item, novoCentroDeCusto);
-            console.log("novoCentroDeCusto: ", novoCentroDeCusto);
+            putCentroDeCusto(item, novoCentroDeCusto);
+            // console.log("novoCentroDeCusto: ", novoCentroDeCusto);
 
             Alert.alert(
                 'Aviso',
@@ -42,9 +50,15 @@ export const CentroDeCustoAtualizar = ({ route }) => {
                     }
                 ]
             );
+
+            setLoad(true)
             navigation.navigate("CentroDeCustoStake");
+            setTimeout(() => {
+                setLoad(false)
+            }, 150);
 
         } catch (error) {
+
             console.error("Erro: " + error);
             Alert.alert(
                 'Aviso',
@@ -81,7 +95,7 @@ export const CentroDeCustoAtualizar = ({ route }) => {
                     value={observacao}
                 />
 
-                <TouchableOpacity onPress={put} style={styles.touchableOpacity}>
+                <TouchableOpacity onPress={confirmarAtualizar} style={styles.touchableOpacity}>
                     <Text>ATUALIZAR</Text>
                 </TouchableOpacity>
 

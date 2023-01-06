@@ -2,9 +2,10 @@ import { Text, View, TouchableOpacity, TextInput, FlatList } from "react-native"
 import { styles } from "./styles";
 import { EvilIcons } from '@expo/vector-icons';
 import { getCentroDeCusto } from "../../services/centroDeCusto";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { CentroDeCustoCard } from "../../components/CentroDeCustoCard";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const CentroDeCusto = () => {
 
@@ -12,6 +13,7 @@ export const CentroDeCusto = () => {
     const [itemFiltrado, setItemFiltrado] = useState([]);
     const [busca, setBusca] = useState("");
     const navigation = useNavigation();
+    const { load } = useContext(AuthContext);
 
     const fetchData = async () => {
         const centroDeCustoList = await getCentroDeCusto();
@@ -21,13 +23,16 @@ export const CentroDeCusto = () => {
 
     useEffect(() => {
         setItemFiltrado(centroDeCusto)
-        navigation.addListener('focus', () => fetchData())
+
     }, [centroDeCusto]);
 
     useEffect(() => {
-        fetchData();
+        setTimeout(() => {
+            fetchData();
 
-    }, []);
+        }, 200);
+
+    }, [load]);
 
     useEffect(() => {
         const resultado = centroDeCusto.filter((centroDeCusto) =>
