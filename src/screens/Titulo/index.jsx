@@ -11,7 +11,7 @@ export const Titulos = () => {
     const [titulos, setTitulos] = useState([]);
     const [itemFiltrado, setItemFiltrado] = useState([]);
     const [busca, setBusca] = useState("");
-    const navigate = useNavigation();
+    const navigation = useNavigation();
 
     const fetchData = async () => {
         const tituloList = await getTitulo();
@@ -21,12 +21,12 @@ export const Titulos = () => {
 
     useEffect(() => {
         setItemFiltrado(titulos)
-
+        navigation.addListener('focus', () => fetchData())
     }, [titulos]);
 
     useEffect(() => {
-        fetchData();
 
+        fetchData();
     }, []);
 
     useEffect(() => {
@@ -41,7 +41,7 @@ export const Titulos = () => {
         <View style={styles.containerMain}>
             <Text style={styles.textoTitulo}>Títulos</Text>
 
-            <TouchableOpacity onPress={() => navigate.navigate("Titulos Cadastra")} style={styles.touchableOpacity}>
+            <TouchableOpacity onPress={() => navigation.navigate("Titulos Cadastra")} style={styles.touchableOpacity}>
                 <Text style={styles.touchableOpacityTexto}>Cadastar</Text>
             </TouchableOpacity>
 

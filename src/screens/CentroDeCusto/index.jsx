@@ -11,7 +11,7 @@ export const CentroDeCusto = () => {
     const [centroDeCusto, setCentroDeCusto] = useState([]);
     const [itemFiltrado, setItemFiltrado] = useState([]);
     const [busca, setBusca] = useState("");
-    const navigate = useNavigation();
+    const navigation = useNavigation();
 
     const fetchData = async () => {
         const centroDeCustoList = await getCentroDeCusto();
@@ -21,7 +21,7 @@ export const CentroDeCusto = () => {
 
     useEffect(() => {
         setItemFiltrado(centroDeCusto)
-
+        navigation.addListener('focus', () => fetchData())
     }, [centroDeCusto]);
 
     useEffect(() => {
@@ -41,7 +41,7 @@ export const CentroDeCusto = () => {
         <View style={styles.containerMain}>
             <Text style={styles.textoTitulo}>Centro De Custos</Text>
 
-            <TouchableOpacity onPress={() => navigate.navigate("Centro De Custo Cadastrar")} style={styles.touchableOpacity}>
+            <TouchableOpacity onPress={() => navigation.navigate("Centro De Custo Cadastrar")} style={styles.touchableOpacity}>
                 <Text style={styles.touchableOpacityTexto}>Cadastar</Text>
             </TouchableOpacity>
 
