@@ -1,10 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { async } from "q";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Image, Text, TouchableOpacity, View } from "react-native";
 import { Source } from "webpack-sources";
 import { AuthContext } from "../../contexts/AuthContext";
 import { styles } from "./styles";
+import { imgUsuario } from '../../img/usuario.png'
 
 export const Conta = () => {
     const { logoutContext } = useContext(AuthContext);
@@ -16,12 +17,17 @@ export const Conta = () => {
         setFot(usuario.foto)
         return usuario.id;
     }
-    img();
+
+    useEffect(() => {
+        setTimeout(() => {
+            img();
+          }, 100);
+    }, []);
 
     return (
         <View style={styles.containerPrincipal}>
 
-            <Text>Conta</Text>
+            <Text style={styles.text}>Conta</Text>
 
             <View >
                <Image source={ {uri: fot ? fot : null}} style={styles.homeDashboard}/>
