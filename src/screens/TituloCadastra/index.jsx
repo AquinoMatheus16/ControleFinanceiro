@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View, StyleSheet, Button } from "react-native";
 import { styles } from "./styles";
 import { SelectList } from 'react-native-dropdown-select-list';
 import { postTitulo } from "../../services/titulo";
 import { getCentroDeCusto } from "../../services/centroDeCusto";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from '../../contexts/AuthContext';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { format } from "date-fns";
 
 export const TituloCadastra = () => {
 
@@ -16,14 +18,15 @@ export const TituloCadastra = () => {
     const [dataVencimento, setDataVencimento] = useState("");
     const [dataPagamento, setDataPagamento] = useState("");
     const [tipo, setTipo] = useState("");
-
     const [centroDeCusto, setCentroDeCusto] = useState([]);
     const [data, setData] = useState([]);
     const [centroDeCustoSalvos, setCentroDeCustoSalvos] = useState([]);
     const [selected, setSelected] = useState("");
     const [centroDeCustoJson, setCentroDeCustoJson] = useState("");
-
     const [selectedTipo, setSelectedTipo] = useState([]);
+
+    const [datePicker, setDatePicker] = useState(false);
+    const [date, setDate] = useState(new Date());
 
     const navigation = useNavigation();
     const { setLoad } = useContext(AuthContext);
@@ -32,6 +35,22 @@ export const TituloCadastra = () => {
         { key: '1', value: 'APAGAR' },
         { key: '2', value: 'ARECEBER' }
     ]
+
+    const dataC = new Date(date)
+    const formatdataCadastro = format(dataC, "dd/MM/yyyy");
+
+    function showDatePicker() {
+        setDatePicker(true);
+    };
+
+    function showDatePicker() {
+        setDatePicker(true);
+    };
+
+    function onDateSelected(event, value) {
+        setDate(value);
+        setDatePicker(false);
+    };
 
     const getCentroDeCustos = async () => {
         await getCentroDeCusto()
@@ -97,7 +116,7 @@ export const TituloCadastra = () => {
             navigation.goBack();
             setTimeout(() => {
                 setLoad(false)
-            }, 120);
+            }, 160);
 
         } catch (error) {
             console.error(error);
@@ -112,6 +131,7 @@ export const TituloCadastra = () => {
                 ]
             );
         };
+
     };
 
     return (
@@ -165,6 +185,22 @@ export const TituloCadastra = () => {
                     value={valor}
                 />
 
+                <Text style={styles.textDate}>Date = {formatdataCadastro}</Text>
+                {/* <Text style={styles.textDate}>Date = {date}</Text> */}
+                {datePicker && (
+                    <DateTimePicker
+                        value={date}
+                        mode={'date'}
+                        display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                        is24Hour={true}
+                        onChange={onDateSelected}
+                        style={styles.datePicker}
+                    />
+                )}
+                <View style={{ margin: 10 }}>
+                    <Button title="Show Date Picker" color="green" onPress={showDatePicker} />
+                </View>
+
                 <Text style={styles.texto}>Data de referência</Text>
                 <TextInput
                     style={styles.textInput}
@@ -206,4 +242,4 @@ export const TituloCadastra = () => {
             </View>
         </ScrollView>
     )
-}
+};

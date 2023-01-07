@@ -1,12 +1,14 @@
 import { FlatList, Text, View, ScrollView, TextInput, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { getDashBoardTotal } from "../../services/titulo";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const Home = ({ navigation }) => {
 
     const [total, setTotal] = useState({});
+    const { load } = useContext(AuthContext);
 
     const fetchTotal = async () => {
 
@@ -18,8 +20,8 @@ export const Home = ({ navigation }) => {
     useEffect(() => {
         setTimeout(() => {
             fetchTotal();
-          }, 100);
-    }, []);
+        }, 100);
+    }, [load]);
 
     return (
 

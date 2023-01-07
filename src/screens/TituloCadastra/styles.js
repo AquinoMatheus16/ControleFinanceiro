@@ -54,4 +54,21 @@ export const styles = StyleSheet.create({
         marginBottom: 50
     },
 
+    // Date
+    textDate: {
+        fontSize: 25,
+        color: '#5EFF00',
+        padding: 3,
+        marginBottom: 10,
+        textAlign: 'center'
+    },
+
+    datePicker: {
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        width: 320,
+        height: 260,
+        display: 'flex',
+    }
+
 });
