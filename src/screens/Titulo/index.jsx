@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, TextInput, FlatList, Alert } from "react-native";
+import { Text, View, TouchableOpacity, TextInput, FlatList } from "react-native";
 import { styles } from "./styles";
 import { EvilIcons } from '@expo/vector-icons';
 import { getTitulo } from "../../services/titulo";
@@ -31,8 +31,7 @@ export const Titulos = () => {
         setTimeout(() => {
             fetchData();
 
-        }, 150);
-
+        }, 250);
     }, [load]);
 
     useEffect(() => {
