@@ -76,15 +76,14 @@ export const styles = StyleSheet.create({
         width: '80%',
         borderBottomWidth: 1,
         borderBottomColor: '#FFFFFF',
-        // color: '#FFFFFF',
-        // textAlign: 'center'
         alignItems: 'center',
         justifyContent: 'center',
-
+        paddingTop: 10,
+        paddingBottom: 10
     },
 
     textInputDate: {
-
+        // padding:5
     },
 
     iconInput: {

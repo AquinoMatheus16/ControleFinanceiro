@@ -10,9 +10,6 @@ export const TituloDetalheHome = ({ route }) => {
     const dataC = new Date(item?.dataCadastro)
     const formatdataCadastro = format(dataC, "dd/MM/yyyy");
 
-    const dataR = new Date(item?.dataReferencia)
-    const formatdataReferencia = format(dataR, "dd/MM/yyyy");
-
     const dataV = new Date(item?.dataVencimento)
     const formatdataVencimento = format(dataV, "dd/MM/yyyy");
 
@@ -36,8 +33,6 @@ export const TituloDetalheHome = ({ route }) => {
                     {item?.dataVencimento === null ? "" : <Text style={styles.texto}>Data vencimneto: {formatdataVencimento}</Text>}
 
                     {item?.dataCadastro === null ? "" : <Text style={styles.texto}>Data cadastro: {formatdataCadastro}</Text>}
-
-                    {item?.dataReferencia === null ? "" : <Text style={styles.texto}>Data referência: {formatdataReferencia}</Text>}
 
                     {item?.dataReferencia === null ? "" : <Text style={styles.texto}>Data referência: {formatdataVencimento}</Text>}
 
