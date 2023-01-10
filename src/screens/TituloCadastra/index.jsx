@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from '../../contexts/AuthContext';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { format } from "date-fns";
+import { AntDesign } from '@expo/vector-icons';
 
 export const TituloCadastra = () => {
 
@@ -26,31 +27,44 @@ export const TituloCadastra = () => {
     const [selectedTipo, setSelectedTipo] = useState([]);
 
     const [datePicker, setDatePicker] = useState(false);
-    const [date, setDate] = useState(new Date());
 
     const navigation = useNavigation();
     const { setLoad } = useContext(AuthContext);
+
+    const [g, setG] = useState("");
 
     const selectTipo = [
         { key: '1', value: 'APAGAR' },
         { key: '2', value: 'ARECEBER' }
     ]
 
-    const dataC = new Date(date)
-    const formatdataCadastro = format(dataC, "dd/MM/yyyy");
-
     function showDatePicker() {
         setDatePicker(true);
     };
 
-    function showDatePicker() {
-        setDatePicker(true);
-    };
+    // const dataR = new Date(dataReferencia)
+    // const formatDataReferencia = format(dataR, "dd/MM/yyyy");
 
-    function onDateSelected(event, value) {
-        setDate(value);
+    function dataReferenciaSelect(event, value) {
+        const dataR = new Date(dataReferencia)
+        const formatDataReferencia = format(dataR, "dd/MM/yyyy");
+        setG(formatDataReferencia);
+        setDataReferencia(value);
         setDatePicker(false);
     };
+
+    // function dataVencimentoSelect(event, value) {
+    //     setDataVencimento(value);
+    //     setDatePicker(false);
+
+    // };
+
+    // function dataPagamentoSelect(event, value) {
+    //     setDataPagamento(value);
+    //     setDatePicker(false);
+    // };
+
+
 
     const getCentroDeCustos = async () => {
         await getCentroDeCusto()
@@ -100,6 +114,7 @@ export const TituloCadastra = () => {
 
             centroDeCustoId();
             postTitulo(novoTitulo);
+            console.log("Log do data: ", novoTitulo);
 
             Alert.alert(
                 'Aviso',
@@ -131,7 +146,6 @@ export const TituloCadastra = () => {
                 ]
             );
         };
-
     };
 
     return (
@@ -185,29 +199,35 @@ export const TituloCadastra = () => {
                     value={valor}
                 />
 
-                <Text style={styles.textDate}>Date = {formatdataCadastro}</Text>
-                {/* <Text style={styles.textDate}>Date = {date}</Text> */}
                 {datePicker && (
                     <DateTimePicker
-                        value={date}
+                        value={dataReferencia}
                         mode={'date'}
                         display={Platform.OS === 'ios' ? 'spinner' : 'default'}
                         is24Hour={true}
-                        onChange={onDateSelected}
+                        onChange={dataReferenciaSelect}
                         style={styles.datePicker}
                     />
                 )}
-                <View style={{ margin: 10 }}>
-                    <Button title="Show Date Picker" color="green" onPress={showDatePicker} />
+                <Text style={styles.texto}>Data de referência</Text>
+                <View style={styles.containerDataInput}>
+                    <AntDesign onPress={showDatePicker} style={styles.iconInput} name="calendar" size={24} color="black" />
+                    <TextInput
+                        style={styles.textInputDate}
+                        placeholder="Data de referência"
+                        onChangeText={setDataReferencia}
+                        value={g}
+                        editable={false}
+                    />
                 </View>
 
-                <Text style={styles.texto}>Data de referência</Text>
+                {/* <Text style={styles.texto}>Data de referência</Text>
                 <TextInput
                     style={styles.textInput}
                     placeholder="Data de referência"
                     onChangeText={setDataReferencia}
                     value={dataReferencia}
-                />
+                /> */}
 
                 <Text style={styles.texto}>Data de vencimento</Text>
                 <TextInput
