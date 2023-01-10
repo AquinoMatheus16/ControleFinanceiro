@@ -15,6 +15,7 @@ import { TituloDetalheHome } from '../screens/TituloDetalheHome';
 import { TitulosDetalhe } from '../screens/TituloDatalhe';
 import { CentroDeCustoAtualizar } from '../screens/CentroDeCustoAtualizar';
 import { CentroDeCustoCadastrar } from '../screens/CentroDeCustoCadastrar';
+import { FontAwesome, FontAwesome5, AntDesign, Feather, Ionicons } from '@expo/vector-icons';
 
 
 const Tab = createBottomTabNavigator();
@@ -87,7 +88,39 @@ export const RotasPrivadas = () => {
 
     return (
         <>
-            <Tab.Navigator>
+            <Tab.Navigator
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ focused }) => {
+                        let iconName;
+                        let iconColor;
+
+                        if (route.name === 'Conta') {
+                            iconName = focused
+                                ? 'ios-information-circle'
+                                : 'ios-information-circle-outline';
+                            iconColor = focused ? 'red' : 'black';
+                            return <FontAwesome name="user-circle-o" size={24} color={iconColor} />;
+
+                        } else if (route.name === 'Titulo') {
+                            iconName = focused ? 'ios-list' : 'ios-list-outline';
+                            iconColor = focused ? 'red' : 'black';
+                            return <FontAwesome5 name="list-alt" size={24} color={iconColor} />;
+
+                        } else if (route.name === 'CentroDeCusto') {
+                            iconName = focused ? 'ios-list' : 'ios-list-outline';
+                            iconColor = focused ? 'red' : 'black';
+                            return <Feather name="list" size={24} color={iconColor} />;
+
+                        } else if (route.name === 'Home') {
+                            iconName = focused ? 'ios-list' : 'ios-list-outline';
+                            iconColor = focused ? 'red' : 'black';
+                            return <Ionicons name="home" size={24} color={iconColor} />;
+                        }
+                    },
+                    tabBarActiveTintColor: 'tomato',
+                    tabBarInactiveTintColor: 'gray',
+                })}
+            >
                 <Tab.Screen
                     name="Home"
                     component={HomeStack}

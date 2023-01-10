@@ -69,6 +69,28 @@ export const styles = StyleSheet.create({
         width: 320,
         height: 260,
         display: 'flex',
+    },
+
+    containerDataInput: {
+        flexDirection: 'row',
+        width: '80%',
+        borderBottomWidth: 1,
+        borderBottomColor: '#FFFFFF',
+        // color: '#FFFFFF',
+        // textAlign: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+
+    textInputDate: {
+
+    },
+
+    iconInput: {
+        marginLeft: 10,
+        paddingRight: 20,
+        paddingBottom: 5
     }
 
 });
