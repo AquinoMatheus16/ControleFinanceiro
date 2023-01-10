@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
-        marginTop: 25
+        marginTop: 10
     },
 
     touchableOpacityTexto: {
@@ -38,14 +38,13 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         borderBottomWidth: 1,
         borderBottomColor: '#FFFFFF',
-        alignItems: 'center',
-        marginBottom: 5
+        alignItems: 'center'
     },
 
     textoTituloInput: {
         color: '#FFFFFF',
         fontSize: 22,
-        marginTop: 50
+        marginTop: 20
     },
 
     textInput: {
@@ -56,6 +55,30 @@ export const styles = StyleSheet.create({
 
     containerFlatList: {
         marginBottom: 300
+    },
+
+    nav: {
+        display: "flex",
+        flexDirection: "row",
+        width: 300,
+        justifyContent: "space-between"
+    },
+
+    navTouch: {
+        backgroundColor: 'gray',
+        width: 70,
+        height: 30,
+        marginTop:10,
+        alignItems: "center",
+        borderBottomWidth: 2,
+        borderBottomColor: '#FFFFFF',
+        borderTopEndRadius: 5,
+        borderTopLeftRadius: 5
+    },
+
+    navTexto: {
+        color: '#FFFFFF',
+        fontSize: 15
     }
 
 });
