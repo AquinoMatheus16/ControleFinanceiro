@@ -6,7 +6,7 @@ import { postTitulo } from "../../services/titulo";
 import { getCentroDeCusto } from "../../services/centroDeCusto";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from '../../contexts/AuthContext';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { format } from "date-fns";
 import { AntDesign } from '@expo/vector-icons';
 
@@ -15,9 +15,7 @@ export const TituloCadastra = () => {
     const [descricao, setDescricao] = useState("");
     const [observacao, setObservacao] = useState("");
     const [valor, setValor] = useState("");
-    const [dataReferencia, setDataReferencia] = useState("");
-    const [dataVencimento, setDataVencimento] = useState("");
-    const [dataPagamento, setDataPagamento] = useState("");
+    const [dataVencimento, setDataVencimento] = useState(new Date());
     const [tipo, setTipo] = useState("");
     const [centroDeCusto, setCentroDeCusto] = useState([]);
     const [data, setData] = useState([]);
@@ -31,7 +29,7 @@ export const TituloCadastra = () => {
     const navigation = useNavigation();
     const { setLoad } = useContext(AuthContext);
 
-    const [g, setG] = useState("");
+    const [dataFormatada, setDataFormatada] = useState("");
 
     const selectTipo = [
         { key: '1', value: 'APAGAR' },
@@ -42,29 +40,13 @@ export const TituloCadastra = () => {
         setDatePicker(true);
     };
 
-    // const dataR = new Date(dataReferencia)
-    // const formatDataReferencia = format(dataR, "dd/MM/yyyy");
-
-    function dataReferenciaSelect(event, value) {
-        const dataR = new Date(dataReferencia)
-        const formatDataReferencia = format(dataR, "dd/MM/yyyy");
-        setG(formatDataReferencia);
-        setDataReferencia(value);
+    function dataVencimentoSelect(event, value) {
+        const dataV = new Date(dataVencimento)
+        const formatDataVencimento = format(dataV, "dd/MM/yyyy");
+        setDataFormatada(formatDataVencimento);
+        setDataVencimento(value);
         setDatePicker(false);
     };
-
-    // function dataVencimentoSelect(event, value) {
-    //     setDataVencimento(value);
-    //     setDatePicker(false);
-
-    // };
-
-    // function dataPagamentoSelect(event, value) {
-    //     setDataPagamento(value);
-    //     setDatePicker(false);
-    // };
-
-
 
     const getCentroDeCustos = async () => {
         await getCentroDeCusto()
@@ -103,9 +85,7 @@ export const TituloCadastra = () => {
                 descricao: descricao,
                 tipo: tipo,
                 valor: parseInt(valor),
-                dataReferencia: dataReferencia,
                 dataVencimento: dataVencimento,
-                dataPagamento: dataPagamento,
                 centroDeCusto: centroDeCustoJson,
                 observacao: observacao
             }
@@ -145,6 +125,7 @@ export const TituloCadastra = () => {
                     }
                 ]
             );
+            return;
         };
     };
 
@@ -201,49 +182,25 @@ export const TituloCadastra = () => {
 
                 {datePicker && (
                     <DateTimePicker
-                        value={dataReferencia}
+                        testID="dateTimePicker"
                         mode={'date'}
                         display={Platform.OS === 'ios' ? 'spinner' : 'default'}
                         is24Hour={true}
-                        onChange={dataReferenciaSelect}
+                        value={dataVencimento}
+                        onChange={dataVencimentoSelect}
                         style={styles.datePicker}
                     />
                 )}
-                <Text style={styles.texto}>Data de referência</Text>
+                <Text style={styles.texto}>Data de vencimento</Text>
                 <View style={styles.containerDataInput}>
                     <AntDesign onPress={showDatePicker} style={styles.iconInput} name="calendar" size={24} color="black" />
                     <TextInput
                         style={styles.textInputDate}
-                        placeholder="Data de referência"
-                        onChangeText={setDataReferencia}
-                        value={g}
-                        editable={false}
+                        placeholder="Data de vencimento"
+                        onChangeText={setDataVencimento}
+                        value={dataFormatada}
                     />
                 </View>
-
-                {/* <Text style={styles.texto}>Data de referência</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Data de referência"
-                    onChangeText={setDataReferencia}
-                    value={dataReferencia}
-                /> */}
-
-                <Text style={styles.texto}>Data de vencimento</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Data de vencimento"
-                    onChangeText={setDataVencimento}
-                    value={dataVencimento}
-                />
-
-                <Text style={styles.texto}>Data de pagamento</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Data de vencimento"
-                    onChangeText={setDataPagamento}
-                    value={dataPagamento}
-                />
 
                 <Text style={styles.texto}>Observação</Text>
                 <TextInput
