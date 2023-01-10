@@ -45,6 +45,27 @@ export const styles = StyleSheet.create({
     textoTouchableOpacity: {
         fontSize: 17,
         color: '#000000'
-    }
+    },
+
+    container: {
+        width: 300,
+        justifyContent: 'center',
+        minHeight: 400,
+        backgroundColor: '#FFFFFF',
+        padding: 15,
+        borderRadius: 10,
+        marginBottom: 30,
+        marginTop: 30
+    },
+
+    texto: {
+        fontSize: 20,
+        marginBottom: 15
+    },
+
+    scrollView: {
+        flex: 1,
+        backgroundColor: '#0C609C',
+    },
 
 });
