@@ -1,7 +1,8 @@
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { format } from "date-fns";
 import { ScrollView } from "react-native-gesture-handler";
+import { putPagar } from "../../services/titulo";
 
 export const TituloDetalheHome = ({ route }) => {
 
@@ -15,6 +16,10 @@ export const TituloDetalheHome = ({ route }) => {
 
     const dataP = new Date(item?.dataPagamento)
     const formatdataPagamento = format(dataP, "dd/MM/yyyy");
+
+    // const pagar = () => {
+    //     putPagar(item);
+    // }
 
     return (
 
@@ -40,6 +45,12 @@ export const TituloDetalheHome = ({ route }) => {
 
                     {item?.observacao === null ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
 
+                </View>
+                <View>
+                    {item?.tipo === "APAGAR" ?
+                        <TouchableOpacity onPress={() => putPagar(item)} style={styles.touchableOpacityPagar}>
+                            <Text style={styles.touchableOpacityPagarTexto}>MARCAR COMO PAGA</Text>
+                        </TouchableOpacity> : ""}
                 </View>
             </View>
         </ScrollView>

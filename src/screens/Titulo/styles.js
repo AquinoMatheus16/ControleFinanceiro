@@ -54,7 +54,9 @@ export const styles = StyleSheet.create({
     },
 
     containerFlatList: {
-        marginBottom: 300
+        marginBottom: 225,
+        width:300,
+        height: 390
     },
 
     nav: {
@@ -66,19 +68,36 @@ export const styles = StyleSheet.create({
 
     navTouch: {
         backgroundColor: 'gray',
-        width: 70,
+        width: 80,
         height: 30,
-        marginTop:10,
+        marginTop: 10,
+        marginRight: 5,
         alignItems: "center",
         borderBottomWidth: 2,
         borderBottomColor: '#FFFFFF',
         borderTopEndRadius: 5,
-        borderTopLeftRadius: 5
+        borderTopLeftRadius: 5,
+        padding: 5
     },
 
     navTexto: {
         color: '#FFFFFF',
         fontSize: 15
-    }
+    },
+
+    scroll: {
+        width: "80%",
+        height: 90,
+        flexDirection: "row",
+        backgroundColor: 'black'
+    },
+
+    nada: {
+        width: 300,
+        height: 100
+    },
+     card: {
+        width:380
+     }
 
 });

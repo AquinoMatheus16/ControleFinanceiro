@@ -2,7 +2,8 @@ import { FlatList, Text, View } from "react-native";
 import { styles } from "./styles";
 import { TitulosCard } from "../../components/TitulosCard";
 import { useEffect, useState } from "react";
-import { getDashBoardTotal, getTitulo } from "../../services/titulo";
+import { getTitulo } from "../../services/titulo";
+import { getDashBoardTotal } from "../../services/dashboard";
 
 export const TitulosApagar = () => {
 
@@ -28,6 +29,12 @@ export const TitulosApagar = () => {
         fetchTotal();
     }, []);
 
+    function filtrarPorNaoPagamento(value) {
+        if ('dataPagamento' in value && typeof (value.dataPagamento) !== 'string') {
+            return value?.tipo.endsWith("APAGAR");
+        }
+    }
+
     return (
         <>
             <View style={styles.containerMian}>
@@ -38,11 +45,11 @@ export const TitulosApagar = () => {
 
                 <View style={styles.containerCard}>
                     <FlatList
-                        data={titulos.filter((titulo) =>
-                            titulo.tipo.endsWith("APAGAR")
-                        )}
+                        data={titulos.filter(filtrarPorNaoPagamento)}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) => <TitulosCard item={item} />}
+                        showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}
                     />
                 </View>
             </View>

@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, TextInput, FlatList, Button } from "react-native";
+import { Text, View, TouchableOpacity, TextInput, FlatList, Button, ScrollView } from "react-native";
 import { styles } from "./styles";
 import { EvilIcons } from '@expo/vector-icons';
 import { getTitulo } from "../../services/titulo";
@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { TitulosCard } from "../../components/TitulosCard";
 import { AuthContext } from "../../contexts/AuthContext";
+import { format } from "date-fns";
 
 export const Titulos = () => {
 
@@ -43,26 +44,38 @@ export const Titulos = () => {
 
     }, [busca]);
 
-    // console.log(itemFiltrado)
-
-
     function filtrarPorPagamento(value) {
-        if ('dataPagamento' in value && typeof(value.dataPagamento) === 'string' && isNaN(value.dataPagamento)) {
-             return value;
-        } 
-    } 
+        if ('dataPagamento' in value && typeof (value.dataPagamento) === 'string' && isNaN(value.dataPagamento)) {
+            return value.tipo.endsWith("APAGAR");
+        }
+    }
+    
+    function filtrarPorRecebidos(value) {
+        if ('dataPagamento' in value && typeof (value.dataPagamento) === 'string' && isNaN(value.dataPagamento)) {
+            return value.tipo.endsWith("ARECEBER");
+        }
+    }
 
     function filtrarPorNaoPagamento(value) {
-        if ('dataPagamento' in value && typeof(value.dataPagamento) === null && !isNaN(value.dataPagamento)) {
-             return value;
-        } 
-    } 
+        if ('dataPagamento' in value && typeof (value.dataPagamento) !== 'string') {
+            return value.tipo.endsWith("APAGAR");
+        }
+    }
+
+    function filtrarPorNaoRecebimento(value) {
+        if ('dataPagamento' in value && typeof (value.dataPagamento) !== 'string') {
+            return value.tipo.endsWith("ARECEBER");
+        }
+    }
 
     function filtrarPorVencimento(value) {
-        if ('dataVencimento' in value && typeof(value.dataPagamento) > new Date()) {
-             return value;
-        } 
-    } 
+        var str = value.dataVencimento;
+        var date = new Date(str.split('/').reverse().join('/'));
+        var novaData = new Date();
+        if (date < novaData) {
+            return date;
+        }
+    }
 
     return (
 
@@ -85,26 +98,30 @@ export const Titulos = () => {
             </View>
 
             <View style={styles.nav}>
-                <TouchableOpacity onPress={() => setAtiva("Todos")} style={styles.navTouch}>
-                    <Text style={styles.navTexto}>Todos</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setAtiva("Apagar")} style={styles.navTouch}>
-                    <Text style={styles.navTexto}>A pagar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setAtiva("Pagos")} style={styles.navTouch}>
-                    <Text style={styles.navTexto}>Pagos</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setAtiva("Vencidos")} style={styles.navTouch}>
-                    <Text style={styles.navTexto}>Vencidos</Text>
-                </TouchableOpacity>
+                <ScrollView horizontal showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}>
+                    <TouchableOpacity onPress={() => setAtiva("Todos")} style={styles.navTouch}>
+                        <Text style={styles.navTexto}>Todos</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => setAtiva("Vencidos")} style={styles.navTouch}>
+                        <Text style={styles.navTexto}>Vencidos</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => setAtiva("Apagar")} style={styles.navTouch}>
+                        <Text style={styles.navTexto}>A pagar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => setAtiva("Pagos")} style={styles.navTouch}>
+                        <Text style={styles.navTexto}>Pagos</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => setAtiva("Areceber")} style={styles.navTouch}>
+                        <Text style={styles.navTexto}>A receber</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => setAtiva("Recebidos")} style={styles.navTouch}>
+                        <Text style={styles.navTexto}>Recebidos</Text>
+                    </TouchableOpacity>
+                </ScrollView>
             </View>
 
             <View style={styles.containerFlatList}>
-                {/* <FlatList
-                    data={itemFiltrado}
-                    keyExtractor={item => item.id}
-                    renderItem={({ item }) => <TitulosCard item={item} />}
-                /> */}
 
                 {ativa === "Todos" && <FlatList
                     data={itemFiltrado}
@@ -112,23 +129,30 @@ export const Titulos = () => {
                     renderItem={({ item }) => <TitulosCard item={item} />}
                 />}
                 {ativa === "Apagar" && <FlatList
-                    data={itemFiltrado.filter(filtrarPorNaoPagamento)}
+                    data={itemFiltrado?.filter(filtrarPorNaoPagamento)}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => <TitulosCard item={item} />}
                 />}
                 {ativa === "Pagos" && <FlatList
-                    data={itemFiltrado.filter(filtrarPorPagamento)}
+                    data={itemFiltrado?.filter(filtrarPorPagamento)}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => <TitulosCard item={item} />}
                 />}
                 {ativa === "Vencidos" && <FlatList
-                    data={itemFiltrado.filter(filtrarPorVencimento)}
+                    data={itemFiltrado?.filter(filtrarPorVencimento)}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => <TitulosCard item={item} />}
                 />}
-                {/* {ativa === "Aulas" && <AulasRender />}
-                {ativa === "Alunos" && <AlunosAvaliacaoRender />}
-                {ativa === "Turmas" && <TurmasRender />} */}
+                {ativa === "Areceber" && <FlatList
+                    data={itemFiltrado?.filter(filtrarPorNaoRecebimento)}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => <TitulosCard item={item} />}
+                />}
+                {ativa === "Recebidos" && <FlatList
+                    data={itemFiltrado?.filter(filtrarPorRecebidos)}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => <TitulosCard item={item} />}
+                />}
             </View>
         </View>
 
