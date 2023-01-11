@@ -1,9 +1,9 @@
 import { FlatList, Text, View, ScrollView, TextInput, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
-import { getDashBoardTotal } from "../../services/titulo";
 import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { AuthContext } from "../../contexts/AuthContext";
+import { getDashBoardTotal } from "../../services/dashboard";
 
 export const Home = ({ navigation }) => {
 

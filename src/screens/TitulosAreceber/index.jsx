@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Text, View } from "react-native"
 import { FlatList } from "react-native-gesture-handler";
 import { TitulosCard } from "../../components/TitulosCard";
-import { getDashBoardTotal, getTitulo } from "../../services/titulo";
+import { getDashBoardTotal } from "../../services/dashboard";
+import { getTitulo } from "../../services/titulo";
 import { styles } from "../TitulosApagar/styles";
 
 export const TitulosAreceber = () => {
@@ -16,7 +17,7 @@ export const TitulosAreceber = () => {
         setTitulos(tituloList);
 
     };
-    
+
     const fetchTotal = async () => {
 
         const total = await getDashBoardTotal();
@@ -29,6 +30,12 @@ export const TitulosAreceber = () => {
         fetchTotal();
     }, []);
 
+    function filtrarPorNaoRecebimento(value) {
+        if ('dataPagamento' in value && typeof (value.dataPagamento) !== 'string') {
+            return value?.tipo.endsWith("ARECEBER");
+        }
+    }
+
     return (
         <>
             <View style={styles.containerMian}>
@@ -39,11 +46,11 @@ export const TitulosAreceber = () => {
 
                 <View style={styles.containerCard}>
                     <FlatList
-                        data={titulos.filter((titulo) =>
-                            titulo.tipo.endsWith("ARECEBER")
-                        )}
+                        data={titulos.filter(filtrarPorNaoRecebimento)}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) => <TitulosCard item={item} />}
+                        showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}
                     />
                 </View>
             </View>
