@@ -37,19 +37,6 @@ export const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#000000',
         marginBottom: 10
-    },
-
-    touchableOpacityPagar: {
-        alignItems: 'center'
-    },
-
-    touchableOpacityPagarTexto: {
-        width: 200,
-        backgroundColor: '#FC0000',
-        padding: 10,
-        textAlign: 'center',
-        borderRadius: 10,
-        color: '#FFFFFF'
-    },
+    }
 
 });

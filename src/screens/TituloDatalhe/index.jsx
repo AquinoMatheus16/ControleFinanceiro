@@ -3,7 +3,7 @@ import { styles } from "./styles";
 import { format } from "date-fns";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import { deleteTitulo } from "../../services/titulo";
+import { deleteTitulo, putDespagar } from "../../services/titulo";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
 
@@ -73,6 +73,55 @@ export const TitulosDetalhe = ({ route }) => {
         }
     };
 
+    const desmarcar = (item) => {
+        try {
+            putDespagar(item);
+            alert("Desmarcado com sucesso!")
+        } catch (error) {
+            alert("Erro ao desmarcar!")
+        }
+    }
+
+    const buttonMostrar = () => {
+
+        if (item?.dataPagamento != null && item?.tipo === "APAGAR") {
+            return (
+                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => desmarcar(item)}>
+                    <Text style={styles.touchableOpacityAtualizarTexto}>DESMARCAR COMO PAGO</Text>
+                </TouchableOpacity>
+            )
+
+        } else if (item?.dataPagamento != null && item?.tipo === "ARECEBER") {
+            return (
+                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => desmarcar(item)}>
+                    <Text style={styles.touchableOpacityAtualizarTexto}>DESMARCAR COMO RECEBIDO</Text>
+                </TouchableOpacity>
+            )
+
+        }
+
+    }
+
+    const buttonMostrarPagar = () => {
+
+        if (item?.dataPagamento != null && item?.tipo === "APAGAR") {
+            return (
+                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => desmarcar(item)}>
+                    <Text style={styles.touchableOpacityAtualizarTexto}>DESMARCAR COMO PAGO</Text>
+                </TouchableOpacity>
+            )
+
+        } else if (item?.dataPagamento != null && item?.tipo === "ARECEBER") {
+            return (
+                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => desmarcar(item)}>
+                    <Text style={styles.touchableOpacityAtualizarTexto}>DESMARCAR COMO RECEBIDO</Text>
+                </TouchableOpacity>
+            )
+
+        }
+
+    }
+
     return (
 
         <ScrollView style={styles.scrollView}>
@@ -95,6 +144,10 @@ export const TitulosDetalhe = ({ route }) => {
 
                     {item?.observacao === "" ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
                     {/* <Text style={styles.texto}>Observação: {item?.observacao}</Text> */}
+
+                    {buttonMostrar()}
+
+
 
                     <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Titulos Atualizar", { item: item })}>
                         <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>

@@ -17,9 +17,14 @@ export const TituloDetalheHome = ({ route }) => {
     const dataP = new Date(item?.dataPagamento)
     const formatdataPagamento = format(dataP, "dd/MM/yyyy");
 
-    // const pagar = () => {
-    //     putPagar(item);
-    // }
+    const pagar = (item) => {
+        try {
+            putPagar(item);
+            alert("Marcado com sucesso!")
+        } catch (error) {
+            alert("Erro ao marcar!")
+        }   
+    }
 
     return (
 
@@ -45,12 +50,6 @@ export const TituloDetalheHome = ({ route }) => {
 
                     {item?.observacao === null ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
 
-                </View>
-                <View>
-                    {item?.tipo === "APAGAR" ?
-                        <TouchableOpacity onPress={() => putPagar(item)} style={styles.touchableOpacityPagar}>
-                            <Text style={styles.touchableOpacityPagarTexto}>MARCAR COMO PAGA</Text>
-                        </TouchableOpacity> : ""}
                 </View>
             </View>
         </ScrollView>

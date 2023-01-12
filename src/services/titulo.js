@@ -67,8 +67,7 @@ export const putPagar = async (titulo) => {
 export const putDespagar = async (titulo) => {
     try {
         const token = await AsyncStorage.getItem("@app_token")
-        const putTitulo = await api.put(`/api/titulos/despagar/${titulo.id}`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
-
+        const putTitulo = await api.put(`/api/titulos/despagar/${titulo.id}`, titulo, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
         return putTitulo;
     } catch (e) {
         console.error(e);
