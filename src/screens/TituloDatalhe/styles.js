@@ -67,4 +67,17 @@ export const styles = StyleSheet.create({
         color: '#FFFFFF'
     },
 
+    touchableOpacityPagar: {
+        alignItems: 'center'
+    },
+
+    touchableOpacityPagarTexto: {
+        width: '50%',
+        backgroundColor: '#FC0000',
+        padding: 10,
+        textAlign: 'center',
+        borderRadius: 10,
+        color: '#FFFFFF'
+    }
+
 });
