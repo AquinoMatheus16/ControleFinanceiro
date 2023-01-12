@@ -25,17 +25,17 @@ export const TituloCadastra = () => {
 
     const [erroData, setErroData] = useState(false);
     const [dataVencimento, setDataVencimento] = useState(new Date());
-    const [errorDataVencimento, setErrorDataVencimento] = useState("");
+    const [errorDataVencimento, setErrorDataVencimento] = useState('');
 
     const [data, setData] = useState([]);
     const [centroDeCustoSalvos, setCentroDeCustoSalvos] = useState([]);
-    const [selected, setSelected] = useState("");
+    const [selected, setSelected] = useState('');
     const [selectedTipo, setSelectedTipo] = useState([]);
-    const [centroDeCustoJson, setCentroDeCustoJson] = useState("");
+    const [centroDeCustoJson, setCentroDeCustoJson] = useState('');
     const [datePicker, setDatePicker] = useState(false);
     const navigation = useNavigation();
     const { setLoad } = useContext(AuthContext);
-    const [dataFormatada, setDataFormatada] = useState("");
+    const [dataFormatada, setDataFormatada] = useState('');
 
     const selectTipo = [
         { key: '1', value: 'APAGAR' },

@@ -11,21 +11,29 @@ export const CentroDeCustoAtualizar = ({ route }) => {
     const navigation = useNavigation();
     const [descricao, setDescricao] = useState(item.descricao);
     const [observacao, setObservacao] = useState(item.observacao);
+    const [erroDescricao, setErroDescricao] = useState(false);
     const { setLoad } = useContext(AuthContext);
 
-    const confirmarAtualizar = () =>
-    Alert.alert(
-        "Aviso",
-        "Deseja mesmo atualizar o centro de custo?",
-        [
-            {
-                text: "Cancelar",
-                onPress: () => null,
-                style: "cancel"
-            },
-            { text: "OK", onPress: () => put() }
-        ]
-    );
+    const confirmarAtualizar = () => {
+
+        if (descricao === '') {
+            setErroDescricao(true)
+            return;
+        };
+
+        Alert.alert(
+            "Aviso",
+            "Deseja mesmo atualizar o centro de custo?",
+            [
+                {
+                    text: "Cancelar",
+                    onPress: () => null,
+                    style: "cancel"
+                },
+                { text: "OK", onPress: () => put() }
+            ]
+        );
+    };
 
     const put = async () => {
         try {
@@ -37,8 +45,9 @@ export const CentroDeCustoAtualizar = ({ route }) => {
 
             JSON.stringify(novoCentroDeCusto);
 
-            putCentroDeCusto(item, novoCentroDeCusto);
-            // console.log("novoCentroDeCusto: ", novoCentroDeCusto);
+            await putCentroDeCusto(item, novoCentroDeCusto);
+
+            console.log("novoCentroDeCusto: ", novoCentroDeCusto);
 
             Alert.alert(
                 'Aviso',
@@ -83,7 +92,9 @@ export const CentroDeCustoAtualizar = ({ route }) => {
                     placeholder="Descrção"
                     onChangeText={setDescricao}
                     value={descricao}
+                    onFocus={() => setErroDescricao(false)}
                 />
+                {erroDescricao ? <Text style={styles.textError}>Informe a descrição</Text> : ''}
 
                 <Text style={styles.texto}>Observação</Text>
                 <TextInput

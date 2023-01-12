@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
     },
 
     containerFlatList: {
-        marginBottom: 300
+        marginBottom: 274
     }
 
 });

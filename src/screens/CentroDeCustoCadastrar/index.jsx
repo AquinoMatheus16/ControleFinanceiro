@@ -1,28 +1,38 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from './styles';
 import { useNavigation } from "@react-navigation/native";
 import { postCentroDeCusto } from "../../services/centroDeCusto";
 import { AuthContext } from "../../contexts/AuthContext";
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+const schema = yup.object({
+    descricao: yup.string().min(2, "A descrição deve ter pelo menos 2 digitos").required("Informe a descrição"),
+    observacao: yup.string(),
+});
 
 export const CentroDeCustoCadastrar = () => {
 
     const navigation = useNavigation();
-    const [descricao, setDescricao] = useState("");
-    const [observacao, setObservacao] = useState("");
     const { setLoad } = useContext(AuthContext);
 
-    const post = async () => {
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    });
+
+    const post = async (data) => {
         try {
 
             const novoCentroDeCusto = {
-                descricao: descricao,
-                observacao: observacao
+                descricao: data.descricao,
+                observacao: data.observacao
             }
 
             JSON.stringify(novoCentroDeCusto);
 
-            postCentroDeCusto(novoCentroDeCusto);
+            await postCentroDeCusto(novoCentroDeCusto);
 
             Alert.alert(
                 'Aviso',
@@ -39,6 +49,7 @@ export const CentroDeCustoCadastrar = () => {
             setTimeout(() => {
                 setLoad(false)
             }, 120);
+            return;
 
         } catch (error) {
             console.error(error);
@@ -61,24 +72,39 @@ export const CentroDeCustoCadastrar = () => {
             <View style={styles.containerMain}>
 
                 <Text style={styles.texto}>Descrção</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Descrção"
-                    onChangeText={setDescricao}
-                    value={descricao}
+                <Controller
+                    control={control}
+                    name="descricao"
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder="Descrção"
+                            onChangeText={onChange}
+                            value={value}
+                        />
+
+                    )}
                 />
+                {errors.descricao && <Text style={styles.textError}>{errors.descricao?.message}</Text>}
 
                 <Text style={styles.texto}>Observação</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Observação"
-                    multiline
-                    numberOfLines={5}
-                    onChangeText={setObservacao}
-                    value={observacao}
+                <Controller
+                    control={control}
+                    name="observacao"
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder="Observação"
+                            multiline
+                            numberOfLines={5}
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
                 />
+                {errors.observacao && <Text style={styles.textError}>{errors.observacao?.message}</Text>}
 
-                <TouchableOpacity onPress={post} style={styles.touchableOpacity}>
+                <TouchableOpacity onPress={handleSubmit(post)} style={styles.touchableOpacity}>
                     <Text>CADASTRAR</Text>
                 </TouchableOpacity>
 
