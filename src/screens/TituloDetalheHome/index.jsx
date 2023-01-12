@@ -17,15 +17,6 @@ export const TituloDetalheHome = ({ route }) => {
     const dataP = new Date(item?.dataPagamento)
     const formatdataPagamento = format(dataP, "dd/MM/yyyy");
 
-    const pagar = (item) => {
-        try {
-            putPagar(item);
-            alert("Marcado com sucesso!")
-        } catch (error) {
-            alert("Erro ao marcar!")
-        }   
-    }
-
     return (
 
         <ScrollView style={styles.scrollView}>

@@ -1,13 +1,15 @@
-import { Text, View, TouchableOpacity, Alert } from "react-native";
+import { Text, View, TouchableOpacity, Alert, Switch } from "react-native";
 import { styles } from "./styles";
 import { format } from "date-fns";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import { deleteTitulo, putDespagar } from "../../services/titulo";
+import { deleteTitulo, putDespagar, putPagar } from "../../services/titulo";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export const TitulosDetalhe = ({ route }) => {
+
+    const [isChecked, setIsChecked] = useState(false)
 
     const { item } = route.params;
     const navigation = useNavigation();
@@ -21,6 +23,10 @@ export const TitulosDetalhe = ({ route }) => {
 
     const dataP = new Date(item?.dataPagamento)
     const formatdataPagamento = format(dataP, "dd/MM/yyyy");
+
+    // const toggleIsChecked = () => {
+    //     setIsChecked(value => !value)
+    // }
 
     const confirmarDeletar = () => {
         Alert.alert(
@@ -73,28 +79,64 @@ export const TitulosDetalhe = ({ route }) => {
         }
     };
 
-    const desmarcar = (item) => {
-        try {
-            putDespagar(item);
-            alert("Desmarcado com sucesso!")
-        } catch (error) {
-            alert("Erro ao desmarcar!")
-        }
+    const marcar = (item) => {
+            setLoad(true)
+            putPagar(item)
+            setTimeout(() => {
+            setLoad(false)
+            }, 250);
+            setTimeout(() => {
+            setLoad(false)
+            navigation.goBack()
+            }, 500);
     }
+
+    const desmarcar = (item) => {
+            setLoad(true)
+            Alert.alert(
+                "Aviso",
+                item.tipo === "APAGAR" ? "Deseja desmarcar como pago?" : "Deseja desmarcar como recebido?",
+                [
+                    {
+                        text: "Cancelar",
+                        onPress: () => null,
+                        style: "cancel"
+
+                    },
+                    { text: "OK", onPress: () => putDespagar(item, setTimeout(() => { setLoad(false)}, 250), setTimeout(() => { navigation.goBack()}, 1000))}
+                ]
+            );
+            
+            
+    }
+
+    // useEffect(() => {
+    //     // setTimeout(() => {
+    //         desmarcar();
+    //         marcar();
+
+    //     // }, 250);
+    // }, []);
 
     const buttonMostrar = () => {
 
         if (item?.dataPagamento != null && item?.tipo === "APAGAR") {
             return (
-                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => desmarcar(item)}>
-                    <Text style={styles.touchableOpacityAtualizarTexto}>DESMARCAR COMO PAGO</Text>
+                <TouchableOpacity onPress={() => desmarcar(item)}>
+                    <View style={styles.marcarPago}>
+                        <View style={styles.marcador}></View>
+                        <Text>PAGO</Text>
+                    </View>
                 </TouchableOpacity>
             )
 
         } else if (item?.dataPagamento != null && item?.tipo === "ARECEBER") {
             return (
-                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => desmarcar(item)}>
-                    <Text style={styles.touchableOpacityAtualizarTexto}>DESMARCAR COMO RECEBIDO</Text>
+                <TouchableOpacity onPress={() => desmarcar(item)}>
+                    <View style={styles.marcar}>
+                        <View style={styles.marcador}></View>
+                        <Text>RECEBIDO</Text>
+                    </View>
                 </TouchableOpacity>
             )
 
@@ -104,17 +146,17 @@ export const TitulosDetalhe = ({ route }) => {
 
     const buttonMostrarPagar = () => {
 
-        if (item?.dataPagamento != null && item?.tipo === "APAGAR") {
+        if (item?.dataPagamento === null && item?.tipo === "APAGAR") {
             return (
-                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => desmarcar(item)}>
-                    <Text style={styles.touchableOpacityAtualizarTexto}>DESMARCAR COMO PAGO</Text>
+                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => marcar(item)}>
+                    <Text style={styles.touchableOpacityAtualizarTexto}>MARCAR COMO PAGO</Text>
                 </TouchableOpacity>
             )
 
-        } else if (item?.dataPagamento != null && item?.tipo === "ARECEBER") {
+        } else if (item?.dataPagamento === null && item?.tipo === "ARECEBER") {
             return (
-                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => desmarcar(item)}>
-                    <Text style={styles.touchableOpacityAtualizarTexto}>DESMARCAR COMO RECEBIDO</Text>
+                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => marcar(item)}>
+                    <Text style={styles.touchableOpacityAtualizarTexto}>MARCAR COMO RECEBIDO</Text>
                 </TouchableOpacity>
             )
 
@@ -128,6 +170,8 @@ export const TitulosDetalhe = ({ route }) => {
             <View style={styles.containerMain}>
                 <View style={styles.container}>
 
+                    {buttonMostrar()}
+
                     {item?.descricao === null ? "" : <Text style={styles.textoTitulo}>{item?.descricao}</Text>}
 
                     {item?.centroDeCusto === null ? "" : <Text style={styles.texto}>Centro de custo: {item?.centroDeCusto.descricao}</Text>}
@@ -140,14 +184,20 @@ export const TitulosDetalhe = ({ route }) => {
 
                     {item?.dataCadastro === null ? "" : <Text style={styles.texto}>Data cadastro: {formatdataCadastro}</Text>}
 
-                    {item?.dataPagamento === null ? "" : <Text style={styles.texto}>Data pagamento: {formatdataPagamento}</Text>}
+                    {item?.dataPagamento === null ? "" : item?.tipo === "APAGAR" ? <Text style={styles.texto}>Data pagamento: {formatdataPagamento}</Text> : <Text style={styles.texto}>Data recebimento: {formatdataPagamento}</Text>}
 
-                    {item?.observacao === "" ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
+                    {item?.observacao === null ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
                     {/* <Text style={styles.texto}>Observação: {item?.observacao}</Text> */}
 
-                    {buttonMostrar()}
+                    {buttonMostrarPagar()}
 
-
+                    {/* <View style={styles.bt}>
+                        <Text>PAGAR</Text>
+                        <Switch
+                            value={isChecked}
+                            onValueChange={toggleIsChecked}
+                        />
+                    </View> */}
 
                     <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Titulos Atualizar", { item: item })}>
                         <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>

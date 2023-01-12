@@ -78,6 +78,44 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         borderRadius: 10,
         color: '#FFFFFF'
+    },
+
+    marcar: {
+        backgroundColor: '#fff',
+        width: 85,
+        height: 20,
+        marginLeft: "70%",
+        marginTop: -5,
+        marginBottom: 5,
+        flexDirection: "row",
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'gray',
+    },
+
+    marcarPago: {
+        backgroundColor: '#fff',
+        width: 60,
+        height: 20,
+        marginLeft: "80%",
+        marginTop: -5,
+        marginBottom: 5,
+        flexDirection: "row",
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'gray',
+    },
+
+    marcador: {
+        backgroundColor: '#0C609C',
+        width: 10,
+        height: 18,
+        marginRight: 5,
+        borderRadius: 1,
+    },
+
+    bt: {
+        flexDirection: "row"
     }
 
 });
