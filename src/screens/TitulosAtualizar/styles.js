@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
         borderBottomColor: '#FFFFFF',
         padding: 5,
         width: '80%',
-        marginBottom: 20,
+        marginBottom: 10,
         color: '#FFFFFF',
         textAlign: 'center'
     },
@@ -82,7 +82,15 @@ export const styles = StyleSheet.create({
         marginLeft: 10,
         paddingRight: 20,
         paddingBottom: 5
-    }
+    },
 
+    touchableOpacity2: {
+        flexDirection: 'row'
+    },
 
+    textError: {
+        // alignSelf: 'flex-start',
+        color: '#F32020',
+        marginBottom: 5
+    },
 });

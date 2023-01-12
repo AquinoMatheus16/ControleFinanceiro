@@ -68,4 +68,26 @@ export const styles = StyleSheet.create({
         backgroundColor: '#0C609C',
     },
 
+    containerDataInput: {
+        flexDirection: 'row',
+        width: '80%',
+        borderBottomWidth: 1,
+        borderBottomColor: '#FFFFFF',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 10,
+        paddingBottom: 10
+    },
+
+    iconInput: {
+        marginLeft: 10,
+        paddingRight: 20,
+        paddingBottom: 5
+    },
+
+    touchableOpacity2: {
+        flexDirection: 'row'
+    }
+
+
 });

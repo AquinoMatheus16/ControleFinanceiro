@@ -6,7 +6,7 @@ import { getCentroDeCusto } from "../../services/centroDeCusto";
 import { putTitulo } from "../../services/titulo";
 import { styles } from "./styles";
 import { AuthContext } from '../../contexts/AuthContext';
-import DateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { format } from "date-fns";
 import { AntDesign } from '@expo/vector-icons';
 
@@ -15,20 +15,21 @@ export const TitulosAtualizar = ({ route }) => {
     const { item } = route.params;
     const [descricao, setDescricao] = useState(item.descricao);
     const [observacao, setObservacao] = useState(item.observacao);
-    const [valor, setValor] = useState("" + item.valor);
-    // const [dataReferencia, setDataReferencia] = useState(item.dataReferencia);
+    const [valor, setValor] = useState('' + item.valor);
     const [dataVencimento, setDataVencimento] = useState(new Date(item.dataVencimento));
-    // const [dataPagamento, setDataPagamento] = useState(item.dataPagamento);
-    const [tipo, setTipo] = useState("");
+    const [tipo, setTipo] = useState('');
 
     const [centroDeCusto, setCentroDeCusto] = useState(item.centroDeCusto);
     const [data, setData] = useState([]);
     const [centroDeCustoSalvos, setCentroDeCustoSalvos] = useState([]);
-    const [selected, setSelected] = useState("");
+    const [selected, setSelected] = useState('');
     const [centroDeCustoJson, setCentroDeCustoJson] = useState(item.centroDeCusto);
     const [selectedTipo, setSelectedTipo] = useState([]);
     const [datePicker, setDatePicker] = useState(false);
     const [dataFormatada, setDataFormatada] = useState(new Date());
+
+    const [erroDescricaoBoolean, setErroDescricaoBoolean] = useState(false);
+    const [erroValorBoolean, setErroValorBoolean] = useState(false);
 
     const navigation = useNavigation();
     const { setLoad } = useContext(AuthContext);
@@ -84,6 +85,27 @@ export const TitulosAtualizar = ({ route }) => {
         centroDeCustoId();
     }, [centroDeCusto]);
 
+    const validarInput = () => {
+        if (descricao === '' && valor === '') {
+
+            setErroDescricaoBoolean(true)
+            setErroValorBoolean(true)
+            return;
+        } else if (descricao === '') {
+
+            setErroValorBoolean(false)
+            setErroDescricaoBoolean(true)
+            return;
+        } else if (valor === '') {
+
+            setErroDescricaoBoolean(false)
+            setErroValorBoolean(true)
+            return;
+        } else {
+            put();
+        }
+    };
+
     const put = async () => {
         try {
 
@@ -92,7 +114,6 @@ export const TitulosAtualizar = ({ route }) => {
                 tipo: tipo,
                 valor: parseInt(valor),
                 dataVencimento: dataVencimento,
-                // dataPagamento: dataPagamento,
                 centroDeCusto: centroDeCustoJson,
                 observacao: observacao
             }
@@ -100,7 +121,8 @@ export const TitulosAtualizar = ({ route }) => {
             JSON.stringify(novoTitulo);
 
             centroDeCustoId();
-            putTitulo(item, novoTitulo);
+            await putTitulo(item, novoTitulo);
+            console.log("novoTitulo: ", novoTitulo);
 
             Alert.alert(
                 'Aviso',
@@ -175,6 +197,7 @@ export const TitulosAtualizar = ({ route }) => {
                     onChangeText={setDescricao}
                     value={descricao}
                 />
+                {erroDescricaoBoolean ? <Text style={styles.textError}>Informe a descrição</Text> : ''}
 
                 <Text style={styles.texto}>Valor</Text>
                 <TextInput
@@ -184,14 +207,7 @@ export const TitulosAtualizar = ({ route }) => {
                     onChangeText={setValor}
                     value={valor}
                 />
-
-                {/* <Text style={styles.texto}>Data de vencimento</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Data de vencimento"
-                    onChangeText={setDataVencimento}
-                    value={dataVencimento}
-                /> */}
+                {erroValorBoolean ? <Text style={styles.textError}>Informe o valor</Text> : ''}
 
                 {datePicker && (
                     <DateTimePicker
@@ -206,24 +222,18 @@ export const TitulosAtualizar = ({ route }) => {
                 )}
                 <Text style={styles.texto}>Data de vencimento</Text>
                 <View style={styles.containerDataInput}>
-                    <AntDesign onPress={showDatePicker} style={styles.iconInput} name="calendar" size={24} color="#FFFFFF" />
-                    <TextInput
-                        style={styles.textInputDate}
-                        placeholder="Data de vencimento"
-                        onChangeText={setDataVencimento}
-                        value={dataFormatada}
-                        // value={dataVencimento}
-                    />
+                    <TouchableOpacity style={styles.touchableOpacity2} onPress={() => showDatePicker()}>
+                        <AntDesign style={styles.iconInput} name="calendar" size={24} color="#FFFFFF" />
+                        <TextInput
+                            style={styles.textInputDate}
+                            placeholder="Data de vencimento"
+                            onChangeText={setDataVencimento}
+                            value={dataFormatada}
+                            dataDetectorTypes={"none"}
+                            editable={false}
+                        />
+                    </TouchableOpacity>
                 </View>
-
-
-                {/* <Text style={styles.texto}>Data de pagamento</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Data de pagamento"
-                    onChangeText={setDataPagamento}
-                    value={dataPagamento}
-                /> */}
 
                 <Text style={styles.texto}>Observação</Text>
                 <TextInput
@@ -235,7 +245,7 @@ export const TitulosAtualizar = ({ route }) => {
                     value={observacao}
                 />
 
-                <TouchableOpacity onPress={put} style={styles.touchableOpacity}>
+                <TouchableOpacity onPress={() => validarInput()} style={styles.touchableOpacity}>
                     <Text>ATUALIZAR</Text>
                 </TouchableOpacity>
 

@@ -66,6 +66,9 @@ export const CentroDeCusto = () => {
                     data={itemFiltrado}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => <CentroDeCustoCard item={item} />}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                    refreshing={true}
                 />
             </View>
         </View>
