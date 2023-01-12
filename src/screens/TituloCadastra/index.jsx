@@ -6,7 +6,7 @@ import { postTitulo } from "../../services/titulo";
 import { getCentroDeCusto } from "../../services/centroDeCusto";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from '../../contexts/AuthContext';
-import DateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { format } from "date-fns";
 import { AntDesign } from '@expo/vector-icons';
 import { useForm, Controller } from 'react-hook-form';
@@ -17,36 +17,21 @@ const schema = yup.object({
     descricao: yup.string().min(2, "A descrição deve ter pelo menos 2 digitos").required("Informe a descrição"),
     observacao: yup.string(),
     valor: yup.string().required("Informe o valor"),
-    dataVencimento: yup.string().required("Informe a data de vencimento"),
     tipo: yup.string().required("Informe o tipo"),
     centroDeCusto: yup.string().required("Informe o centro de custo")
 });
 
 export const TituloCadastra = () => {
 
-    const { control, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema)
-    });
-
-    const [descricao, setDescricao] = useState("");
-    const [observacao, setObservacao] = useState("");
-    const [valor, setValor] = useState("");
+    const [erroData, setErroData] = useState(false);
     const [dataVencimento, setDataVencimento] = useState(new Date());
-    const [tipo, setTipo] = useState("");
-    const [centroDeCusto, setCentroDeCusto] = useState([]);
-
-    // const [descricaoError, setDescricaoError] = useState("");
-    // const [observacaoError, setObservacaoError] = useState("");
-    // const [valorError, setValorError] = useState("");
-    // const [dataVencimentoError, setDataVencimentoError] = useState(new Date());
-    // const [tipoError, setTipoError] = useState("");
-    // const [centroDeCustoError, setCentroDeCustoError] = useState([]);
+    const [errorDataVencimento, setErrorDataVencimento] = useState("");
 
     const [data, setData] = useState([]);
     const [centroDeCustoSalvos, setCentroDeCustoSalvos] = useState([]);
     const [selected, setSelected] = useState("");
-    const [centroDeCustoJson, setCentroDeCustoJson] = useState("");
     const [selectedTipo, setSelectedTipo] = useState([]);
+    const [centroDeCustoJson, setCentroDeCustoJson] = useState("");
     const [datePicker, setDatePicker] = useState(false);
     const navigation = useNavigation();
     const { setLoad } = useContext(AuthContext);
@@ -56,6 +41,10 @@ export const TituloCadastra = () => {
         { key: '1', value: 'APAGAR' },
         { key: '2', value: 'ARECEBER' }
     ]
+
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    });
 
     function showDatePicker() {
         setDatePicker(true);
@@ -67,6 +56,7 @@ export const TituloCadastra = () => {
         setDataFormatada(formatDataVencimento);
         setDataVencimento(value);
         setDatePicker(false)
+        setErroData(true)
     };
 
     const getCentroDeCustos = async () => {
@@ -87,41 +77,46 @@ export const TituloCadastra = () => {
 
     const centroDeCustoId = () => {
         centroDeCustoSalvos.map(item => {
-            if (item.descricao == centroDeCusto) {
+            if (item.descricao === selected) {
                 setCentroDeCustoJson(item)
             }
         })
-        // console.log("centroDeCustoJson: ", centroDeCusto)
     }
 
     useEffect(() => {
         getCentroDeCustos()
+    }, [])
+
+    useEffect(() => {
         centroDeCustoId()
-    }, [centroDeCusto]);
+    }, [selected]);
+
+    const validarData = () => {
+        if (dataFormatada === '') {
+            setErrorDataVencimento("Informe a data de vencimento")
+            return;
+        }
+    };
 
     const post = async (data) => {
         try {
-            console.log("Data:: ", data);
-
-            if (descricao === "" || tipo === "" || centroDeCusto === "" || valor === "" || dataVencimento === "") {
-                alert("DDDDDDDDDDDDDDDD")
-                return;
-            };
+            // console.log("Data: ", data);
 
             const novoTitulo = {
-                descricao: descricao,
-                tipo: tipo,
-                valor: parseInt(valor),
+                descricao: data.descricao,
+                tipo: data.tipo,
+                valor: parseInt(data.valor),
                 dataVencimento: dataVencimento,
                 centroDeCusto: centroDeCustoJson,
-                observacao: observacao
+                observacao: data.observacao
             }
+            // console.log("centroDeCustoJson 2: ", centroDeCustoJson);
 
             JSON.stringify(novoTitulo);
 
             centroDeCustoId();
             postTitulo(novoTitulo);
-            console.log("Log do data: ", novoTitulo);
+            console.log("Log do novoTitulo: ", novoTitulo);
 
             Alert.alert(
                 'Aviso',
@@ -160,84 +155,6 @@ export const TituloCadastra = () => {
         <ScrollView style={styles.scrollView}>
             <View style={styles.containerMain}>
 
-                {/* <Text style={styles.textoTituloSelect}>Tipo</Text>
-                <SelectList
-                    style={styles.selectListTipo}
-                    setSelected={(val) => setSelectedTipo(val)}
-                    data={selectTipo}
-                    save="value"
-                    onSelect={() => setTipo(selectedTipo)}
-                    boxStyles={{ borderRadius: 10, width: 320, borderColor: '#FFFFFf', justifyContent: 'center' }}
-                    dropdownStyles={{ borderRadius: 5, borderColor: '#FFFFFf', alignItems: 'center' }}
-                    dropdownTextStyles={{ color: '#FFFFFF' }}
-                    inputStyles={{ color: '#FFFFFF' }}
-                    searchPlaceholder='Pesquisar'
-                    placeholder='Tipo'
-                />
-
-                <Text style={styles.textoTituloSelect}>Centro de custo</Text>
-                <SelectList
-                    setSelected={(val) => setSelected(val)}
-                    data={data}
-                    save='value'
-                    onSelect={() => setCentroDeCusto(selected)}
-                    boxStyles={{ borderRadius: 10, width: 320, borderColor: '#FFFFFf', justifyContent: 'center' }}
-                    dropdownStyles={{ borderRadius: 5, borderColor: '#FFFFFf', alignItems: 'center' }}
-                    dropdownTextStyles={{ color: '#FFFFFF' }}
-                    inputStyles={{ color: '#FFFFFF' }}
-                    searchPlaceholder='Pesquisar'
-                    placeholder='Centro de custo'
-                />
-
-                <Text style={styles.texto}>Descrção</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Descrção"
-                    onChangeText={setDescricao}
-                    value={descricao}
-                />
-
-                <Text style={styles.texto}>Valor</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Valor"
-                    keyboardType="numeric"
-                    onChangeText={setValor}
-                    value={valor}
-                />
-
-                {datePicker && (
-                    <DateTimePicker
-                        testID="dateTimePicker"
-                        mode={'date'}
-                        display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                        is24Hour={true}
-                        value={dataVencimento}
-                        onChange={dataVencimentoSelect}
-                        style={styles.datePicker}
-                    />
-                )}
-                <Text style={styles.texto}>Data de vencimento</Text>
-                <View style={styles.containerDataInput}>
-                    <AntDesign onPress={showDatePicker} style={styles.iconInput} name="calendar" size={24} color="black" />
-                    <TextInput
-                        style={styles.textInputDate}
-                        placeholder="Data de vencimento"
-                        onChangeText={setDataVencimento}
-                        value={dataFormatada}
-                    />
-                </View>
-
-                <Text style={styles.texto}>Observação</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Observação"
-                    multiline
-                    numberOfLines={5}
-                    onChangeText={setObservacao}
-                    value={observacao}
-                /> */}
-
                 <Text style={styles.textoTituloSelect}>Tipo</Text>
                 <Controller
                     control={control}
@@ -246,9 +163,9 @@ export const TituloCadastra = () => {
                         <SelectList
                             style={styles.selectListTipo}
                             setSelected={(val) => setSelectedTipo(val)}
+                            onSelect={() => onChange(selectedTipo)}
                             data={selectTipo}
                             save="value"
-                            onSelect={() => setTipo(selectedTipo)}
                             boxStyles={{ borderRadius: 10, width: 320, borderColor: '#FFFFFf', justifyContent: 'center' }}
                             dropdownStyles={{ borderRadius: 5, borderColor: '#FFFFFf', alignItems: 'center' }}
                             dropdownTextStyles={{ color: '#FFFFFF' }}
@@ -267,9 +184,9 @@ export const TituloCadastra = () => {
                     render={({ field: { onChange, onBlur, value } }) => (
                         <SelectList
                             setSelected={(val) => setSelected(val)}
+                            onSelect={() => onChange(selected)}
                             data={data}
                             save='value'
-                            onSelect={() => setCentroDeCusto(selected)}
                             boxStyles={{ borderRadius: 10, width: 320, borderColor: '#FFFFFf', justifyContent: 'center' }}
                             dropdownStyles={{ borderRadius: 5, borderColor: '#FFFFFf', alignItems: 'center' }}
                             dropdownTextStyles={{ color: '#FFFFFF' }}
@@ -282,7 +199,7 @@ export const TituloCadastra = () => {
                 />
                 {errors.centroDeCusto && <Text style={styles.textError}>{errors.centroDeCusto?.message}</Text>}
 
-                <Text style={styles.texto}>Descrção</Text>
+                <Text style={styles.texto}>Descrição</Text>
                 <Controller
                     control={control}
                     name="descricao"
@@ -292,7 +209,6 @@ export const TituloCadastra = () => {
                             placeholder="Descrição"
                             onBlur={onBlur}
                             onChangeText={onChange}
-                            value={value}
                         />
                     )}
                 />
@@ -318,6 +234,7 @@ export const TituloCadastra = () => {
                 <Text style={styles.texto}>Data de vencimento</Text>
                 {datePicker && (
                     <DateTimePicker
+                        style={styles.datePicker}
                         testID="dateTimePicker"
                         mode={'date'}
                         display={Platform.OS === 'ios' ? 'spinner' : 'default'}
@@ -325,28 +242,22 @@ export const TituloCadastra = () => {
                         value={dataVencimento}
                         onChange={dataVencimentoSelect}
                         locale={'DE'}
-                        style={styles.datePicker}
                     />
                 )}
-                <Controller
-                    control={control}
-                    name="dataVencimento"
-                    render={({ field: { onChange, onBlur, value } }) => (
-                        <View style={styles.containerDataInput}>
-                            <AntDesign onPress={() => showDatePicker()} style={styles.iconInput} name="calendar" size={24} color="black" />
-                            <TextInput
-                                style={styles.textInputDate}
-                                onBlur={onBlur}
-                                placeholder="Data de vencimento"
-                                // onChangeText={setDataVencimento}
-                                onChangeText={onChange}
-                                // value={dataFormatada}
-                                value={value}
-                            />
-                        </View>
-                    )}
-                />
-                {errors.dataVencimento && <Text style={styles.textError}>{errors.dataVencimento?.message}</Text>}
+                <View style={styles.containerDataInput}>
+                    <TouchableOpacity style={styles.touchableOpacity2} onPress={() => showDatePicker()}>
+                        <AntDesign style={styles.iconInput} name="calendar" size={24} color="#000000" />
+                        <TextInput
+                            style={styles.textInputDate}
+                            placeholder="Data vencimento"
+                            defaultValue=""
+                            value={dataFormatada}
+                            dataDetectorTypes={"none"}
+                            editable={false}
+                        />
+                    </TouchableOpacity>
+                </View>
+                {erroData ? "" : <Text style={styles.textError}>{errorDataVencimento}</Text>}
 
                 <Text style={styles.texto}>Observação</Text>
                 <Controller
@@ -366,11 +277,11 @@ export const TituloCadastra = () => {
                 />
                 {errors.observacao && <Text style={styles.textError}>{errors.observacao?.message}</Text>}
 
-                <TouchableOpacity onPress={handleSubmit(post)} style={styles.touchableOpacity}>
+                <TouchableOpacity onPress={handleSubmit(post)} onPressIn={() => validarData()} style={styles.touchableOpacity}>
                     <Text>CADASTRAR</Text>
                 </TouchableOpacity>
 
             </View>
-        </ScrollView>
+        </ScrollView >
     )
 };

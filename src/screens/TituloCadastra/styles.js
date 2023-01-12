@@ -83,7 +83,7 @@ export const styles = StyleSheet.create({
     },
 
     textInputDate: {
-        // padding:5
+        color: '#FFFFFF'
     },
 
     iconInput: {
@@ -96,6 +96,17 @@ export const styles = StyleSheet.create({
         // alignSelf: 'flex-start',
         color: '#F32020',
         marginBottom: 5
+    },
+
+    touchableOpacityData: {
+        width: '80%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    touchableOpacity2: {
+        flexDirection: 'row'
     }
 
 });
