@@ -9,16 +9,24 @@ export const styles = StyleSheet.create({
 
     homeContainer: {
         flex: 1,
-        backgroundColor: '#0C609C',
-        alignItems: 'center'
+        backgroundColor: 'gray',
+        alignItems: 'center',
     },
 
     homeDashboard: {
-        height: 220,
-        width: 220,
         marginTop: 20,
         borderRadius: 150,
-        backgroundColor: '#FFFFFF'
+        backgroundColor: 'gray',
+    },
+
+    homeDashboardtopo: {
+        width: '100%',
+        height: '40%',
+        backgroundColor: '#0C609C',
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     homeContainerMain: {

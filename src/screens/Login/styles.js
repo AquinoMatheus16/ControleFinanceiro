@@ -6,23 +6,42 @@ export const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         height: '100%',
-        backgroundColor: '#0C609C',
+        backgroundColor: 'gray',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         minHeight: 500
     },
 
     containerLogin: {
         width: '85%',
-        height: '65%',
-        backgroundColor: '#0C609C',
+        height: '60%',
+        backgroundColor: 'gray',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-        borderRadius: 7,
-        marginTop: 100
+        borderRadius: 7
+    },
+
+    containerMain: {
+        width: '100%',
+        height: '70%',
+        backgroundColor: 'gray',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column'
+        
+    },
+
+    containerTopo: {
+        width: '100%',
+        height: '40%',
+        backgroundColor: '#0C609C',
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        marginBottom: 25
     },
 
     input: {
@@ -59,6 +78,8 @@ export const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         fontSize: 18,
+        marginTop: 40,
+        marginBottom: 70
     },
 
     logoContainer: {
@@ -76,6 +97,8 @@ export const styles = StyleSheet.create({
     tituloTexto: {
         fontSize: 18,
         color: '#000000'
-    }
+    },
+
+    
 
 });

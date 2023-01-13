@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         borderRadius: 2,
         borderWidth: 1,
-        borderColor: 'gray',
+        borderColor: 'gray'
     },
 
     marcador: {

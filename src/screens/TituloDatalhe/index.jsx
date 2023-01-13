@@ -110,14 +110,6 @@ export const TitulosDetalhe = ({ route }) => {
             
     }
 
-    // useEffect(() => {
-    //     // setTimeout(() => {
-    //         desmarcar();
-    //         marcar();
-
-    //     // }, 250);
-    // }, []);
-
     const buttonMostrar = () => {
 
         if (item?.dataPagamento != null && item?.tipo === "APAGAR") {
