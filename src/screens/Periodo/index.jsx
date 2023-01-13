@@ -1,15 +1,18 @@
-import { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { useEffect, useState } from "react";
+import { FlatList, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { getDashBoard } from "../../services/dashboard";
 import { styles } from "./styles";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { AntDesign } from '@expo/vector-icons';
 import { format } from "date-fns";
+import { TitulosCard } from "../../components/TitulosCard";
 
 export const Periodo = () => {
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(false);
+    const [apagar, setApagar] = useState([]);
+    const [areceber, setAreceber] = useState([]);
     const [dataInicial, setDataInicial] = useState(new Date());
     const [dataFinal, setDataFinal] = useState(new Date());
 
@@ -37,9 +40,14 @@ export const Periodo = () => {
 
     const fetchTotal = async () => {
         const response = await getDashBoard(dataFormatadaInicial, dataFormatadaFinal);
-        setData(response);
-        console.log('response: ', response);
+        setApagar(response.titulosApagar);
+        setAreceber(response.titulosAreceber);
     };
+    console.log('response: ', data);
+
+    useEffect(() => {
+        fetchTotal();
+    }, [data]);
 
     return (
 
@@ -98,25 +106,28 @@ export const Periodo = () => {
                     />
                 </TouchableOpacity>
             </View>
+            <View style={styles.stilo}>
+                <TouchableOpacity onPress={fetchTotal} onPressIn={() => setData(true)}>
+                    <View style={styles.containerTouchableOpacity}>
+                        <Text style={styles.textoTouchableOpacity}>A pagar</Text>
+                    </View>
+                </TouchableOpacity>
 
-            <TouchableOpacity onPress={fetchTotal}>
-                <View style={styles.containerTouchableOpacity}>
-                    <Text style={styles.textoTouchableOpacity}>Pesquisar</Text>
-                </View>
-            </TouchableOpacity>
+                <TouchableOpacity onPress={fetchTotal} onPressIn={() => setData(false)}>
+                    <View style={styles.containerTouchableOpacity}>
+                        <Text style={styles.textoTouchableOpacity}>A receber</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
 
-            <View style={styles.containerMain}>
-
-                <Text style={styles.textoTitulo}>{data?.saldo}</Text>
-                <Text style={styles.textoTitulo}>{data?.totalApagar}</Text>
-                <Text style={styles.textoTitulo}>{data?.totalAreceber}</Text>
-
-                {/* {item?.centroDeCusto === null ? "" : <Text style={styles.texto}>Centro de custo: {item?.centroDeCusto.descricao}</Text>}
-
-                {item?.valor === null ? "" : <Text style={styles.texto}>Valor: {item?.valor}</Text>}
-
-                {item?.dataVencimento === null ? "" : <Text style={styles.texto}>Data vencimneto: {formatdataVencimento}</Text>} */}
-
+            <View style={styles.containerCard}>
+                <FlatList
+                    data={data ? apagar : areceber}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => <TitulosCard item={item} />}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                />
             </View>
 
         </View>
