@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useContext, useState } from "react";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from './styles';
 import { useNavigation } from "@react-navigation/native";
 import { postCentroDeCusto } from "../../services/centroDeCusto";
@@ -7,6 +7,9 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { ModalSuccessful } from "../../components/ModalSuccessful";
+import { ModalFailed } from "../../components/ModalFailed";
+import { InputGeral } from "../../components/InputGeral";
 
 const schema = yup.object({
     descricao: yup.string().min(2, "A descrição deve ter pelo menos 2 digitos").required("Informe a descrição"),
@@ -17,6 +20,9 @@ export const CentroDeCustoCadastrar = () => {
 
     const navigation = useNavigation();
     const { setLoad } = useContext(AuthContext);
+
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const [mostrarModalErro, setMostrarModalErro] = useState(false);
 
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
@@ -34,18 +40,13 @@ export const CentroDeCustoCadastrar = () => {
 
             await postCentroDeCusto(novoCentroDeCusto);
 
-            Alert.alert(
-                'Aviso',
-                'Centro De Custo cadastrado com suecsso!',
-                [
-                    {
-                        text: "OK",
-                        onPress: () => null
-                    }
-                ]
-            );
+            setMostrarModal(true)
+
             setLoad(true)
-            navigation.goBack();
+            setTimeout(() => {
+                navigation.goBack();
+            }, 2000);
+
             setTimeout(() => {
                 setLoad(false)
             }, 120);
@@ -53,16 +54,10 @@ export const CentroDeCustoCadastrar = () => {
 
         } catch (error) {
             console.error(error);
-            Alert.alert(
-                'Aviso',
-                'Erro ao cadastrar Centro De Custo.',
-                [
-                    {
-                        text: "OK",
-                        onPress: () => null
-                    }
-                ]
-            );
+
+            // setTimeout(() => {
+            setMostrarModalErro(true)
+            // }, 4000);
         };
     };
 
@@ -71,18 +66,16 @@ export const CentroDeCustoCadastrar = () => {
         <ScrollView style={styles.scrollView}>
             <View style={styles.containerMain}>
 
-                <Text style={styles.texto}>Descrção</Text>
+                <Text style={styles.texto}>Descrição</Text>
                 <Controller
                     control={control}
                     name="descricao"
                     render={({ field: { onChange, onBlur, value } }) => (
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder="Descrção"
+                        <InputGeral
+                            placeholder={'Descrção'}
                             onChangeText={onChange}
                             value={value}
                         />
-
                     )}
                 />
                 {errors.descricao && <Text style={styles.textError}>{errors.descricao?.message}</Text>}
@@ -92,10 +85,9 @@ export const CentroDeCustoCadastrar = () => {
                     control={control}
                     name="observacao"
                     render={({ field: { onChange, onBlur, value } }) => (
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder="Observação"
-                            multiline
+                        <InputGeral
+                            placeholder={'Observação'}
+                            multiline={true}
                             numberOfLines={5}
                             onChangeText={onChange}
                             value={value}
@@ -107,6 +99,9 @@ export const CentroDeCustoCadastrar = () => {
                 <TouchableOpacity onPress={handleSubmit(post)} style={styles.touchableOpacity}>
                     <Text>CADASTRAR</Text>
                 </TouchableOpacity>
+
+                <ModalSuccessful isVisible={mostrarModal} textoModal={"Centro De Custo cadastrado com suecsso!"} />
+                <ModalFailed onPress={() => setMostrarModalErro(false)} isVisible={mostrarModalErro} textoModal={"Erro ao cadastrar Centro De Custo."} />
 
             </View>
         </ScrollView>

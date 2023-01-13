@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
+import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { AuthContext } from "../../contexts/AuthContext";
 import { putCentroDeCusto } from "../../services/centroDeCusto";
 import { styles } from "./styles";
@@ -9,8 +10,8 @@ export const CentroDeCustoAtualizar = ({ route }) => {
 
     const { item } = route.params;
     const navigation = useNavigation();
-    const [descricao, setDescricao] = useState(item.descricao);
-    const [observacao, setObservacao] = useState(item.observacao);
+    const [descricao, setDescricao] = useState(item?.descricao);
+    const [observacao, setObservacao] = useState(item?.observacao);
     const [erroDescricao, setErroDescricao] = useState(false);
     const { setLoad } = useContext(AuthContext);
 
@@ -86,7 +87,7 @@ export const CentroDeCustoAtualizar = ({ route }) => {
         <ScrollView style={styles.scrollView}>
             <View style={styles.containerMain}>
 
-                <Text style={styles.texto}>Descrção</Text>
+                <Text style={styles.texto}>Descrição</Text>
                 <TextInput
                     style={styles.textInput}
                     placeholder="Descrção"
@@ -109,6 +110,8 @@ export const CentroDeCustoAtualizar = ({ route }) => {
                 <TouchableOpacity onPress={confirmarAtualizar} style={styles.touchableOpacity}>
                     <Text>ATUALIZAR</Text>
                 </TouchableOpacity>
+
+                {/* <ModalSuccessful isVisible={}/> */}
 
             </View>
         </ScrollView>

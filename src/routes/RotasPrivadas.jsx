@@ -16,6 +16,7 @@ import { TitulosDetalhe } from '../screens/TituloDatalhe';
 import { CentroDeCustoAtualizar } from '../screens/CentroDeCustoAtualizar';
 import { CentroDeCustoCadastrar } from '../screens/CentroDeCustoCadastrar';
 import { FontAwesome, FontAwesome5, AntDesign, Feather, Ionicons } from '@expo/vector-icons';
+import { CentroDeCustoDetalhe } from '../screens/CentroDeCustoDetalhe';
 
 
 const Tab = createBottomTabNavigator();
@@ -69,17 +70,9 @@ const CentroDecUstoStake = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name='CentroDeCustoStake' component={CentroDeCusto} options={{ headerShown: false }} />
-            <Stack.Screen name='Centro De Custo Atualizar' component={CentroDeCustoAtualizar} options={({ navigation }) => ({
-                headerLeft: (props) => (
-                    <HeaderBackButton
-                        {...props}
-                        onPress={() => {
-                            navigation.navigate('CentroDeCustoStake');
-                        }}
-                    />
-                ),
-            })} />
             <Stack.Screen name='Centro De Custo Cadastrar' component={CentroDeCustoCadastrar} options={{ headerShown: true }} />
+            <Stack.Screen name='Centro De Custo Atualizar' component={CentroDeCustoAtualizar} options={{ headerShown: true }} />
+            <Stack.Screen name='Centro De Custo Detalhe' component={CentroDeCustoDetalhe} options={{ headerShown: true }} />
         </Stack.Navigator>
     )
 };
