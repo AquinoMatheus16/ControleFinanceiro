@@ -22,8 +22,6 @@ export const styles = StyleSheet.create({
         fontSize: 22,
         width: '50%',
         textAlign: 'center',
-        color: '#000000',
-        borderBottomWidth: 1,
         borderBottomColor: '#000000',
         marginBottom: 25
     }

@@ -54,9 +54,10 @@ export const styles = StyleSheet.create({
     },
 
     containerFlatList: {
-        marginBottom: 225,
-        width:300,
-        height: 390
+        // marginBottom: 225,
+        // width: 300,
+        // height: 390
+        marginBottom: 274
     },
 
     nav: {
@@ -96,8 +97,9 @@ export const styles = StyleSheet.create({
         width: 300,
         height: 100
     },
-     card: {
-        width:380
-     }
+
+    card: {
+        width: 380
+    }
 
 });
