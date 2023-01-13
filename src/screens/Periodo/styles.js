@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     },
 
     containerTouchableOpacity: {
-        width: 200,
+        width: 100,
         padding: 10,
         backgroundColor: '#FFFFFF',
         marginTop: 40,
@@ -87,6 +87,20 @@ export const styles = StyleSheet.create({
 
     touchableOpacity2: {
         flexDirection: 'row'
+    },
+
+    containerCard: {
+        flex: 1,
+        marginTop: 20,
+        width: '100%',
+        // backgroundColor: '#FF3233',
+        alignItems: 'center'
+    },
+
+    stilo: {
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        width: 300
     }
 
 
