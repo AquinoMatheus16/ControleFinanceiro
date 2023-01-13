@@ -20,7 +20,7 @@ export const TitulosCard = ({ item }) => {
 
                 {item?.valor === null ? "" : <Text style={styles.texto}>Valor: {item?.valor}</Text>}
 
-                {item?.dataVencimento === null ? "" : <Text style={styles.texto}>Data vencimneto: {formatdataVencimento}</Text>}
+                {item?.dataVencimento === null ? "" : <Text style={styles.texto}>Data vencimento: {formatdataVencimento}</Text>}
 
             </View>
         </TouchableOpacity>

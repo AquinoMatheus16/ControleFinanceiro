@@ -49,7 +49,7 @@ export const Titulos = () => {
             return value.tipo.endsWith("APAGAR");
         }
     }
-    
+
     function filtrarPorRecebidos(value) {
         if ('dataPagamento' in value && typeof (value.dataPagamento) === 'string' && isNaN(value.dataPagamento)) {
             return value.tipo.endsWith("ARECEBER");
@@ -99,7 +99,7 @@ export const Titulos = () => {
 
             <View style={styles.nav}>
                 <ScrollView horizontal showsVerticalScrollIndicator={false}
-                        showsHorizontalScrollIndicator={false}>
+                    showsHorizontalScrollIndicator={false}>
                     <TouchableOpacity onPress={() => setAtiva("Todos")} style={styles.navTouch}>
                         <Text style={styles.navTexto}>Todos</Text>
                     </TouchableOpacity>
@@ -127,31 +127,43 @@ export const Titulos = () => {
                     data={itemFiltrado}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => <TitulosCard item={item} />}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
                 />}
                 {ativa === "Apagar" && <FlatList
                     data={itemFiltrado?.filter(filtrarPorNaoPagamento)}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => <TitulosCard item={item} />}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
                 />}
                 {ativa === "Pagos" && <FlatList
                     data={itemFiltrado?.filter(filtrarPorPagamento)}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => <TitulosCard item={item} />}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
                 />}
                 {ativa === "Vencidos" && <FlatList
                     data={itemFiltrado?.filter(filtrarPorVencimento)}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => <TitulosCard item={item} />}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
                 />}
                 {ativa === "Areceber" && <FlatList
                     data={itemFiltrado?.filter(filtrarPorNaoRecebimento)}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => <TitulosCard item={item} />}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
                 />}
                 {ativa === "Recebidos" && <FlatList
                     data={itemFiltrado?.filter(filtrarPorRecebidos)}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => <TitulosCard item={item} />}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
                 />}
             </View>
         </View>
