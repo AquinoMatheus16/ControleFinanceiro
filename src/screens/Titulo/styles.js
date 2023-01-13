@@ -91,15 +91,6 @@ export const styles = StyleSheet.create({
         height: 90,
         flexDirection: "row",
         backgroundColor: 'black'
-    },
-
-    nada: {
-        width: 300,
-        height: 100
-    },
-
-    card: {
-        width: 380
     }
 
 });

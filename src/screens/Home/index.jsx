@@ -27,15 +27,17 @@ export const Home = ({ navigation }) => {
 
         <View style={styles.homeContainer}>
 
-            <View style={styles.homeDashboard}>
+            <View style={styles.homeDashboardtopo}>
+                <View style={styles.homeDashboard}>
+
+                </View>
+
+                <Text style={styles.homeTexto}>Saldo</Text>
+                <Text style={styles.homeNumero}>R$: {total?.saldo}</Text>
 
             </View>
 
             <View style={styles.homeContainerMain}>
-                <Text style={styles.homeTexto}>Saldo</Text>
-                <Text style={styles.homeNumero}>R$: {total?.saldo}</Text>
-
-                <Text style={styles.homeTexto2}>Pesquisar</Text>
 
                 {/* <View style={styles.homeDivInput}>
                     <EvilIcons style={styles.homeIcon} name="search" size={30} color="white" />
@@ -45,6 +47,8 @@ export const Home = ({ navigation }) => {
                         placeholderTextColor="#c5c5c5"
                     />
                 </View> */}
+
+                <Text style={styles.homeTexto2}>Pesquisar</Text>
 
                 <TouchableOpacity onPress={() => navigation.navigate('TitulosApagar')}>
                     <View style={styles.homeTouchableOpacity}>
