@@ -3,14 +3,14 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
 
     containerMain: {
-        flex: 1,
-        backgroundColor: '#0C609C',
-        alignItems: 'center'
+        backgroundColor: 'gray',
+        alignItems: 'center',
+        flex: 1
     },
 
     textoTitulo: {
         width: '80%',
-        marginTop: 30,
+        marginTop: 15,
         fontSize: 22,
         textAlign: 'center',
         paddingBottom: 10,
@@ -20,8 +20,8 @@ export const styles = StyleSheet.create({
     },
 
     touchableOpacity: {
-        width: 190,
-        height: 45,
+        width: 150,
+        height: 40,
         backgroundColor: '#FFFFFF',
         alignItems: 'center',
         justifyContent: 'center',
@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     },
 
     touchableOpacityTexto: {
-        fontSize: 22
+        fontSize: 20
     },
 
     containerInput: {
@@ -39,12 +39,6 @@ export const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#FFFFFF',
         alignItems: 'center'
-    },
-
-    textoTituloInput: {
-        color: '#FFFFFF',
-        fontSize: 22,
-        marginTop: 20
     },
 
     textInput: {
@@ -56,22 +50,23 @@ export const styles = StyleSheet.create({
     containerFlatList: {
         // marginBottom: 225,
         // width: 300,
-        // height: 390
-        marginBottom: 274
+        height: 450
+        // marginBottom: 310
     },
 
     nav: {
         display: "flex",
         flexDirection: "row",
         width: 300,
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        marginTop: -20
     },
 
     navTouch: {
-        backgroundColor: 'gray',
+        backgroundColor: '#0C609C',
         width: 80,
         height: 30,
-        marginTop: 10,
+        marginTop: 30,
         marginRight: 5,
         alignItems: "center",
         borderBottomWidth: 2,
@@ -83,7 +78,7 @@ export const styles = StyleSheet.create({
 
     navTexto: {
         color: '#FFFFFF',
-        fontSize: 15
+        fontSize: 14
     },
 
     scroll: {
@@ -91,6 +86,16 @@ export const styles = StyleSheet.create({
         height: 90,
         flexDirection: "row",
         backgroundColor: 'black'
-    }
+    },
+
+    containerTopo: {
+        width: '100%',
+        minHeight: '40%',
+        backgroundColor: '#0C609C',
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        alignItems: 'center',
+        justifyContent: "space-evenly"
+    },
 
 });

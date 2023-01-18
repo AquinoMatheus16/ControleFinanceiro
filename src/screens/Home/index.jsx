@@ -4,10 +4,17 @@ import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { AuthContext } from "../../contexts/AuthContext";
 import { getDashBoardTotal } from "../../services/dashboard";
+import { VictoryPie, VictoryTheme } from "victory-native";
+import { getTitulo } from "../../services/titulo";
+import { getCentroDeCusto } from "../../services/centroDeCusto";
 
 export const Home = ({ navigation }) => {
 
     const [total, setTotal] = useState({});
+    const [titulos, setTitulos] = useState([]);
+    const [title, setTitle] = useState([]);
+    const [centroCusto, setCentroCusto] = useState([]);
+    const [centro, setCentro] = useState([]);
     const { load } = useContext(AuthContext);
 
     const fetchTotal = async () => {
@@ -17,8 +24,32 @@ export const Home = ({ navigation }) => {
 
     };
 
+    const fetchData = async () => {
+
+        const tituloList = await getTitulo();
+        setTitulos(tituloList);
+        const apagar = titulos.filter((numero) => numero?.tipo.endsWith("APAGAR"));
+        const areceber = titulos.filter((numero) => numero?.tipo.endsWith("ARECEBER"));
+        setTitle([apagar?.length, areceber?.length]);
+
+    };
+    console.log("setTitle",title);
+
+    // const fetchDataCentro = async () => {
+
+    //     const centroList = await getCentroDeCusto();
+    //     setCentro(centroList);
+    //     const apagar = centro.filter((numero) => numero?.descricao);
+    //     const areceber = centro.filter((numero) => numero?.descricao);
+    //     setCentroCusto([apagar.length, areceber.length]);
+
+    // };
+    // console.log("setTitle",title);
+
+
     useEffect(() => {
         setTimeout(() => {
+            fetchData();
             fetchTotal();
         }, 100);
     }, [load]);
@@ -28,14 +59,59 @@ export const Home = ({ navigation }) => {
         <View style={styles.homeContainer}>
 
             <View style={styles.homeDashboardtopo}>
-                <View style={styles.homeDashboard}>
-
-                </View>
 
                 <Text style={styles.homeTexto}>Saldo</Text>
                 <Text style={styles.homeNumero}>R$: {total?.saldo}</Text>
 
+                <View style={styles.dash}>
+
+                    <View style={styles.dash1}>
+                        <VictoryPie
+                            width={150}
+                            innerRadius={40}
+                            theme={VictoryTheme.material}
+                            data={title} x="quarter" y="earnings"
+                            style={{
+                                labels: {
+                                    display: 'none'
+                                }
+                            }}
+                        />
+                        <Text style={styles.titleDash}>Títulos</Text>
+                    </View>
+                    <View style={styles.dash2}>
+                        <VictoryPie
+                            width={150}
+                            innerRadius={40}
+                            theme={VictoryTheme.material}
+                            data={titulos.map((numero) => numero.valor)} x="quarter" y="earnings"
+                            style={{
+                                labels: {
+                                    display: 'none'
+                                }
+                            }}
+                        />
+                        <Text style={styles.titleDash}>Títulos</Text>
+                    </View>
+                    <View style={styles.dash3}>
+                        <VictoryPie
+                            width={150}
+                            innerRadius={40}
+                            theme={VictoryTheme.material}
+                            data={titulos.map((numero) => numero.valor)} x="quarter" y="earnings"
+                            style={{
+                                labels: {
+                                    display: 'none'
+                                }
+                            }}
+                        />
+                        <Text style={styles.titleDash}>Títulos</Text>
+                    </View>
+
+
+                </View>
             </View>
+
 
             <View style={styles.homeContainerMain}>
 

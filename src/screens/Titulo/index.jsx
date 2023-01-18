@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, TextInput, FlatList, Button, ScrollView } from "react-native";
+import { Text, View, TouchableOpacity, TextInput, FlatList, ScrollView } from "react-native";
 import { styles } from "./styles";
 import { EvilIcons } from '@expo/vector-icons';
 import { getTitulo } from "../../services/titulo";
@@ -6,7 +6,6 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { TitulosCard } from "../../components/TitulosCard";
 import { AuthContext } from "../../contexts/AuthContext";
-import { format } from "date-fns";
 
 export const Titulos = () => {
 
@@ -80,48 +79,83 @@ export const Titulos = () => {
     return (
 
         <View style={styles.containerMain}>
-            <Text style={styles.textoTitulo}>Títulos</Text>
+            <View style={styles.containerTopo}>
 
-            <TouchableOpacity onPress={() => navigation.navigate("Titulos Cadastra")} style={styles.touchableOpacity}>
-                <Text style={styles.touchableOpacityTexto}>Cadastar</Text>
-            </TouchableOpacity>
+                <Text style={styles.textoTitulo}>Títulos</Text>
 
-            <Text style={styles.textoTituloInput}>Pequisar</Text>
+                <TouchableOpacity onPress={() => navigation.navigate("Titulos Cadastra")} style={styles.touchableOpacity}>
+                    <Text style={styles.touchableOpacityTexto}>Cadastar</Text>
+                </TouchableOpacity>
 
-            <View style={styles.containerInput}>
-                <EvilIcons name="search" size={24} color="#FFFFFF" />
-                <TextInput
-                    style={styles.textInput} placeholder="Pequisar"
-                    value={busca}
-                    onChangeText={e => setBusca(e)}
-                />
-            </View>
+                {/* <KeyboardAvoidingView behavior="padding" style={styles.containerInput}>
+                    <EvilIcons name="search" size={24} color="#FFFFFF" />
+                    <TextInput
+                        style={styles.textInput} placeholder="Pequisar"
+                        value={busca}
+                        onChangeText={e => setBusca(e)}
+                    />
+                </KeyboardAvoidingView> */}
+                
 
-            <View style={styles.nav}>
-                <ScrollView horizontal showsVerticalScrollIndicator={false}
-                    showsHorizontalScrollIndicator={false}>
-                    <TouchableOpacity onPress={() => setAtiva("Todos")} style={styles.navTouch}>
-                        <Text style={styles.navTexto}>Todos</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setAtiva("Vencidos")} style={styles.navTouch}>
-                        <Text style={styles.navTexto}>Vencidos</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setAtiva("Apagar")} style={styles.navTouch}>
-                        <Text style={styles.navTexto}>A pagar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setAtiva("Pagos")} style={styles.navTouch}>
-                        <Text style={styles.navTexto}>Pagos</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setAtiva("Areceber")} style={styles.navTouch}>
-                        <Text style={styles.navTexto}>A receber</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setAtiva("Recebidos")} style={styles.navTouch}>
-                        <Text style={styles.navTexto}>Recebidos</Text>
-                    </TouchableOpacity>
-                </ScrollView>
+                {/* <View style={styles.nav}>
+                    <ScrollView horizontal showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}>
+                        <TouchableOpacity onPress={() => setAtiva("Todos")} style={styles.navTouch}>
+                            <Text style={styles.navTexto}>Todos</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setAtiva("Vencidos")} style={styles.navTouch}>
+                            <Text style={styles.navTexto}>Vencidos</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setAtiva("Apagar")} style={styles.navTouch}>
+                            <Text style={styles.navTexto}>A pagar</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setAtiva("Pagos")} style={styles.navTouch}>
+                            <Text style={styles.navTexto}>Pagos</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setAtiva("Areceber")} style={styles.navTouch}>
+                            <Text style={styles.navTexto}>A receber</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setAtiva("Recebidos")} style={styles.navTouch}>
+                            <Text style={styles.navTexto}>Recebidos</Text>
+                        </TouchableOpacity>
+                    </ScrollView>
+                </View> */}
+                
+                <View style={styles.containerInput}>
+                    <EvilIcons name="search" size={24} color="#FFFFFF" />
+                    <TextInput
+                        style={styles.textInput} placeholder="Pequisar"
+                        value={busca}
+                        onChangeText={e => setBusca(e)}
+                    />
+                </View>
             </View>
 
             <View style={styles.containerFlatList}>
+
+            <View style={styles.nav}>
+                    <ScrollView horizontal showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}>
+                        <TouchableOpacity onPress={() => setAtiva("Todos")} style={styles.navTouch}>
+                            <Text style={styles.navTexto}>Todos</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setAtiva("Vencidos")} style={styles.navTouch}>
+                            <Text style={styles.navTexto}>Vencidos</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setAtiva("Apagar")} style={styles.navTouch}>
+                            <Text style={styles.navTexto}>A pagar</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setAtiva("Pagos")} style={styles.navTouch}>
+                            <Text style={styles.navTexto}>Pagos</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setAtiva("Areceber")} style={styles.navTouch}>
+                            <Text style={styles.navTexto}>A receber</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setAtiva("Recebidos")} style={styles.navTouch}>
+                            <Text style={styles.navTexto}>Recebidos</Text>
+                        </TouchableOpacity>
+                    </ScrollView>
+                </View>
 
                 {ativa === "Todos" && <FlatList
                     data={itemFiltrado}

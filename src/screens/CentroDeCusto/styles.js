@@ -4,13 +4,13 @@ export const styles = StyleSheet.create({
 
     containerMain: {
         flex: 1,
-        backgroundColor: '#0C609C',
+        backgroundColor: 'gray',
         alignItems: 'center'
     },
 
     textoTitulo: {
         width: '80%',
-        marginTop: 30,
+        marginTop: 15,
         fontSize: 22,
         textAlign: 'center',
         paddingBottom: 10,
@@ -20,17 +20,17 @@ export const styles = StyleSheet.create({
     },
 
     touchableOpacity: {
-        width: 190,
-        height: 45,
+        width: 150,
+        height: 40,
         backgroundColor: '#FFFFFF',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
-        marginTop: 25
+        marginTop: 10
     },
 
     touchableOpacityTexto: {
-        fontSize: 22
+        fontSize: 20
     },
 
     containerInput: {
@@ -39,13 +39,6 @@ export const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#FFFFFF',
         alignItems: 'center',
-        marginBottom: 5
-    },
-
-    textoTituloInput: {
-        color: '#FFFFFF',
-        fontSize: 22,
-        marginTop: 50
     },
 
     textInput: {
@@ -55,7 +48,18 @@ export const styles = StyleSheet.create({
     },
 
     containerFlatList: {
-        marginBottom: 274
-    }
+        height: 450
+    },
+
+    containerTopo: {
+        width: '100%',
+        minHeight: '40%',
+        backgroundColor: '#0C609C',
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        alignItems: 'center',
+        justifyContent: "space-evenly"
+    },
+
 
 });
