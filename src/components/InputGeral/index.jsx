@@ -1,7 +1,7 @@
 import { Text, TextInput } from "react-native";
 import { styles } from "./styles";
 
-export const InputGeral = ({ placeholder, onChangeText, value, multiline, numberOfLines }) => {
+export const InputGeral = ({ placeholder, onChangeText, value, multiline, numberOfLines, onFocus }) => {
 
     return (
         <TextInput
@@ -11,6 +11,7 @@ export const InputGeral = ({ placeholder, onChangeText, value, multiline, number
             value={value}
             multiline={multiline}
             numberOfLines={numberOfLines}
+            onFocus={onFocus}
         />
     )
 };

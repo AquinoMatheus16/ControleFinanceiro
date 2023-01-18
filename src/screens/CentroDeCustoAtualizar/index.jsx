@@ -1,6 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
+import { InputGeral } from "../../components/InputGeral";
+import { ModalFailed } from "../../components/ModalFailed";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { AuthContext } from "../../contexts/AuthContext";
 import { putCentroDeCusto } from "../../services/centroDeCusto";
@@ -13,31 +15,17 @@ export const CentroDeCustoAtualizar = ({ route }) => {
     const [descricao, setDescricao] = useState(item?.descricao);
     const [observacao, setObservacao] = useState(item?.observacao);
     const [erroDescricao, setErroDescricao] = useState(false);
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const [mostrarModalErro, setMostrarModalErro] = useState(false);
     const { setLoad } = useContext(AuthContext);
-
-    const confirmarAtualizar = () => {
-
-        if (descricao === '') {
-            setErroDescricao(true)
-            return;
-        };
-
-        Alert.alert(
-            "Aviso",
-            "Deseja mesmo atualizar o centro de custo?",
-            [
-                {
-                    text: "Cancelar",
-                    onPress: () => null,
-                    style: "cancel"
-                },
-                { text: "OK", onPress: () => put() }
-            ]
-        );
-    };
 
     const put = async () => {
         try {
+
+            if (descricao === '') {
+                setErroDescricao(true)
+                return;
+            };
 
             const novoCentroDeCusto = {
                 descricao: descricao,
@@ -47,22 +35,15 @@ export const CentroDeCustoAtualizar = ({ route }) => {
             JSON.stringify(novoCentroDeCusto);
 
             await putCentroDeCusto(item, novoCentroDeCusto);
+            // console.log("novoCentroDeCusto: ", novoCentroDeCusto);
 
-            console.log("novoCentroDeCusto: ", novoCentroDeCusto);
-
-            Alert.alert(
-                'Aviso',
-                'Centro de custo atualizado com suecsso!',
-                [
-                    {
-                        text: "OK",
-                        onPress: () => null
-                    }
-                ]
-            );
+            setMostrarModal(true);
 
             setLoad(true)
-            navigation.navigate("CentroDeCustoStake");
+            setTimeout(() => {
+                navigation.navigate("CentroDeCustoStake");
+            }, 2000);
+
             setTimeout(() => {
                 setLoad(false)
             }, 150);
@@ -70,16 +51,7 @@ export const CentroDeCustoAtualizar = ({ route }) => {
         } catch (error) {
 
             console.error("Erro: " + error);
-            Alert.alert(
-                'Aviso',
-                'Erro ao atualizar centro de custo .',
-                [
-                    {
-                        text: "OK",
-                        onPress: () => null
-                    }
-                ]
-            );
+            setMostrarModalErro(true);
         };
     };
 
@@ -88,9 +60,8 @@ export const CentroDeCustoAtualizar = ({ route }) => {
             <View style={styles.containerMain}>
 
                 <Text style={styles.texto}>Descrição</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Descrção"
+                <InputGeral
+                    placeholder={"Descrção"}
                     onChangeText={setDescricao}
                     value={descricao}
                     onFocus={() => setErroDescricao(false)}
@@ -98,20 +69,20 @@ export const CentroDeCustoAtualizar = ({ route }) => {
                 {erroDescricao ? <Text style={styles.textError}>Informe a descrição</Text> : ''}
 
                 <Text style={styles.texto}>Observação</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Observação"
-                    multiline
+                <InputGeral
+                    placeholder={"Observação"}
+                    multiline={true}
                     numberOfLines={5}
                     onChangeText={setObservacao}
                     value={observacao}
                 />
 
-                <TouchableOpacity onPress={confirmarAtualizar} style={styles.touchableOpacity}>
+                <TouchableOpacity onPress={() => put()} style={styles.touchableOpacity}>
                     <Text>ATUALIZAR</Text>
                 </TouchableOpacity>
 
-                {/* <ModalSuccessful isVisible={}/> */}
+                <ModalSuccessful isVisible={mostrarModal} textoModal={'Centro de custo atualizado com suecsso!'} />
+                <ModalFailed onPress={() => setMostrarModalErro(false)} isVisible={mostrarModalErro} textoModal={"Erro ao atualizar centro de custo."} />
 
             </View>
         </ScrollView>
