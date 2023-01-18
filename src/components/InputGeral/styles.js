@@ -9,6 +9,6 @@ export const styles = StyleSheet.create({
         width: '80%',
         marginBottom: 5,
         color: '#FFFFFF',
-        textAlign: 'center'
+        textAlign: 'center',
     },
 });

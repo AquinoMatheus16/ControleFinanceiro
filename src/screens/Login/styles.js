@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column'
-        
+
     },
 
     containerTopo: {
@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         // paddingRight: 8
-        paddingLeft:20
+        paddingLeft: 20
     },
 
     botaoEntrar: {
@@ -96,9 +96,7 @@ export const styles = StyleSheet.create({
 
     tituloTexto: {
         fontSize: 18,
-        color: '#000000'
+        color: '#000000',
+        marginTop: 30
     },
-
-    
-
 });

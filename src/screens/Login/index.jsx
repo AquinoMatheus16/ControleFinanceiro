@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
+import { InputGeral } from '../../components/InputGeral';
 import { AuthContext } from '../../contexts/AuthContext';
 import { styles } from './styles';
 
@@ -31,17 +32,15 @@ export const Login = ({ navigation }) => {
         </View> */}
 
           <Text style={styles.tituloTexto}>E-mail</Text>
-          <TextInput
-            style={styles.input}
-            placeholder='INSIRA SEU EMAIL'
+          <InputGeral
+            placeholder={'INSIRA SEU EMAIL'}
             onChangeText={setEmail}
             value={email}
           />
 
           <Text style={styles.tituloTexto}>Senha</Text>
-          <TextInput
-            style={styles.input}
-            placeholder='INSIRA SUA SENHA'
+          <InputGeral
+            placeholder={'INSIRA SUA SENHA'}
             onChangeText={setSenha}
             value={senha}
             secureTextEntry={true}

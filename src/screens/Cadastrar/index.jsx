@@ -3,6 +3,7 @@ import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { styles } from './styles';
 import * as ImagePicker from 'expo-image-picker';
 import { postUsuario } from '../../services/usuario';
+import { InputGeral } from '../../components/InputGeral';
 
 export const Cadastrar = ({ navigation }) => {
   const [nome, setNome] = useState('');
@@ -79,33 +80,29 @@ export const Cadastrar = ({ navigation }) => {
         </View>
 
         <Text style={styles.tituloTexto}>Nome</Text>
-        <TextInput
-          style={styles.input}
-          placeholder='INSIRA SEU NOME'
+        <InputGeral
+          placeholder={'INSIRA SEU NOME'}
           onChangeText={setNome}
           value={nome}
         />
 
         <Text style={styles.tituloTexto}>E-mail</Text>
-        <TextInput
-          style={styles.input}
-          placeholder='INSIRA SEU EMAIL'
+        <InputGeral
+          placeholder={'INSIRA SEU EMAIL'}
           onChangeText={setEmail}
           value={email}
         />
 
         <Text style={styles.tituloTexto}>Senha</Text>
-        <TextInput
-          style={styles.input}
-          placeholder='INSIRA SUA SENHA'
+        <InputGeral
+          placeholder={'INSIRA SUA SENHA'}
           onChangeText={setSenha}
           value={senha}
           secureTextEntry={true}
         />
         <Text style={styles.tituloTexto}>Confirma Senha</Text>
-        <TextInput
-          style={styles.input}
-          placeholder='CONFIRME SUA SENHA'
+        <InputGeral
+          placeholder={'CONFIRME SUA SENHA'}
           onChangeText={setConfirmaSenha}
           value={confirmaSenha}
           secureTextEntry={true}
