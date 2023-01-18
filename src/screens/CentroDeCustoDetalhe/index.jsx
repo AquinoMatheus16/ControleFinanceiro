@@ -1,6 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
-import { useContext } from "react";
-import { Alert, Text, TouchableOpacity, View } from "react-native";
+import { useContext, useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { ModalConfirm } from "../../components/ModalConfirm";
+import { ModalFailed } from "../../components/ModalFailed";
+import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { AuthContext } from "../../contexts/AuthContext";
 import { deleteCentroDeCusto } from "../../services/centroDeCusto";
 import { styles } from "./styles";
@@ -10,55 +13,29 @@ export const CentroDeCustoDetalhe = ({ route }) => {
     const { item } = route.params;
     const navigation = useNavigation();
     const { setLoad } = useContext(AuthContext);
-
-    const confirmarDeletar = () => {
-        Alert.alert(
-            "Aviso",
-            "Deseja mesmo deletar o centro de custo? Excluir este centro de custo pode excluir os títulos ligados a ele!",
-            [
-                {
-                    text: "Cancelar",
-                    onPress: () => null,
-                    style: "cancel"
-                },
-                { text: "OK", onPress: () => onDelete() }
-            ]
-        );
-    }
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const [mostrarModalErro, setMostrarModalErro] = useState(false);
+    const [mostrarModalConfirm, setMostrarModalConfirm] = useState(false);
 
     const onDelete = async () => {
         try {
+            setMostrarModalConfirm(false)
 
             deleteCentroDeCusto(item.id)
 
-            Alert.alert(
-                'Aviso',
-                'Centro de custo deletado com sucesso.',
-                [
-                    {
-                        text: "OK",
-                        onPress: () => null
-                    }
-                ]
-            );
+            setMostrarModal(true)
             setLoad(true)
-            navigation.goBack();
+            setTimeout(() => {
+                navigation.goBack();
+            }, 2000);
+
             setTimeout(() => {
                 setLoad(false)
             }, 120);
 
         } catch (e) {
             console.error(e);
-            Alert.alert(
-                'Aviso',
-                'Não possível deletar o centro de custo.',
-                [
-                    {
-                        text: "OK",
-                        onPress: () => null
-                    }
-                ]
-            );
+            setMostrarModalErro(true);
         }
     };
 
@@ -74,9 +51,26 @@ export const CentroDeCustoDetalhe = ({ route }) => {
                     <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.touchableOpacityDeletar} onPress={() => confirmarDeletar()}>
+                <TouchableOpacity style={styles.touchableOpacityDeletar} onPress={() => setMostrarModalConfirm(true)}>
                     <Text style={styles.touchableOpacityDeletarTexto}>DELETAR</Text>
                 </TouchableOpacity>
+
+                <ModalConfirm
+                    isVisible={mostrarModalConfirm}
+                    onPressCancel={() => setMostrarModalConfirm(false)}
+                    onPressConfirm={() => onDelete()}
+                    textoModal={'Deseja mesmo deletar o centro de custo? Excluir este centro de custo pode excluir os títulos ligados a ele!'}
+                />
+
+                <ModalSuccessful
+                    isVisible={mostrarModal}
+                    textoModal={'Centro de custo deletado com sucesso.'}
+                />
+
+                <ModalFailed
+                    isVisible={mostrarModalErro}
+                    textoModal={'Não foi possível deletar o centro de custo.'}
+                />
 
             </View>
         </View>
