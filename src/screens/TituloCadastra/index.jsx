@@ -12,6 +12,9 @@ import { AntDesign } from '@expo/vector-icons';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { InputGeral } from "../../components/InputGeral";
+import { ModalSuccessful } from "../../components/ModalSuccessful";
+import { ModalFailed } from "../../components/ModalFailed";
 
 const schema = yup.object({
     descricao: yup.string().min(2, "A descrição deve ter pelo menos 2 digitos").required("Informe a descrição"),
@@ -26,6 +29,9 @@ export const TituloCadastra = () => {
     const [erroData, setErroData] = useState(false);
     const [dataVencimento, setDataVencimento] = useState(new Date());
     const [errorDataVencimento, setErrorDataVencimento] = useState('');
+
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const [mostrarModalErro, setMostrarModalErro] = useState(false);
 
     const [data, setData] = useState([]);
     const [centroDeCustoSalvos, setCentroDeCustoSalvos] = useState([]);
@@ -115,38 +121,24 @@ export const TituloCadastra = () => {
             JSON.stringify(novoTitulo);
 
             centroDeCustoId();
-            postTitulo(novoTitulo);
+            await postTitulo(novoTitulo);
             console.log("Log do novoTitulo: ", novoTitulo);
 
-            Alert.alert(
-                'Aviso',
-                'Título cadastrado com suecsso!',
-                [
-                    {
-                        text: "OK",
-                        onPress: () => null
-                    }
-                ]
-            );
-
+            setMostrarModal(true)
             setLoad(true)
-            navigation.goBack();
+
+            setTimeout(() => {
+                navigation.goBack();
+            }, 2000);
+
             setTimeout(() => {
                 setLoad(false)
             }, 160);
 
         } catch (error) {
             console.error("Error error: ", error);
-            Alert.alert(
-                'Aviso',
-                'Erro ao cadastrar.',
-                [
-                    {
-                        text: "OK",
-                        onPress: () => null
-                    }
-                ]
-            )
+
+            mostrarModalErro(true);
         };
     };
 
@@ -204,10 +196,8 @@ export const TituloCadastra = () => {
                     control={control}
                     name="descricao"
                     render={({ field: { onChange, onBlur, value } }) => (
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder="Descrição"
-                            onBlur={onBlur}
+                        <InputGeral
+                            placeholder={"Descrição"}
                             onChangeText={onChange}
                         />
                     )}
@@ -219,11 +209,9 @@ export const TituloCadastra = () => {
                     control={control}
                     name="valor"
                     render={({ field: { onChange, onBlur, value } }) => (
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder="Valor"
-                            keyboardType="numeric"
-                            onBlur={onBlur}
+                        <InputGeral
+                            placeholder={"Valor"}
+                            keyboardType={"numeric"}
                             onChangeText={onChange}
                             value={value}
                         />
@@ -264,12 +252,10 @@ export const TituloCadastra = () => {
                     control={control}
                     name="observacao"
                     render={({ field: { onChange, onBlur, value } }) => (
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder="Observação"
+                        <InputGeral
+                            placeholder={"Observação"}
                             multiline
                             numberOfLines={5}
-                            onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
                         />
@@ -280,6 +266,9 @@ export const TituloCadastra = () => {
                 <TouchableOpacity onPress={handleSubmit(post)} onPressIn={() => validarData()} style={styles.touchableOpacity}>
                     <Text>CADASTRAR</Text>
                 </TouchableOpacity>
+
+                <ModalSuccessful isVisible={mostrarModal} textoModal={"Título cadastrado com suecsso!"} />
+                <ModalFailed onPress={() => setMostrarModalErro(false)} isVisible={mostrarModalErro} textoModal={"Erro ao cadastrar."} />
 
             </View>
         </ScrollView >

@@ -9,6 +9,8 @@ import { AuthContext } from '../../contexts/AuthContext';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { format } from "date-fns";
 import { AntDesign } from '@expo/vector-icons';
+import { InputGeral } from "../../components/InputGeral";
+import { ModalSuccessful } from "../../components/ModalSuccessful";
 
 export const TitulosAtualizar = ({ route }) => {
 
@@ -30,6 +32,8 @@ export const TitulosAtualizar = ({ route }) => {
 
     const [erroDescricaoBoolean, setErroDescricaoBoolean] = useState(false);
     const [erroValorBoolean, setErroValorBoolean] = useState(false);
+
+    const [mostrarModal, setMostrarModal] = useState(false);
 
     const navigation = useNavigation();
     const { setLoad } = useContext(AuthContext);
@@ -124,18 +128,13 @@ export const TitulosAtualizar = ({ route }) => {
             await putTitulo(item, novoTitulo);
             console.log("novoTitulo: ", novoTitulo);
 
-            Alert.alert(
-                'Aviso',
-                'Título atualizado com suecsso!',
-                [
-                    {
-                        text: "OK",
-                        onPress: () => null
-                    }
-                ]
-            );
+            setMostrarModal(true)
             setLoad(true)
-            navigation.navigate("Titulos");
+
+            setTimeout(() => {
+                navigation.navigate("Titulos");
+            }, 2000);
+
             setTimeout(() => {
                 setLoad(false)
             }, 120);
@@ -191,19 +190,17 @@ export const TitulosAtualizar = ({ route }) => {
                 />
 
                 <Text style={styles.texto}>Descrção</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Descrção"
+                <InputGeral
+                    placeholder={"Descrção"}
                     onChangeText={setDescricao}
                     value={descricao}
                 />
                 {erroDescricaoBoolean ? <Text style={styles.textError}>Informe a descrição</Text> : ''}
 
                 <Text style={styles.texto}>Valor</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Valor"
-                    keyboardType="numeric"
+                <InputGeral
+                    placeholder={"Valor"}
+                    keyboardType={"numeric"}
                     onChangeText={setValor}
                     value={valor}
                 />
@@ -236,9 +233,8 @@ export const TitulosAtualizar = ({ route }) => {
                 </View>
 
                 <Text style={styles.texto}>Observação</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Observação"
+                <InputGeral
+                    placeholder={"Observação"}
                     multiline
                     numberOfLines={5}
                     onChangeText={setObservacao}
@@ -248,6 +244,8 @@ export const TitulosAtualizar = ({ route }) => {
                 <TouchableOpacity onPress={() => validarInput()} style={styles.touchableOpacity}>
                     <Text>ATUALIZAR</Text>
                 </TouchableOpacity>
+
+                <ModalSuccessful isVisible={mostrarModal} textoModal={"Título atualizado com suecsso!"} />
 
             </View>
         </ScrollView>

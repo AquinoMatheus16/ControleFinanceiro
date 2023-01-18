@@ -33,10 +33,11 @@ export const styles = StyleSheet.create({
         // borderWidth: 1,
         borderBottomWidth: 1,
         borderBottomColor: '#000000',
-        padding: 10,
+        // padding: 10,
         borderRadius: 10,
         // paddingRight: 8
-        paddingLeft:20
+        paddingLeft: 80,
+        // textAlign:'center'
     },
 
     botaoEntrar: {
@@ -76,14 +77,15 @@ export const styles = StyleSheet.create({
 
     tituloTexto: {
         fontSize: 18,
-        color: '#000000'
+        color: '#FFFFFF',
+        marginTop: 15
     },
     img: {
         width: 150,
         height: 150,
         marginBottom: 40,
         borderWidth: 2,
-        borderColor: 'black',
+        borderColor: '#FFFFFF',
         borderRadius: 100
     }
 

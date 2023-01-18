@@ -6,14 +6,18 @@ import { useNavigation } from "@react-navigation/native";
 import { deleteTitulo, putDespagar, putPagar } from "../../services/titulo";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useEffect, useState } from "react";
+import { ModalSuccessful } from "../../components/ModalSuccessful";
+import { ModalFailed } from "../../components/ModalFailed";
+import { ModalConfirm } from "../../components/ModalConfirm";
 
 export const TitulosDetalhe = ({ route }) => {
-
-    const [isChecked, setIsChecked] = useState(false)
 
     const { item } = route.params;
     const navigation = useNavigation();
     const { setLoad } = useContext(AuthContext);
+
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const [mostrarModalConfirm, setMostrarModalConfirm] = useState(false);
 
     const dataC = new Date(item?.dataCadastro)
     const formatdataCadastro = format(dataC, "dd/MM/yyyy");
@@ -28,38 +32,33 @@ export const TitulosDetalhe = ({ route }) => {
     //     setIsChecked(value => !value)
     // }
 
-    const confirmarDeletar = () => {
-        Alert.alert(
-            "Aviso",
-            "Deseja mesmo deletar o título?",
-            [
-                {
-                    text: "Cancelar",
-                    onPress: () => null,
-                    style: "cancel"
-                },
-                { text: "OK", onPress: () => onDelete() }
-            ]
-        );
-    }
+    // const confirmarDeletar = () => {
+    //     Alert.alert(
+    //         "Aviso",
+    //         "Deseja mesmo deletar o título?",
+    //         [
+    //             {
+    //                 text: "Cancelar",
+    //                 onPress: () => null,
+    //                 style: "cancel"
+    //             },
+    //             { text: "OK", onPress: () => onDelete() }
+    //         ]
+    //     );
+    // }
 
     const onDelete = async () => {
         try {
 
             deleteTitulo(item.id)
 
-            Alert.alert(
-                'Aviso',
-                'Título deletado com sucesso.',
-                [
-                    {
-                        text: "OK",
-                        onPress: () => null
-                    }
-                ]
-            );
+            setMostrarModal(true)
             setLoad(true)
-            navigation.goBack();
+
+            setTimeout(() => {
+                navigation.goBack();
+            }, 2000);
+
             setTimeout(() => {
                 setLoad(false)
             }, 120);
@@ -196,9 +195,22 @@ export const TitulosDetalhe = ({ route }) => {
                     <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.touchableOpacityDeletar} onPress={() => confirmarDeletar()}>
+                <TouchableOpacity style={styles.touchableOpacityDeletar} onPress={() => setMostrarModalConfirm(true)}>
                     <Text style={styles.touchableOpacityDeletarTexto}>DELETAR</Text>
                 </TouchableOpacity>
+
+                <ModalConfirm
+                    isVisible={mostrarModalConfirm}
+                    onPressCancel={() => setMostrarModalConfirm(false)}
+                    onPressConfirm={() => onDelete()}
+                    textoModal={'Deseja mesmo deletar o título?'}
+                />
+
+                <ModalSuccessful
+                    isVisible={mostrarModal}
+                    textoModal={'Título deletado com sucesso.'}
+                />
+
             </View>
         </View>
     )
