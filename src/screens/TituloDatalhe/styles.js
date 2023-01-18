@@ -4,39 +4,35 @@ export const styles = StyleSheet.create({
 
     scrollView: {
         flex: 1,
-        backgroundColor: '#0C609C',
-    },
-
-    containerMain: {
-        marginTop: 30,
-        alignItems: 'center',
-        justifyContent: 'center'
+        backgroundColor: 'gray',
     },
 
     container: {
-        width: "80%",
+        width: "100%",
+        height: 600,
         justifyContent: 'center',
-        minHeight: 400,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#008C8C',
         padding: 15,
-        borderRadius: 10,
-        marginBottom: 30
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20
+    },
+    containerTopo: {
+        width: "100%",
+        height: 120
     },
 
     texto: {
-        fontSize: 20,
+        fontSize: 22,
         marginBottom: 15
     },
 
     textoTitulo: {
         marginLeft: '25%',
-        fontSize: 22,
+        fontSize: 30,
         width: '50%',
         textAlign: 'center',
         color: '#000000',
-        borderBottomWidth: 1,
-        borderBottomColor: '#000000',
-        marginBottom: 10
+        marginBottom: 50
     },
 
     touchableOpacityAtualizar: {

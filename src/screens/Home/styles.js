@@ -2,21 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
 
-
-    homeScrollView: {
-        flex: 1
-    },
-
     homeContainer: {
         flex: 1,
-        backgroundColor: 'gray',
+        backgroundColor: '#FFFFFF',
         alignItems: 'center',
-    },
-
-    homeDashboard: {
-        marginTop: 20,
-        borderRadius: 150,
-        backgroundColor: 'gray',
     },
 
     homeDashboardtopo: {
@@ -30,16 +19,18 @@ export const styles = StyleSheet.create({
     },
 
     homeContainerMain: {
-        height: 180,
-        width: '80%',
+        height: '60%',
+        width: '100%',
         // backgroundColor: '#FF8800',
         marginTop: 20,
         alignItems: 'center'
     },
 
     homeTexto: {
-        fontSize: 22,
-        color: '#FFFFFF'
+        fontSize: 25,
+        fontWeight: '700',
+        color: '#FFFFFF',
+        textAlign: 'center',
         // marginTop: 10
     },
 
@@ -47,9 +38,9 @@ export const styles = StyleSheet.create({
         width: '90%',
         marginTop: 25,
         fontSize: 22,
-        color: '#FFFFFF',
+        color: 'black',
         borderBottomWidth: 1,
-        borderBottomColor: '#FFFFFF',
+        borderBottomColor: 'black',
         textAlign: 'center',
         paddingBottom: 10
     },
@@ -58,10 +49,11 @@ export const styles = StyleSheet.create({
         width: '90%',
         borderBottomWidth: 1,
         borderBottomColor: '#FFFFFF',
-        paddingLeft: '35%',
+        textAlign: 'center',
         marginTop: 10,
-        paddingBottom: 10,
-        color: '#FFFFFF'
+        fontSize: 40,
+        color: '#FFFFFF',
+        fontWeight: '700',
     },
 
     homeDivInput: {
@@ -93,11 +85,42 @@ export const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         marginTop: 40,
         borderRadius: 15,
-        alignItems: 'center'
+        alignItems: 'center',
+        borderWidth: 2,
+        borderColor: 'black'
     },
 
     homeTextoTouchable: {
         fontSize: 17,
-        color: '#000000'
+        color: 'black'
+    },
+
+    dash: {
+        width: '100%',
+        height: 250,
+        flexDirection: 'row',
+        justifyContent: "space-evenly",
+        marginTop: -100
+    },
+
+    dash1: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+
+    dash2: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    dash3: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+
+    titleDash: {
+        marginTop: -150
     }
 });

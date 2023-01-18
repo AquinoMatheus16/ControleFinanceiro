@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, TextInput, FlatList } from "react-native";
+import { Text, View, TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView } from "react-native";
 import { styles } from "./styles";
 import { EvilIcons } from '@expo/vector-icons';
 import { getCentroDeCusto } from "../../services/centroDeCusto";
@@ -44,21 +44,21 @@ export const CentroDeCusto = () => {
     return (
 
         <View style={styles.containerMain}>
+              <View style={styles.containerTopo}>
             <Text style={styles.textoTitulo}>Centro De Custos</Text>
 
             <TouchableOpacity onPress={() => navigation.navigate("Centro De Custo Cadastrar")} style={styles.touchableOpacity}>
                 <Text style={styles.touchableOpacityTexto}>Cadastar</Text>
             </TouchableOpacity>
 
-            <Text style={styles.textoTituloInput}>Pequisar</Text>
-
-            <View style={styles.containerInput}>
+            <KeyboardAvoidingView behavior="padding" style={styles.containerInput}>
                 <EvilIcons name="search" size={24} color="#FFFFFF" />
                 <TextInput
                     style={styles.textInput} placeholder="Pequisar"
                     value={busca}
                     onChangeText={e => setBusca(e)}
                 />
+            </KeyboardAvoidingView>
             </View>
 
             <View style={styles.containerFlatList}>

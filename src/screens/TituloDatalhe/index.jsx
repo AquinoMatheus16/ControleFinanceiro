@@ -80,34 +80,34 @@ export const TitulosDetalhe = ({ route }) => {
     };
 
     const marcar = (item) => {
-            setLoad(true)
-            putPagar(item)
-            setTimeout(() => {
+        setLoad(true)
+        putPagar(item)
+        setTimeout(() => {
             setLoad(false)
-            }, 250);
-            setTimeout(() => {
+        }, 250);
+        setTimeout(() => {
             setLoad(false)
             navigation.goBack()
-            }, 500);
+        }, 500);
     }
 
     const desmarcar = (item) => {
-            setLoad(true)
-            Alert.alert(
-                "Aviso",
-                item.tipo === "APAGAR" ? "Deseja desmarcar como pago?" : "Deseja desmarcar como recebido?",
-                [
-                    {
-                        text: "Cancelar",
-                        onPress: () => null,
-                        style: "cancel"
+        setLoad(true)
+        Alert.alert(
+            "Aviso",
+            item.tipo === "APAGAR" ? "Deseja desmarcar como pago?" : "Deseja desmarcar como recebido?",
+            [
+                {
+                    text: "Cancelar",
+                    onPress: () => null,
+                    style: "cancel"
 
-                    },
-                    { text: "OK", onPress: () => putDespagar(item, setTimeout(() => { setLoad(false)}, 250), setTimeout(() => { navigation.goBack()}, 1000))}
-                ]
-            );
-            
-            
+                },
+                { text: "OK", onPress: () => putDespagar(item, setTimeout(() => { setLoad(false) }, 250), setTimeout(() => { navigation.goBack() }, 1000)) }
+            ]
+        );
+
+
     }
 
     const buttonMostrar = () => {
@@ -158,32 +158,33 @@ export const TitulosDetalhe = ({ route }) => {
 
     return (
 
-        <ScrollView style={styles.scrollView}>
-            <View style={styles.containerMain}>
-                <View style={styles.container}>
+        <View style={styles.scrollView}>
+            <View style={styles.containerTopo}>
+            </View>
+            <View style={styles.container}>
 
-                    {buttonMostrar()}
+                {buttonMostrar()}
 
-                    {item?.descricao === null ? "" : <Text style={styles.textoTitulo}>{item?.descricao}</Text>}
+                {item?.descricao === null ? "" : <Text style={styles.textoTitulo}>{item?.descricao}</Text>}
 
-                    {item?.centroDeCusto === null ? "" : <Text style={styles.texto}>Centro de custo: {item?.centroDeCusto.descricao}</Text>}
+                {item?.centroDeCusto === null ? "" : <Text style={styles.texto}>Centro de custo: {item?.centroDeCusto.descricao}</Text>}
 
-                    {item?.valor === null ? "" : <Text style={styles.texto}>Valor: {item?.valor}</Text>}
+                {item?.valor === null ? "" : <Text style={styles.texto}>Valor: {item?.valor}</Text>}
 
-                    {item?.tipo === null ? "" : <Text style={styles.texto}>Tipo: {item?.tipo}</Text>}
+                {item?.tipo === null ? "" : <Text style={styles.texto}>Tipo: {item?.tipo}</Text>}
 
-                    {item?.dataVencimento === null ? "" : <Text style={styles.texto}>Data vencimento: {formatdataVencimento}</Text>}
+                {item?.dataVencimento === null ? "" : <Text style={styles.texto}>Data vencimento: {formatdataVencimento}</Text>}
 
-                    {item?.dataCadastro === null ? "" : <Text style={styles.texto}>Data cadastro: {formatdataCadastro}</Text>}
+                {item?.dataCadastro === null ? "" : <Text style={styles.texto}>Data cadastro: {formatdataCadastro}</Text>}
 
-                    {item?.dataPagamento === null ? "" : item?.tipo === "APAGAR" ? <Text style={styles.texto}>Data pagamento: {formatdataPagamento}</Text> : <Text style={styles.texto}>Data recebimento: {formatdataPagamento}</Text>}
+                {item?.dataPagamento === null ? "" : item?.tipo === "APAGAR" ? <Text style={styles.texto}>Data pagamento: {formatdataPagamento}</Text> : <Text style={styles.texto}>Data recebimento: {formatdataPagamento}</Text>}
 
-                    {item?.observacao === null ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
-                    {/* <Text style={styles.texto}>Observação: {item?.observacao}</Text> */}
+                {item?.observacao === null ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
+                {/* <Text style={styles.texto}>Observação: {item?.observacao}</Text> */}
 
-                    {buttonMostrarPagar()}
+                {buttonMostrarPagar()}
 
-                    {/* <View style={styles.bt}>
+                {/* <View style={styles.bt}>
                         <Text>PAGAR</Text>
                         <Switch
                             value={isChecked}
@@ -191,16 +192,14 @@ export const TitulosDetalhe = ({ route }) => {
                         />
                     </View> */}
 
-                    <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Titulos Atualizar", { item: item })}>
-                        <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>
-                    </TouchableOpacity>
+                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Titulos Atualizar", { item: item })}>
+                    <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>
+                </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.touchableOpacityDeletar} onPress={() => confirmarDeletar()}>
-                        <Text style={styles.touchableOpacityDeletarTexto}>DELETAR</Text>
-                    </TouchableOpacity>
-
-                </View>
+                <TouchableOpacity style={styles.touchableOpacityDeletar} onPress={() => confirmarDeletar()}>
+                    <Text style={styles.touchableOpacityDeletarTexto}>DELETAR</Text>
+                </TouchableOpacity>
             </View>
-        </ScrollView>
+        </View>
     )
 };
