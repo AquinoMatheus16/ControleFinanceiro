@@ -1,61 +1,64 @@
-import { useContext, useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity, ImageBackground, ScrollView, Image } from 'react-native';
+import { useState } from 'react';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { styles } from './styles';
-import logo from "..//../img/cadeado.png"
+import logo from "../../img/cadeado.png"
 import { api } from '../../services/api';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { InputGeral } from '../../components/InputGeral';
+import { ModalSuccessful } from '../../components/ModalSuccessful';
+
+const schema = yup.object({
+  envioEmail: yup.string().email("E-mail inválido").required("Informe o email")
+});
 
 export const RecuperarSenha = () => {
 
-  const [envioEmail, setEnvioEmail] = useState("");
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema)
+  });
 
-  const enviaToken = async () => {
-
+  const enviaToken = async (data) => {
     try {
 
-      if (envioEmail === "" || envioEmail === null) {
-        return (
-          alert("Preencha os campos")
-        )
-      }
-
-      await api.post(`/api/usuarios/recover/${envioEmail}`);
-      alert("E-mail enviado com sucesso!");
+      await api.post(`/api/usuarios/recover/${data.envioEmail}`);
+      setMostrarModal(true);
 
     } catch (error) {
-      alert("E-mail inválido");
+      // console.error(error);
+      console.error("Ops, algo deu errado");
     }
-
   }
 
   return (
     <View style={styles.containerPrincipal}>
       <View style={styles.containerLogin}>
 
-        <View>
-          <Image source={logo} style={styles.imagemLogo} />
-        </View>
+        <Image source={logo} style={styles.imagemLogo} />
 
         <Text style={styles.titulo}>Esqueceu sua Senha?</Text>
 
-        {/* <View style={styles.logoContainer}>
-          <ImageBackground source={logo} style={styles.imagemLogo} />
-        </View> */}
-
         <Text style={styles.tituloTexto}>E-mail</Text>
-        <TextInput
-          style={styles.input}
-          placeholder='INSIRA SEU EMAIL'
-          onChangeText={setEnvioEmail}
-          value={envioEmail}
+        <Controller
+          control={control}
+          name="envioEmail"
+          render={({ field: { onChange, value } }) => (
+            <InputGeral
+              placeholder='INSIRA SEU EMAIL'
+              onChangeText={onChange}
+              value={value}
+            />
+          )}
         />
+        {errors.envioEmail && <Text style={styles.textError}>{errors.envioEmail?.message}</Text>}
 
-        <TouchableOpacity
-          onPress={() => enviaToken()}
-        >
-          <View style={styles.botaoEntrar}>
-            <Text style={styles.entrar}>ENVIAR</Text>
-          </View>
+        <TouchableOpacity onPress={handleSubmit(enviaToken)}>
+          <Text style={styles.entrar}>ENVIAR</Text>
         </TouchableOpacity>
+
+        <ModalSuccessful isVisible={mostrarModal} textoModal={'E-mail enviado com sucesso!'} />
 
       </View>
     </View>

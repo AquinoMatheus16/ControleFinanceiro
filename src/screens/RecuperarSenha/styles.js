@@ -22,16 +22,6 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         borderRadius: 7,
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 2,
-        // },
-        // minHeight: 400,
-        // shadowOpacity: 0.25,
-        // shadowRadius: 3.84,
-
-        // elevation: 5,
     },
 
     input: {
@@ -44,22 +34,31 @@ export const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         // paddingRight: 8
-        paddingLeft:20
+        paddingLeft: 20
     },
 
-    botaoEntrar: {
+    // botaoEntrar: {
+    //     backgroundColor: '#ef4036',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     padding: 5,
+    //     width: 100,
+    //     height: 30,
+    //     borderRadius: 10,
+    //     marginTop: 30,
+    //     color: '#FFFFFF'
+    // },
+
+    entrar: {
         backgroundColor: '#ef4036',
-        alignItems: 'center',
-        justifyContent: 'center',
+        textAlign: 'center',
+        textAlignVertical: 'center',
         padding: 5,
         width: 100,
         height: 30,
         borderRadius: 10,
         marginTop: 30,
-        color: '#FFFFFF'
-    },
-
-    entrar: {
+        color: '#FFFFFF',
         color: 'white',
         fontWeight: 'bold'
     },
@@ -80,13 +79,19 @@ export const styles = StyleSheet.create({
 
     tituloTexto: {
         fontSize: 18,
-        color: '#000000'
+        color: '#FFFFFF'
     },
+
     titulo: {
         fontSize: 20,
-        color: '#000000',
+        color: '#FFFFFF',
         marginTop: 20,
         marginBottom: 20
-    }
+    },
+
+    textError: {
+        color: '#F32020',
+        marginBottom: 5
+    },
 
 });
