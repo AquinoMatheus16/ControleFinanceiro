@@ -111,7 +111,7 @@ export const TituloCadastra = () => {
             const novoTitulo = {
                 descricao: data.descricao,
                 tipo: data.tipo,
-                valor: parseInt(data.valor),
+                valor: (Math.floor(data.valor * 100).toFixed(0) / 100).toFixed(2),
                 dataVencimento: dataVencimento,
                 centroDeCusto: centroDeCustoJson,
                 observacao: data.observacao
