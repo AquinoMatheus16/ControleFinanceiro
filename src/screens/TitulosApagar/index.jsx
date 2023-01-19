@@ -39,7 +39,7 @@ export const TitulosApagar = () => {
         <>
             <View style={styles.containerMian}>
                 <Text style={styles.textoTotal}>Total a pagar</Text>
-                <Text style={styles.textoNumero}>R$: {total.totalApagar}</Text>
+                <Text style={styles.textoNumero}>R$: {(Math.floor(total.totalApagar * 100).toFixed(0) / 100).toFixed(2)}</Text>
 
                 <Text style={styles.textoTitulo}>Títulos a pagar</Text>
 

@@ -61,7 +61,7 @@ export const Home = ({ navigation }) => {
             <View style={styles.homeDashboardtopo}>
 
                 <Text style={styles.homeTexto}>Saldo</Text>
-                <Text style={styles.homeNumero}>R$: {total?.saldo}</Text>
+                <Text style={styles.homeNumero}>R$: {(Math.floor(total?.saldo * 100).toFixed(0) / 100).toFixed(2)}</Text>
 
                 <View style={styles.dash}>
 
