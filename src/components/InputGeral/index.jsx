@@ -14,6 +14,7 @@ export const InputGeral = ({ placeholder, onChangeText, value, keyboardType, mul
             numberOfLines={numberOfLines}
             onFocus={onFocus}
             secureTextEntry={secureTextEntry}
+            textAlign={'center'}
         />
     )
 };

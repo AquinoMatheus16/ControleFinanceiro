@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-
 export const styles = StyleSheet.create({
 
     containerPrincipal: {
@@ -26,53 +25,19 @@ export const styles = StyleSheet.create({
         marginTop: 50
     },
 
-    input: {
-        height: 35,
-        width: '90%',
-        margin: 12,
-        // borderWidth: 1,
-        borderBottomWidth: 1,
-        borderBottomColor: '#000000',
-        // padding: 10,
-        borderRadius: 10,
-        // paddingRight: 8
-        paddingLeft: 80,
-        // textAlign:'center'
-    },
-
-    botaoEntrar: {
+    entrar: {
+        color: 'white',
+        fontWeight: 'bold',
         backgroundColor: '#ef4036',
-        alignItems: 'center',
-        justifyContent: 'center',
+        fontSize: 20,
+        textAlign: 'center',
+        textAlignVertical: 'center',
         padding: 5,
-        width: 100,
-        height: 30,
+        width: 150,
+        height: 40,
         borderRadius: 10,
         marginTop: 40,
         color: '#FFFFFF'
-    },
-
-    entrar: {
-        color: 'white',
-        fontWeight: 'bold'
-    },
-
-    cadastro: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 18,
-    },
-
-    logoContainer: {
-        width: 210,
-        height: 40,
-        backgroundColor: 'white',
-        borderRadius: 10,
-        marginBottom: 100
-    },
-
-    imagemLogo: {
-        flex: 1,
     },
 
     tituloTexto: {
@@ -80,6 +45,7 @@ export const styles = StyleSheet.create({
         color: '#FFFFFF',
         marginTop: 15
     },
+
     img: {
         width: 150,
         height: 150,
@@ -87,6 +53,11 @@ export const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: '#FFFFFF',
         borderRadius: 100
-    }
+    },
+
+    textError: {
+        color: '#F32020',
+        marginBottom: 5
+    },
 
 });
