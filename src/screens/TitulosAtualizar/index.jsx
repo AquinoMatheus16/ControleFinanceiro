@@ -116,7 +116,7 @@ export const TitulosAtualizar = ({ route }) => {
             const novoTitulo = {
                 descricao: descricao,
                 tipo: tipo,
-                valor: parseInt(valor),
+                valor: (Math.floor(valor * 100).toFixed(0) / 100).toFixed(2),
                 dataVencimento: dataVencimento,
                 centroDeCusto: centroDeCustoJson,
                 observacao: observacao

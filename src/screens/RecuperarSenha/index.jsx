@@ -13,7 +13,7 @@ const schema = yup.object({
   envioEmail: yup.string().email("E-mail inválido").required("Informe o email")
 });
 
-export const RecuperarSenha = () => {
+export const RecuperarSenha = ({navigation}) => {
 
   const [mostrarModal, setMostrarModal] = useState(false);
   const { control, handleSubmit, formState: { errors } } = useForm({
@@ -25,6 +25,9 @@ export const RecuperarSenha = () => {
 
       await api.post(`/api/usuarios/recover/${data.envioEmail}`);
       setMostrarModal(true);
+      setTimeout(() => {
+        navigation.goBack();
+      }, 2000);
 
     } catch (error) {
       // console.error(error);
