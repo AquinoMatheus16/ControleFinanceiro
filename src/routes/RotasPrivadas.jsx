@@ -30,16 +30,7 @@ const HomeStack = () => {
             <Stack.Screen name='TitulosApagar' component={TitulosApagar} options={{ headerShown: false }} />
             <Stack.Screen name='TitulosAreceber' component={TitulosAreceber} options={{ headerShown: false }} />
             <Stack.Screen name='Periodo' component={Periodo} options={{ headerShown: false }} />
-            <Stack.Screen name='Titulos ' component={TituloDetalheHome} options={({ navigation }) => ({
-                headerLeft: (props) => (
-                    <HeaderBackButton
-                        {...props}
-                        onPress={() => {
-                            navigation.navigate('TitulosApagar');
-                        }}
-                    />
-                ),
-            })} />
+            <Stack.Screen name='Titulos ' component={TituloDetalheHome} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 };
@@ -49,16 +40,7 @@ const TituloStake = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name='Titulos' component={Titulos} options={{ headerShown: false }} />
-            <Stack.Screen name='Titulos ' component={TitulosDetalhe} options={({ navigation }) => ({
-                headerLeft: (props) => (
-                    <HeaderBackButton
-                        {...props}
-                        onPress={() => {
-                            navigation.navigate('Titulos');
-                        }}
-                    />
-                ),
-            })} />
+            <Stack.Screen name='Titulos ' component={TitulosDetalhe} options={{ headerShown: false }} />
             <Stack.Screen name='Titulos Cadastra' component={TituloCadastra} options={{ headerShown: true }} />
             <Stack.Screen name='Titulos Atualizar' component={TitulosAtualizar} options={{ headerShown: true }} />
         </Stack.Navigator>
@@ -72,7 +54,7 @@ const CentroDecUstoStake = () => {
             <Stack.Screen name='CentroDeCustoStake' component={CentroDeCusto} options={{ headerShown: false }} />
             <Stack.Screen name='Centro De Custo Cadastrar' component={CentroDeCustoCadastrar} options={{ headerShown: true }} />
             <Stack.Screen name='Centro De Custo Atualizar' component={CentroDeCustoAtualizar} options={{ headerShown: true }} />
-            <Stack.Screen name='Centro De Custo Detalhe' component={CentroDeCustoDetalhe} options={{ headerShown: true }} />
+            <Stack.Screen name='Centro De Custo Detalhe' component={CentroDeCustoDetalhe} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 };
