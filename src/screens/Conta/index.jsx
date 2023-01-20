@@ -6,6 +6,7 @@ import { Source } from "webpack-sources";
 import { AuthContext } from "../../contexts/AuthContext";
 import { styles } from "./styles";
 import { imgUsuario } from '../../img/usuario.png'
+import { EvilIcons } from '@expo/vector-icons';
 
 export const Conta = () => {
     const { logoutContext } = useContext(AuthContext);
@@ -33,7 +34,7 @@ export const Conta = () => {
 
                 <TouchableOpacity>
                     <View >
-                        <Image source={{ uri: fot ? fot : null }} style={styles.homeDashboard} />
+                       {fot ? <Image source={{ uri: fot}} style={styles.homeDashboard} /> : <EvilIcons name="user" size={200} style={styles.icon} color="#ffffff" />}
                     </View>
                 </TouchableOpacity>
 
