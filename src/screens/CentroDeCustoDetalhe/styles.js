@@ -6,8 +6,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#0C609C',
         alignItems: 'center',
-        // marginTop: 30,
-        // justifyContent: 'center'
     },
 
     container: {
@@ -17,8 +15,16 @@ export const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         padding: 15,
         borderRadius: 10,
-        marginTop: 100
-        // marginBottom: 30
+        marginTop: 100,
+
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 8,
     },
 
     texto: {

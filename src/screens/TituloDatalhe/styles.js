@@ -4,21 +4,27 @@ export const styles = StyleSheet.create({
 
     scrollView: {
         flex: 1,
-        backgroundColor: 'gray',
+        backgroundColor: '#0C609C',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     container: {
-        width: "100%",
-        height: 600,
+        width: "80%",
+        minHeight: 500,
         justifyContent: 'center',
-        backgroundColor: '#008C8C',
+        backgroundColor: '#FFFFFF',
         padding: 15,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20
-    },
-    containerTopo: {
-        width: "100%",
-        height: 120
+        borderRadius: 15,
+
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 8,
     },
 
     texto: {

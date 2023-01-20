@@ -1,13 +1,11 @@
-import { Text, View, TouchableOpacity, Alert, Switch } from "react-native";
+import { Text, View, TouchableOpacity, Alert } from "react-native";
 import { styles } from "./styles";
 import { format } from "date-fns";
-import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { deleteTitulo, putDespagar, putPagar } from "../../services/titulo";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
-import { ModalFailed } from "../../components/ModalFailed";
 import { ModalConfirm } from "../../components/ModalConfirm";
 
 export const TitulosDetalhe = ({ route }) => {
@@ -27,25 +25,6 @@ export const TitulosDetalhe = ({ route }) => {
 
     const dataP = new Date(item?.dataPagamento)
     const formatdataPagamento = format(dataP, "dd/MM/yyyy");
-
-    // const toggleIsChecked = () => {
-    //     setIsChecked(value => !value)
-    // }
-
-    // const confirmarDeletar = () => {
-    //     Alert.alert(
-    //         "Aviso",
-    //         "Deseja mesmo deletar o título?",
-    //         [
-    //             {
-    //                 text: "Cancelar",
-    //                 onPress: () => null,
-    //                 style: "cancel"
-    //             },
-    //             { text: "OK", onPress: () => onDelete() }
-    //         ]
-    //     );
-    // }
 
     const onDelete = async () => {
         try {
@@ -105,8 +84,6 @@ export const TitulosDetalhe = ({ route }) => {
                 { text: "OK", onPress: () => putDespagar(item, setTimeout(() => { setLoad(false) }, 250), setTimeout(() => { navigation.goBack() }, 1000)) }
             ]
         );
-
-
     }
 
     const buttonMostrar = () => {
@@ -130,9 +107,7 @@ export const TitulosDetalhe = ({ route }) => {
                     </View>
                 </TouchableOpacity>
             )
-
         }
-
     }
 
     const buttonMostrarPagar = () => {
@@ -150,16 +125,12 @@ export const TitulosDetalhe = ({ route }) => {
                     <Text style={styles.touchableOpacityAtualizarTexto}>MARCAR COMO RECEBIDO</Text>
                 </TouchableOpacity>
             )
-
         }
-
     }
 
     return (
 
         <View style={styles.scrollView}>
-            <View style={styles.containerTopo}>
-            </View>
             <View style={styles.container}>
 
                 {buttonMostrar()}
@@ -179,17 +150,8 @@ export const TitulosDetalhe = ({ route }) => {
                 {item?.dataPagamento === null ? "" : item?.tipo === "APAGAR" ? <Text style={styles.texto}>Data pagamento: {formatdataPagamento}</Text> : <Text style={styles.texto}>Data recebimento: {formatdataPagamento}</Text>}
 
                 {item?.observacao === null ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
-                {/* <Text style={styles.texto}>Observação: {item?.observacao}</Text> */}
 
                 {buttonMostrarPagar()}
-
-                {/* <View style={styles.bt}>
-                        <Text>PAGAR</Text>
-                        <Switch
-                            value={isChecked}
-                            onValueChange={toggleIsChecked}
-                        />
-                    </View> */}
 
                 <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Titulos Atualizar", { item: item })}>
                     <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>

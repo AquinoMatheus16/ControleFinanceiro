@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FlatList, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { getDashBoard } from "../../services/dashboard";
 import { styles } from "./styles";
@@ -13,37 +13,42 @@ export const Periodo = () => {
     const [data, setData] = useState(false);
     const [apagar, setApagar] = useState([]);
     const [areceber, setAreceber] = useState([]);
-    const [dataInicial, setDataInicial] = useState(new Date());
+
     const [dataFinal, setDataFinal] = useState(new Date());
-
-    const [datePickerInicial, setDatePickerInicial] = useState(false);
     const [datePickerFinal, setDatePickerFinal] = useState(false);
-
-    const [dataFormatadaInicial, setDataFormatadaInicial] = useState('');
     const [dataFormatadaFinal, setDataFormatadaFinal] = useState('');
+    const [dataFinalApi, setDataFinalApi] = useState('');
+
+    const [dataInicial, setDataInicial] = useState(new Date());
+    const [datePickerInicial, setDatePickerInicial] = useState(false);
+    const [dataFormatadaInicial, setDataFormatadaInicial] = useState('');
+    const [dataInicialApi, setDataInicialApi] = useState('');
 
     function dataInicialSelect(event, value) {
         setDataInicial(value);
         const dataI = new Date(dataInicial)
-        const formatDataInicial = format(dataI, "dd/MM/yyyy");
-        setDataFormatadaInicial(formatDataInicial);
+        const formatDataInicialMostrar = format(dataI, "dd/MM/yyyy");
+        const formatDataInicialApi = format(dataI, "yyyy-MM-dd");
+        setDataFormatadaInicial(formatDataInicialMostrar);
+        setDataInicialApi(formatDataInicialApi);
         setDatePickerInicial(false);
     };
 
     function dataFinalSelect(event, value) {
         setDataFinal(value);
         const dataF = new Date(dataFinal)
-        const formatDataFinal = format(dataF, "dd/MM/yyyy");
-        setDataFormatadaFinal(formatDataFinal);
+        const formatDataFinalMostrar = format(dataF, "dd/MM/yyyy");
+        const formatDataFinalApi = format(dataF, "yyyy-MM-dd 23:59:59");
+        setDataFormatadaFinal(formatDataFinalMostrar);
+        setDataFinalApi(formatDataFinalApi);
         setDatePickerFinal(false);
     };
 
     const fetchTotal = async () => {
-        const response = await getDashBoard(dataFormatadaInicial, dataFormatadaFinal);
+        const response = await getDashBoard(dataInicialApi, dataFinalApi);
         setApagar(response.titulosApagar);
         setAreceber(response.titulosAreceber);
     };
-    console.log('response: ', data);
 
     useEffect(() => {
         fetchTotal();
@@ -98,7 +103,7 @@ export const Periodo = () => {
                     <AntDesign style={styles.iconInput} name="calendar" size={24} color="#000000" />
                     <TextInput
                         style={styles.textInputDate}
-                        placeholder={"Digite uma data final"}
+                        placeholder={"Digite uma data final      "}
                         defaultValue={""}
                         value={dataFormatadaFinal}
                         dataDetectorTypes={"none"}
@@ -107,13 +112,13 @@ export const Periodo = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.stilo}>
-                <TouchableOpacity onPress={fetchTotal} onPressIn={() => setData(true)}>
+                <TouchableOpacity onPress={() => fetchTotal()} onPressIn={() => setData(true)}>
                     <View style={styles.containerTouchableOpacity}>
                         <Text style={styles.textoTouchableOpacity}>A pagar</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={fetchTotal} onPressIn={() => setData(false)}>
+                <TouchableOpacity onPress={() => fetchTotal()} onPressIn={() => setData(false)}>
                     <View style={styles.containerTouchableOpacity}>
                         <Text style={styles.textoTouchableOpacity}>A receber</Text>
                     </View>
