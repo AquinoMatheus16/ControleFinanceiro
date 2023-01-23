@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useState } from "react";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { ModalConfirm } from "../../components/ModalConfirm";
+import { Loading } from "../../components/Loading";
 
 export const TitulosDetalhe = ({ route }) => {
 
@@ -16,6 +17,7 @@ export const TitulosDetalhe = ({ route }) => {
 
     const [mostrarModal, setMostrarModal] = useState(false);
     const [mostrarModalConfirm, setMostrarModalConfirm] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const dataC = new Date(item?.dataCadastro)
     const formatdataCadastro = format(dataC, "dd/MM/yyyy");
@@ -29,7 +31,9 @@ export const TitulosDetalhe = ({ route }) => {
     const onDelete = async () => {
         try {
 
-            deleteTitulo(item.id)
+            setIsLoading(true);
+            await deleteTitulo(item.id);
+            setIsLoading(false);
 
             setMostrarModal(true)
             setLoad(true)
@@ -153,7 +157,7 @@ export const TitulosDetalhe = ({ route }) => {
 
                 {buttonMostrarPagar()}
 
-                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Titulos Atualizar", { item: item })}>
+                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Atualizar Título", { item: item })}>
                     <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>
                 </TouchableOpacity>
 
@@ -172,6 +176,8 @@ export const TitulosDetalhe = ({ route }) => {
                     isVisible={mostrarModal}
                     textoModal={'Título deletado com sucesso.'}
                 />
+
+                <Loading isLoading={isLoading} />
 
             </View>
         </View>

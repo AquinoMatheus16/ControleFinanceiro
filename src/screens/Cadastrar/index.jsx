@@ -9,6 +9,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { ModalSuccessful } from '../../components/ModalSuccessful';
+import { ModalFailed } from '../../components/ModalFailed';
+import { Loading } from '../../components/Loading';
 
 const schema = yup.object({
   nome: yup.string().min(3, "O nome deve ter pelo menos 3 digitos").required("Informe o nome"),
@@ -20,8 +22,9 @@ const schema = yup.object({
 export const Cadastrar = ({ navigation }) => {
 
   const [image, setImage] = useState(null);
-  const [listUsuarios, setListUsuarios] = useState([]);
   const [mostrarModal, setMostrarModal] = useState(false);
+  const [mostrarModalFailed, setMostrarModalFailed] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
@@ -43,19 +46,19 @@ export const Cadastrar = ({ navigation }) => {
   };
 
   const handleUsuario = async (data) => {
-
-    const novoUsuario = {
-      nome: data.nome,
-      email: data.email,
-      senha: data.senha,
-      confirmaSenha: data.confirmaSenha,
-      foto: image
-    };
-
     try {
-      const { dataa } = await postUsuario(novoUsuario);
-      console.log(dataa);
-      setListUsuarios([...listUsuarios, data]);
+      const novoUsuario = {
+        nome: data.nome,
+        email: data.email,
+        senha: data.senha,
+        confirmaSenha: data.confirmaSenha,
+        foto: image
+      };
+      // console.log('novoUsuario:', novoUsuario);
+
+      setIsLoading(true);
+      await postUsuario(novoUsuario);
+      setIsLoading(false);
 
       setMostrarModal(true);
 
@@ -64,7 +67,12 @@ export const Cadastrar = ({ navigation }) => {
       }, 2000);
 
     } catch (error) {
-      console.error(error);
+      // console.error('error: ', error);
+      setIsLoading(false);
+      setMostrarModalFailed(true);
+      setTimeout(() => {
+        setMostrarModalFailed(false);
+      }, 2500);
     }
   };
 
@@ -144,6 +152,8 @@ export const Cadastrar = ({ navigation }) => {
         </TouchableOpacity>
 
         <ModalSuccessful isVisible={mostrarModal} textoModal={"Usuário cadastrado com sucesso!"} />
+        <ModalFailed isVisible={mostrarModalFailed} textoModal={"Já existe um usuário com esse e-mail"} />
+        <Loading isLoading={isLoading} />
 
       </View>
     </View>

@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
 import { InputGeral } from "../../components/InputGeral";
+import { Loading } from "../../components/Loading";
 import { ModalFailed } from "../../components/ModalFailed";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -15,8 +16,11 @@ export const CentroDeCustoAtualizar = ({ route }) => {
     const [descricao, setDescricao] = useState(item?.descricao);
     const [observacao, setObservacao] = useState(item?.observacao);
     const [erroDescricao, setErroDescricao] = useState(false);
+
     const [mostrarModal, setMostrarModal] = useState(false);
     const [mostrarModalErro, setMostrarModalErro] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
     const { setLoad } = useContext(AuthContext);
 
     const put = async () => {
@@ -34,8 +38,9 @@ export const CentroDeCustoAtualizar = ({ route }) => {
 
             JSON.stringify(novoCentroDeCusto);
 
+            setIsLoading(true);
             await putCentroDeCusto(item, novoCentroDeCusto);
-            // console.log("novoCentroDeCusto: ", novoCentroDeCusto);
+            setIsLoading(false);
 
             setMostrarModal(true);
 
@@ -83,6 +88,7 @@ export const CentroDeCustoAtualizar = ({ route }) => {
 
                 <ModalSuccessful isVisible={mostrarModal} textoModal={'Centro de custo atualizado com suecsso!'} />
                 <ModalFailed onPress={() => setMostrarModalErro(false)} isVisible={mostrarModalErro} textoModal={"Erro ao atualizar centro de custo."} />
+                <Loading isLoading={isLoading} />
 
             </View>
         </ScrollView>

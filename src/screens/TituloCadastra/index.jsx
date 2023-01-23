@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View, StyleSheet, Button } from "react-native";
+import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { SelectList } from 'react-native-dropdown-select-list';
 import { postTitulo } from "../../services/titulo";
@@ -15,6 +15,7 @@ import * as yup from 'yup';
 import { InputGeral } from "../../components/InputGeral";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { ModalFailed } from "../../components/ModalFailed";
+import { Loading } from "../../components/Loading";
 
 const schema = yup.object({
     descricao: yup.string().min(2, "A descrição deve ter pelo menos 2 digitos").required("Informe a descrição"),
@@ -32,6 +33,7 @@ export const TituloCadastra = () => {
 
     const [mostrarModal, setMostrarModal] = useState(false);
     const [mostrarModalErro, setMostrarModalErro] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [data, setData] = useState([]);
     const [centroDeCustoSalvos, setCentroDeCustoSalvos] = useState([]);
@@ -52,17 +54,12 @@ export const TituloCadastra = () => {
         resolver: yupResolver(schema)
     });
 
-    function showDatePicker() {
-        setDatePicker(true);
-    };
-
     function dataVencimentoSelect(event, value) {
-        const dataV = new Date(dataVencimento)
-        const formatDataVencimento = format(dataV, "dd/MM/yyyy");
-        setDataFormatada(formatDataVencimento);
+        setDatePicker(false);
         setDataVencimento(value);
-        setDatePicker(false)
         setErroData(true)
+        const formatDataVencimento = format(new Date(value), "dd/MM/yyyy");
+        setDataFormatada(formatDataVencimento);
     };
 
     const getCentroDeCustos = async () => {
@@ -79,7 +76,7 @@ export const TituloCadastra = () => {
             .catch((e) => {
                 console.log(e)
             })
-    }
+    };
 
     const centroDeCustoId = () => {
         centroDeCustoSalvos.map(item => {
@@ -87,11 +84,11 @@ export const TituloCadastra = () => {
                 setCentroDeCustoJson(item)
             }
         })
-    }
+    };
 
     useEffect(() => {
         getCentroDeCustos()
-    }, [])
+    }, []);
 
     useEffect(() => {
         centroDeCustoId()
@@ -121,8 +118,9 @@ export const TituloCadastra = () => {
             JSON.stringify(novoTitulo);
 
             centroDeCustoId();
+            setIsLoading(true);
             await postTitulo(novoTitulo);
-            console.log("Log do novoTitulo: ", novoTitulo);
+            setIsLoading(false);
 
             setMostrarModal(true)
             setLoad(true)
@@ -229,12 +227,11 @@ export const TituloCadastra = () => {
                         is24Hour={true}
                         value={dataVencimento}
                         onChange={dataVencimentoSelect}
-                        locale={'DE'}
                     />
                 )}
                 <View style={styles.containerDataInput}>
-                    <TouchableOpacity style={styles.touchableOpacity2} onPress={() => showDatePicker()}>
-                        <AntDesign style={styles.iconInput} name="calendar" size={24} color="#000000" />
+                    <TouchableOpacity style={styles.touchableOpacity2} onPress={() => setDatePicker(true)}>
+                        <AntDesign style={styles.iconInput} name="calendar" size={24} color="#ffffff" />
                         <TextInput
                             style={styles.textInputDate}
                             placeholder="Data vencimento"
@@ -267,8 +264,9 @@ export const TituloCadastra = () => {
                     <Text>CADASTRAR</Text>
                 </TouchableOpacity>
 
-                <ModalSuccessful isVisible={mostrarModal} textoModal={"Título cadastrado com suecsso!"} />
+                <ModalSuccessful isVisible={mostrarModal} textoModal={"Título cadastrado com sucesso!"} />
                 <ModalFailed onPress={() => setMostrarModalErro(false)} isVisible={mostrarModalErro} textoModal={"Erro ao cadastrar."} />
+                <Loading isLoading={isLoading} />
 
             </View>
         </ScrollView >

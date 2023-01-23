@@ -47,7 +47,7 @@ export const CentroDeCusto = () => {
               <View style={styles.containerTopo}>
             <Text style={styles.textoTitulo}>Centro De Custos</Text>
 
-            <TouchableOpacity onPress={() => navigation.navigate("Centro De Custo Cadastrar")} style={styles.touchableOpacity}>
+            <TouchableOpacity onPress={() => navigation.navigate("Cadastrar Centro De Custo")} style={styles.touchableOpacity}>
                 <Text style={styles.touchableOpacityTexto}>Cadastar</Text>
             </TouchableOpacity>
 

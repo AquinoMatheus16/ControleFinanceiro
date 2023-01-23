@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
     },
 
     containerInput: {
-        // backgroundColor: '#6FFF00',
         width: '80%',
         marginTop: 10,
         borderBottomWidth: 1,
@@ -93,7 +92,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         marginTop: 20,
         width: '100%',
-        // backgroundColor: '#FF3233',
         alignItems: 'center'
     },
 
@@ -101,7 +99,10 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-evenly",
         width: 300
-    }
+    },
 
+    textInputDate: {
+        color: '#FFFFFF'
+    }
 
 });

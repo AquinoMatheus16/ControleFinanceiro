@@ -30,13 +30,9 @@ export const getUsuarioId = async (id) => {
 
 // POST
 export const postUsuario = async (novoUsuario) => {
-    try {
-        const token = await AsyncStorage.getItem("@app_token")
-        const usuario = await api.post(`/api/usuarios`, novoUsuario, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
-        return usuario;
-    } catch (e) {
-        console.error(e);
-    }
+
+    const usuario = await api.post(`/api/usuarios`, novoUsuario)
+    return usuario;
 };
 
 // PUT
@@ -51,7 +47,7 @@ export const putUsuario = async (usuario) => {
     }
 };
 
-// DELETE   
+// DELETE
 // export const deleteUsuario = async (id) => {
 //     try {
 //         const token = await AsyncStorage.getItem("@app_token")

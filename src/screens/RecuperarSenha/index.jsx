@@ -8,14 +8,19 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { InputGeral } from '../../components/InputGeral';
 import { ModalSuccessful } from '../../components/ModalSuccessful';
+import { ModalFailed } from '../../components/ModalFailed';
+import { Loading } from '../../components/Loading';
 
 const schema = yup.object({
   envioEmail: yup.string().email("E-mail inválido").required("Informe o email")
 });
 
-export const RecuperarSenha = ({navigation}) => {
+export const RecuperarSenha = ({ navigation }) => {
 
   const [mostrarModal, setMostrarModal] = useState(false);
+  const [mostrarModalFailed, setMostrarModalFailed] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
@@ -23,15 +28,20 @@ export const RecuperarSenha = ({navigation}) => {
   const enviaToken = async (data) => {
     try {
 
+      setIsLoading(true)
       await api.post(`/api/usuarios/recover/${data.envioEmail}`);
       setMostrarModal(true);
+      setIsLoading(false)
       setTimeout(() => {
         navigation.goBack();
       }, 2000);
 
     } catch (error) {
-      // console.error(error);
-      console.error("Ops, algo deu errado");
+      // console.error('error: ', error);
+      setMostrarModalFailed(true);
+      setTimeout(() => {
+        setMostrarModalFailed(false);
+      }, 2500);
     }
   }
 
@@ -62,6 +72,8 @@ export const RecuperarSenha = ({navigation}) => {
         </TouchableOpacity>
 
         <ModalSuccessful isVisible={mostrarModal} textoModal={'E-mail enviado com sucesso!'} />
+        <ModalFailed isVisible={mostrarModalFailed} textoModal={'Esse e-mail não existe.'} />
+        <Loading isLoading={isLoading} />
 
       </View>
     </View>

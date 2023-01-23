@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
+import { Loading } from "../../components/Loading";
 import { ModalConfirm } from "../../components/ModalConfirm";
 import { ModalFailed } from "../../components/ModalFailed";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
@@ -13,15 +14,19 @@ export const CentroDeCustoDetalhe = ({ route }) => {
     const { item } = route.params;
     const navigation = useNavigation();
     const { setLoad } = useContext(AuthContext);
+
     const [mostrarModal, setMostrarModal] = useState(false);
     const [mostrarModalErro, setMostrarModalErro] = useState(false);
     const [mostrarModalConfirm, setMostrarModalConfirm] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const onDelete = async () => {
         try {
             setMostrarModalConfirm(false)
 
-            deleteCentroDeCusto(item.id)
+            setIsLoading(true);
+            await deleteCentroDeCusto(item.id);
+            setIsLoading(false);
 
             setMostrarModal(true)
             setLoad(true)
@@ -47,7 +52,7 @@ export const CentroDeCustoDetalhe = ({ route }) => {
 
                 {item?.observacao === null ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
 
-                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Centro De Custo Atualizar", { item: item })}>
+                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Atualizar Centro De Custo", { item: item })}>
                     <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>
                 </TouchableOpacity>
 
@@ -62,15 +67,9 @@ export const CentroDeCustoDetalhe = ({ route }) => {
                     textoModal={'Deseja mesmo deletar o centro de custo? Excluir este centro de custo pode excluir os títulos ligados a ele!'}
                 />
 
-                <ModalSuccessful
-                    isVisible={mostrarModal}
-                    textoModal={'Centro de custo deletado com sucesso.'}
-                />
-
-                <ModalFailed
-                    isVisible={mostrarModalErro}
-                    textoModal={'Não foi possível deletar o centro de custo.'}
-                />
+                <ModalSuccessful isVisible={mostrarModal} textoModal={'Centro de custo deletado com sucesso.'} />
+                <ModalFailed isVisible={mostrarModalErro} textoModal={'Não foi possível deletar o centro de custo.'} />
+                <Loading isLoading={isLoading} />
 
             </View>
         </View>

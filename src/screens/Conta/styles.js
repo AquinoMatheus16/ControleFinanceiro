@@ -11,22 +11,24 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         minHeight: 500
     },
-    botaoEntrar: {
-        backgroundColor: '#0C609C',
+
+    touchableOpacitySair: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
         alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#0C609C',
         padding: 5,
         width: 100,
-        height: 30,
+        height: 40,
         borderRadius: 10,
         marginTop: 30,
-        color: '#FFFFFF'
     },
-    entrar: {
-        color: 'black',
-        fontWeight: 'bold',
-        fontSize: 15
+
+    touchableOpacityTexto: {
+        color: '#FFFFFF',
+        fontSize: 18,
     },
+
     homeDashboard: {
         height: 150,
         width: 150,

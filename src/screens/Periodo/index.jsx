@@ -25,23 +25,21 @@ export const Periodo = () => {
     const [dataInicialApi, setDataInicialApi] = useState('');
 
     function dataInicialSelect(event, value) {
+        setDatePickerInicial(false);
         setDataInicial(value);
-        const dataI = new Date(dataInicial)
-        const formatDataInicialMostrar = format(dataI, "dd/MM/yyyy");
-        const formatDataInicialApi = format(dataI, "yyyy-MM-dd");
+        const formatDataInicialMostrar = format(new Date(value), "dd/MM/yyyy");
+        const formatDataInicialApi = format(new Date(value), "yyyy-MM-dd");
         setDataFormatadaInicial(formatDataInicialMostrar);
         setDataInicialApi(formatDataInicialApi);
-        setDatePickerInicial(false);
     };
 
     function dataFinalSelect(event, value) {
+        setDatePickerFinal(false);
         setDataFinal(value);
-        const dataF = new Date(dataFinal)
-        const formatDataFinalMostrar = format(dataF, "dd/MM/yyyy");
-        const formatDataFinalApi = format(dataF, "yyyy-MM-dd 23:59:59");
+        const formatDataFinalMostrar = format(new Date(value), "dd/MM/yyyy");
+        const formatDataFinalApi = format(new Date(value), "yyyy-MM-dd 23:59:59");
         setDataFormatadaFinal(formatDataFinalMostrar);
         setDataFinalApi(formatDataFinalApi);
-        setDatePickerFinal(false);
     };
 
     const fetchTotal = async () => {
@@ -74,7 +72,7 @@ export const Periodo = () => {
             )}
             <View style={styles.containerDataInput}>
                 <TouchableOpacity style={styles.touchableOpacity2} onPress={() => setDatePickerInicial(true)}>
-                    <AntDesign style={styles.iconInput} name="calendar" size={24} color="#000000" />
+                    <AntDesign style={styles.iconInput} name="calendar" size={24} color="#ffffff" />
                     <TextInput
                         style={styles.textInputDate}
                         placeholder={"Digite uma data de início"}
@@ -100,7 +98,7 @@ export const Periodo = () => {
             )}
             <View style={styles.containerDataInput}>
                 <TouchableOpacity style={styles.touchableOpacity2} onPress={() => setDatePickerFinal(true)}>
-                    <AntDesign style={styles.iconInput} name="calendar" size={24} color="#000000" />
+                    <AntDesign style={styles.iconInput} name="calendar" size={24} color="#ffffff" />
                     <TextInput
                         style={styles.textInputDate}
                         placeholder={"Digite uma data final      "}

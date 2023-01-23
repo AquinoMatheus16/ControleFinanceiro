@@ -11,6 +11,7 @@ import { format } from "date-fns";
 import { AntDesign } from '@expo/vector-icons';
 import { InputGeral } from "../../components/InputGeral";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
+import { Loading } from "../../components/Loading";
 
 export const TitulosAtualizar = ({ route }) => {
 
@@ -34,6 +35,7 @@ export const TitulosAtualizar = ({ route }) => {
     const [erroValorBoolean, setErroValorBoolean] = useState(false);
 
     const [mostrarModal, setMostrarModal] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigation = useNavigation();
     const { setLoad } = useContext(AuthContext);
@@ -43,16 +45,11 @@ export const TitulosAtualizar = ({ route }) => {
         { key: '2', value: 'ARECEBER' }
     ]
 
-    function showDatePicker() {
-        setDatePicker(true);
-    };
-
     function dataVencimentoSelect(event, value) {
-        const dataV = new Date(dataVencimento)
-        const formatDataVencimento = format(dataV, "dd/MM/yyyy");
-        setDataFormatada(formatDataVencimento);
-        setDataVencimento(value);
         setDatePicker(false);
+        setDataVencimento(value);
+        const formatDataVencimento = format(new Date(value), "dd/MM/yyyy");
+        setDataFormatada(formatDataVencimento);
     };
 
     const getCentroDeCustos = async () => {
@@ -125,8 +122,9 @@ export const TitulosAtualizar = ({ route }) => {
             JSON.stringify(novoTitulo);
 
             centroDeCustoId();
+            setIsLoading(true);
             await putTitulo(item, novoTitulo);
-            console.log("novoTitulo: ", novoTitulo);
+            setIsLoading(false);
 
             setMostrarModal(true)
             setLoad(true)
@@ -219,7 +217,7 @@ export const TitulosAtualizar = ({ route }) => {
                 )}
                 <Text style={styles.texto}>Data de vencimento</Text>
                 <View style={styles.containerDataInput}>
-                    <TouchableOpacity style={styles.touchableOpacity2} onPress={() => showDatePicker()}>
+                    <TouchableOpacity style={styles.touchableOpacity2} onPress={() => setDatePicker(true)}>
                         <AntDesign style={styles.iconInput} name="calendar" size={24} color="#FFFFFF" />
                         <TextInput
                             style={styles.textInputDate}
@@ -246,6 +244,7 @@ export const TitulosAtualizar = ({ route }) => {
                 </TouchableOpacity>
 
                 <ModalSuccessful isVisible={mostrarModal} textoModal={"Título atualizado com suecsso!"} />
+                <Loading isLoading={isLoading} />
 
             </View>
         </ScrollView>
