@@ -1,11 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { async } from "q";
 import { useContext, useEffect, useState } from "react";
-import { Button, Image, Text, TouchableOpacity, View } from "react-native";
-import { Source } from "webpack-sources";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 import { AuthContext } from "../../contexts/AuthContext";
 import { styles } from "./styles";
-import { imgUsuario } from '../../img/usuario.png'
 import { EvilIcons } from '@expo/vector-icons';
 
 export const Conta = () => {
@@ -34,7 +32,7 @@ export const Conta = () => {
 
                 <TouchableOpacity>
                     <View >
-                       {fot ? <Image source={{ uri: fot}} style={styles.homeDashboard} /> : <EvilIcons name="user" size={200} style={styles.icon} color="#ffffff" />}
+                        {fot ? <Image source={{ uri: fot }} style={styles.homeDashboard} /> : <EvilIcons name="user" size={200} style={styles.icon} color="#ffffff" />}
                     </View>
                 </TouchableOpacity>
 
@@ -52,13 +50,9 @@ export const Conta = () => {
             </View>
 
             <View style={styles.meioBaixo}>
-                
-                
-                <TouchableOpacity
-                    onPress={() => logoutContext()}>
-                    <View style={styles.botaoEntrar}>
-                        <Text style={styles.entrar}>Sair</Text>
-                    </View>
+                <TouchableOpacity style={styles.touchableOpacitySair} onPress={() => logoutContext()}>
+                    <Text style={styles.touchableOpacityTexto}>Sair</Text>
+                    <MaterialIcons name="logout" size={24} color="#FFFFFF" />
                 </TouchableOpacity>
             </View>
 

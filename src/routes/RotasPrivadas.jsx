@@ -9,15 +9,13 @@ import { TitulosApagar } from '../screens/TitulosApagar';
 import { TitulosAreceber } from '../screens/TitulosAreceber';
 import { Periodo } from '../screens/Periodo';
 import { TituloCadastra } from '../screens/TituloCadastra';
-import { HeaderBackButton } from '@react-navigation/elements';
 import { TitulosAtualizar } from '../screens/TitulosAtualizar';
 import { TituloDetalheHome } from '../screens/TituloDetalheHome';
 import { TitulosDetalhe } from '../screens/TituloDatalhe';
 import { CentroDeCustoAtualizar } from '../screens/CentroDeCustoAtualizar';
 import { CentroDeCustoCadastrar } from '../screens/CentroDeCustoCadastrar';
-import { FontAwesome, FontAwesome5, AntDesign, Feather, Ionicons } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5, Feather, Ionicons } from '@expo/vector-icons';
 import { CentroDeCustoDetalhe } from '../screens/CentroDeCustoDetalhe';
-
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
@@ -41,8 +39,8 @@ const TituloStake = () => {
         <Stack.Navigator>
             <Stack.Screen name='Titulos' component={Titulos} options={{ headerShown: false }} />
             <Stack.Screen name='Titulos ' component={TitulosDetalhe} options={{ headerShown: false }} />
-            <Stack.Screen name='Titulos Cadastra' component={TituloCadastra} options={{ headerShown: true }} />
-            <Stack.Screen name='Titulos Atualizar' component={TitulosAtualizar} options={{ headerShown: true }} />
+            <Stack.Screen name='Cadastrar Título' component={TituloCadastra} options={{ headerShown: true }} />
+            <Stack.Screen name='Atualizar Título' component={TitulosAtualizar} options={{ headerShown: true }} />
         </Stack.Navigator>
     )
 };
@@ -52,8 +50,8 @@ const CentroDecUstoStake = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name='CentroDeCustoStake' component={CentroDeCusto} options={{ headerShown: false }} />
-            <Stack.Screen name='Centro De Custo Cadastrar' component={CentroDeCustoCadastrar} options={{ headerShown: true }} />
-            <Stack.Screen name='Centro De Custo Atualizar' component={CentroDeCustoAtualizar} options={{ headerShown: true }} />
+            <Stack.Screen name='Cadastrar Centro De Custo' component={CentroDeCustoCadastrar} options={{ headerShown: true }} />
+            <Stack.Screen name='Atualizar Centro De Custo' component={CentroDeCustoAtualizar} options={{ headerShown: true }} />
             <Stack.Screen name='Centro De Custo Detalhe' component={CentroDeCustoDetalhe} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
@@ -73,22 +71,22 @@ export const RotasPrivadas = () => {
                             iconName = focused
                                 ? 'ios-information-circle'
                                 : 'ios-information-circle-outline';
-                            iconColor = focused ? 'red' : 'black';
+                            iconColor = focused ? '#f30000' : '#000000';
                             return <FontAwesome name="user-circle-o" size={24} color={iconColor} />;
 
                         } else if (route.name === 'Titulo') {
                             iconName = focused ? 'ios-list' : 'ios-list-outline';
-                            iconColor = focused ? 'red' : 'black';
+                            iconColor = focused ? '#f30000' : '#000000';
                             return <FontAwesome5 name="list-alt" size={24} color={iconColor} />;
 
                         } else if (route.name === 'CentroDeCusto') {
                             iconName = focused ? 'ios-list' : 'ios-list-outline';
-                            iconColor = focused ? 'red' : 'black';
+                            iconColor = focused ? '#f30000' : '#000000';
                             return <Feather name="list" size={24} color={iconColor} />;
 
                         } else if (route.name === 'Home') {
                             iconName = focused ? 'ios-list' : 'ios-list-outline';
-                            iconColor = focused ? 'red' : 'black';
+                            iconColor = focused ? '#f30000' : '#000000';
                             return <Ionicons name="home" size={24} color={iconColor} />;
                         }
                     },

@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { ModalFailed } from "../../components/ModalFailed";
 import { InputGeral } from "../../components/InputGeral";
+import { Loading } from "../../components/Loading";
 
 const schema = yup.object({
     descricao: yup.string().min(2, "A descrição deve ter pelo menos 2 digitos").required("Informe a descrição"),
@@ -23,6 +24,7 @@ export const CentroDeCustoCadastrar = () => {
 
     const [mostrarModal, setMostrarModal] = useState(false);
     const [mostrarModalErro, setMostrarModalErro] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
@@ -38,7 +40,9 @@ export const CentroDeCustoCadastrar = () => {
 
             JSON.stringify(novoCentroDeCusto);
 
+            setIsLoading(true);
             await postCentroDeCusto(novoCentroDeCusto);
+            setIsLoading(false);
 
             setMostrarModal(true)
 
@@ -102,6 +106,7 @@ export const CentroDeCustoCadastrar = () => {
 
                 <ModalSuccessful isVisible={mostrarModal} textoModal={"Centro De Custo cadastrado com suecsso!"} />
                 <ModalFailed onPress={() => setMostrarModalErro(false)} isVisible={mostrarModalErro} textoModal={"Erro ao cadastrar Centro De Custo."} />
+                <Loading isLoading={isLoading} />
 
             </View>
         </ScrollView>

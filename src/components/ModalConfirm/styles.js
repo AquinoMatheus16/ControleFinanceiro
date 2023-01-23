@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
         backgroundColor: '#F0B800',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        marginBottom: 49
+        // marginBottom: 49
     },
 
     textoModal: {

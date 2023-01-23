@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { InputGeral } from '../../components/InputGeral';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -6,6 +6,7 @@ import { styles } from './styles';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { Loading } from '../../components/Loading';
 
 const schema = yup.object({
   email: yup.string().email("E-mail inválido").required("Informe o email"),
@@ -14,6 +15,7 @@ const schema = yup.object({
 
 export const Login = ({ navigation }) => {
 
+  const [isLoading, setIsLoading] = useState(false);
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
@@ -22,7 +24,9 @@ export const Login = ({ navigation }) => {
 
   const handleLogin = async (data) => {
     try {
-      await loginContext(data.email, data.senha)
+      setIsLoading(true);
+      await loginContext(data.email, data.senha);
+      setIsLoading(false);
 
     } catch (error) {
       console.error('Error: ', error);
@@ -37,7 +41,6 @@ export const Login = ({ navigation }) => {
       </View>
 
       <View style={styles.containerMain}>
-        {/* <View style={styles.containerLogin}> */}
 
         <Text style={styles.tituloTexto}>E-mail</Text>
         <Controller
@@ -77,11 +80,12 @@ export const Login = ({ navigation }) => {
           <Text style={styles.entrar}>ENTRAR</Text>
         </TouchableOpacity>
 
-        {/* </View> */}
-
         <TouchableOpacity onPress={() => navigation.navigate('Cadastrar')}>
           <Text style={styles.cadastro}>Cadastre-se</Text>
         </TouchableOpacity>
+
+        <Loading isLoading={isLoading} />
+
       </View>
     </View>
   );

@@ -83,7 +83,7 @@ export const Titulos = () => {
 
                 <Text style={styles.textoTitulo}>Títulos</Text>
 
-                <TouchableOpacity onPress={() => navigation.navigate("Titulos Cadastra")} style={styles.touchableOpacity}>
+                <TouchableOpacity onPress={() => navigation.navigate("Cadastrar Título")} style={styles.touchableOpacity}>
                     <Text style={styles.touchableOpacityTexto}>Cadastar</Text>
                 </TouchableOpacity>
 
