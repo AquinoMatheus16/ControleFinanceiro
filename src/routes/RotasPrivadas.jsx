@@ -16,6 +16,7 @@ import { CentroDeCustoAtualizar } from '../screens/CentroDeCustoAtualizar';
 import { CentroDeCustoCadastrar } from '../screens/CentroDeCustoCadastrar';
 import { FontAwesome, FontAwesome5, Feather, Ionicons } from '@expo/vector-icons';
 import { CentroDeCustoDetalhe } from '../screens/CentroDeCustoDetalhe';
+import { NetworkInformation } from '../components/NetworkInformation';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
@@ -61,6 +62,7 @@ export const RotasPrivadas = () => {
 
     return (
         <>
+            <NetworkInformation />
             <Tab.Navigator
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused }) => {
@@ -94,6 +96,7 @@ export const RotasPrivadas = () => {
                     tabBarInactiveTintColor: 'gray',
                 })}
             >
+
                 <Tab.Screen
                     name="Home"
                     component={HomeStack}
@@ -126,6 +129,7 @@ export const RotasPrivadas = () => {
                 translucent={false}
                 networkActivityIndicatorVisible={true}
             />
+
         </>
     );
 };
