@@ -33,7 +33,7 @@ export const Home = ({ navigation }) => {
         setTitle([apagar?.length, areceber?.length]);
 
     };
-    console.log("setTitle",title);
+    console.log("setTitle", title);
 
     // const fetchDataCentro = async () => {
 
@@ -63,52 +63,59 @@ export const Home = ({ navigation }) => {
                 <Text style={styles.homeTexto}>Saldo</Text>
                 <Text style={styles.homeNumero}>R$: {(Math.floor(total?.saldo * 100).toFixed(0) / 100).toFixed(2)}</Text>
 
-                <View style={styles.dash}>
+                <View style={styles.dash1}>
 
-                    <View style={styles.dash1}>
-                        <VictoryPie
-                            width={150}
-                            innerRadius={40}
-                            theme={VictoryTheme.material}
-                            data={title} x="quarter" y="earnings"
-                            style={{
-                                labels: {
-                                    display: 'none'
-                                }
-                            }}
-                        />
-                        <Text style={styles.titleDash}>Títulos</Text>
+                    <View style={styles.titleDash3}>
+                        <View style={styles.dash}>
+                            <VictoryPie
+                                width={170}
+                                innerRadius={50}
+                                theme={VictoryTheme.material}
+                                data={title} x="quarter" y="earnings"
+                                style={{
+                                    labels: {
+                                        display: 'none'
+                                    }
+                                }}
+                            />
+                            <Text style={styles.titleDash}>{titulos.length}</Text>
+                        </View>
+                        <Text style={styles.titleDash2}>Títulos</Text>
                     </View>
-                    <View style={styles.dash2}>
-                        <VictoryPie
-                            width={150}
-                            innerRadius={40}
-                            theme={VictoryTheme.material}
-                            data={titulos.map((numero) => numero.valor)} x="quarter" y="earnings"
-                            style={{
-                                labels: {
-                                    display: 'none'
-                                }
-                            }}
-                        />
-                        <Text style={styles.titleDash}>Títulos</Text>
+                    <View style={styles.titleDash3}>
+                        <View style={styles.dash}>
+                            <VictoryPie
+                                width={170}
+                                innerRadius={50}
+                                theme={VictoryTheme.material}
+                                data={titulos.map((numero) => numero.valor)} x="quarter" y="earnings"
+                                style={{
+                                    labels: {
+                                        display: 'none'
+                                    }
+                                }}
+                            />
+                            <Text style={styles.titleDash}>R$: {(Math.floor(total?.totalApagar * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                        </View>
+                        <Text style={styles.titleDash2}>A pagar</Text>
                     </View>
-                    <View style={styles.dash3}>
-                        <VictoryPie
-                            width={150}
-                            innerRadius={40}
-                            theme={VictoryTheme.material}
-                            data={titulos.map((numero) => numero.valor)} x="quarter" y="earnings"
-                            style={{
-                                labels: {
-                                    display: 'none'
-                                }
-                            }}
-                        />
-                        <Text style={styles.titleDash}>Títulos</Text>
+                    <View style={styles.titleDash3}>
+                        <View style={styles.dash}>
+                            <VictoryPie
+                                width={170}
+                                innerRadius={50}
+                                theme={VictoryTheme.material}
+                                data={titulos.map((numero) => numero.valor)} x="quarter" y="earnings"
+                                style={{
+                                    labels: {
+                                        display: 'none'
+                                    }
+                                }}
+                            />
+                            <Text style={styles.titleDash}>R$: {(Math.floor(total?.totalAreceber * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                        </View>
+                        <Text style={styles.titleDash2}>A receber</Text>
                     </View>
-
-
                 </View>
             </View>
 

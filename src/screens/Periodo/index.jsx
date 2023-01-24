@@ -13,6 +13,7 @@ export const Periodo = () => {
     const [data, setData] = useState(false);
     const [apagar, setApagar] = useState([]);
     const [areceber, setAreceber] = useState([]);
+    const [dash, setDash] = useState([]);
 
     const [dataFinal, setDataFinal] = useState(new Date());
     const [datePickerFinal, setDatePickerFinal] = useState(false);
@@ -46,6 +47,7 @@ export const Periodo = () => {
         const response = await getDashBoard(dataInicialApi, dataFinalApi);
         setApagar(response.titulosApagar);
         setAreceber(response.titulosAreceber);
+        setDash(response)
     };
 
     useEffect(() => {
@@ -56,7 +58,7 @@ export const Periodo = () => {
 
         <View style={styles.containerMian}>
 
-            <Text style={styles.textoTitulo}>Pesquisar por período</Text>
+            <Text style={styles.textoTitulo}>Pesquisar por data de vencimento</Text>
 
             <Text style={styles.textoNormal}>Período inicial</Text>
             {datePickerInicial && (
@@ -121,6 +123,18 @@ export const Periodo = () => {
                         <Text style={styles.textoTouchableOpacity}>A receber</Text>
                     </View>
                 </TouchableOpacity>
+            </View>
+
+            <View style={styles.valores}>
+                <View style={styles.valor}>
+                    <Text >Total A pagar: {dash?.totalApagar}</Text>
+                </View>
+                <View style={styles.valor}>
+                    <Text >Total A receber: {dash?.totalAreceber}</Text>
+                </View>
+                <View style={styles.valor}>
+                    <Text >Saldo: {dash?.saldo}</Text>
+                </View>
             </View>
 
             <View style={styles.containerCard}>
