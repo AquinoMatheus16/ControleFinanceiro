@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
 
     homeContainer: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: 'gray',
         alignItems: 'center',
     },
 
@@ -96,31 +96,67 @@ export const styles = StyleSheet.create({
     },
 
     dash: {
-        width: '100%',
-        height: 250,
+        height: 100,
         flexDirection: 'row',
-        justifyContent: "space-evenly",
-        marginTop: -100
+        justifyContent: "space-between",
+        alignItems: "center",
     },
 
     dash1: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        width: '90%',
+        height: 100,
+        flexDirection: 'row',
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        // backgroundColor: "green",
+        marginTop: 30,
     },
 
-    dash2: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
-    dash3: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
+    // dash1: {
+    //     flexDirection: 'column',
+    //     justifyContent: 'space-between',
+    //     alignItems: 'center',
+    //     // backgroundColor: "green",
+    //     width: '33%',
+    //     height: 300,
+    // },
 
+    // dash2: {
+    //     flexDirection: 'column',
+    //     justifyContent: 'space-between',
+    //     alignItems: 'center',
+    //     // backgroundColor: "gray",
+    //     width: '33%',
+    //     height: 300,
+    // },
+    // dash3: {
+    //     alignItems: 'center',
+    //     backgroundColor: "red",
+    //     width: '33%',
+    //     height: 200,
+    //     marginBottom: 20
+    // },
     titleDash: {
-        marginTop: -150
+        color: "black",
+        position: "absolute",
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        width: '100%',
+        fontSize: 10,
+        fontWeight: '900',
+        color: '#FFFFFF',
+        // backgroundColor: "gray",
+    },
+    
+    titleDash2: {
+        color: '#FFFFFF',
+        
+    },
+    
+    titleDash3: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        
     }
+
 });

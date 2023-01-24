@@ -9,13 +9,13 @@ export const styles = StyleSheet.create({
     },
 
     textoTitulo: {
-        marginTop: 30,
+        marginTop: 20,
         fontSize: 22,
         color: '#FFFFFF'
     },
 
     textoNormal: {
-        marginTop: 30,
+        marginTop: 20,
         fontSize: 20,
         color: '#FFFFFF'
     },
@@ -74,8 +74,8 @@ export const styles = StyleSheet.create({
         borderBottomColor: '#FFFFFF',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 10,
-        paddingBottom: 10
+        paddingTop: 5,
+        paddingBottom: 5
     },
 
     iconInput: {
@@ -90,7 +90,7 @@ export const styles = StyleSheet.create({
 
     containerCard: {
         flex: 1,
-        marginTop: 20,
+        marginTop: 5,
         width: '100%',
         alignItems: 'center'
     },
@@ -98,11 +98,26 @@ export const styles = StyleSheet.create({
     stilo: {
         flexDirection: "row",
         justifyContent: "space-evenly",
-        width: 300
+        alignItems: "flex-start",
+        width: 300,
+        height: 90,
+        marginTop: 5,
     },
 
     textInputDate: {
         color: '#FFFFFF'
+    },
+
+    valores: {
+        width: "100%",
+        flexDirection: "column",
+        alignItems: "center",
+        marginTop: 5
+        
+    },
+
+    valor: {
+        marginRight: 0
     }
 
 });
