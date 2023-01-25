@@ -124,7 +124,7 @@ export const Titulos = () => {
                 <View style={styles.containerInput}>
                     <EvilIcons name="search" size={24} color="#FFFFFF" />
                     <TextInput
-                        style={styles.textInput} placeholder="Pequisar"
+                        style={styles.textInput} placeholder="Pequisar títulos"
                         value={busca}
                         onChangeText={e => setBusca(e)}
                     />

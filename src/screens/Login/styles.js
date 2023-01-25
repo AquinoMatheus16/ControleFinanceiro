@@ -4,13 +4,7 @@ export const styles = StyleSheet.create({
 
     containerPrincipal: {
         flex: 1,
-        // width: '100%',
-        // height: '100%',
         backgroundColor: 'gray',
-        // display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        minHeight: 500
     },
 
     containerLogin: {
@@ -26,12 +20,11 @@ export const styles = StyleSheet.create({
 
     containerMain: {
         width: '100%',
-        height: '70%',
-        backgroundColor: 'gray',
+        height: 400,
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent:'space-evenly',
         alignItems: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
 
     containerTopo: {
@@ -40,7 +33,9 @@ export const styles = StyleSheet.create({
         backgroundColor: '#0C609C',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
-        marginBottom: 25
+        marginBottom: 25,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     texto: {
@@ -49,14 +44,13 @@ export const styles = StyleSheet.create({
     },
 
     entrar: {
-        backgroundColor: '#ef4036',
+        backgroundColor: '#0C609C',
         textAlign: 'center',
         textAlignVertical: 'center',
         padding: 5,
-        width: 100,
-        height: 30,
+        width: 150,
+        height: 50,
         borderRadius: 10,
-        marginTop: 40,
         color: '#FFFFFF',
         fontWeight: 'bold'
     },
@@ -65,17 +59,12 @@ export const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontWeight: 'bold',
         fontSize: 18,
-        marginTop: 40,
-        marginBottom: 70
     },
 
-    // logoContainer: {
-    //     width: 210,
-    //     height: 40,
-    //     backgroundColor: 'white',
-    //     borderRadius: 10,
-    //     marginBottom: 100
-    // },
+    logoContainer: {
+        width: 200,
+        height: 200
+    },
 
     // imagemLogo: {
     //     flex: 1,
@@ -84,11 +73,16 @@ export const styles = StyleSheet.create({
     tituloTexto: {
         fontSize: 18,
         color: '#FFFFFF',
-        marginTop: 30
     },
 
     textError: {
         color: '#F32020',
         marginBottom: 5
     },
+
+    touch: {
+        marginTop: 20,
+        marginBottom: 35,
+        alignItems: 'center',
+    }
 });

@@ -1,20 +1,15 @@
-import { FlatList, Text, View, ScrollView, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { useContext, useEffect, useState } from "react";
-import { api } from "../../services/api";
 import { AuthContext } from "../../contexts/AuthContext";
 import { getDashBoardTotal } from "../../services/dashboard";
 import { VictoryPie, VictoryTheme } from "victory-native";
 import { getTitulo } from "../../services/titulo";
-import { getCentroDeCusto } from "../../services/centroDeCusto";
 
 export const Home = ({ navigation }) => {
 
     const [total, setTotal] = useState({});
     const [titulos, setTitulos] = useState([]);
-    const [title, setTitle] = useState([]);
-    const [centroCusto, setCentroCusto] = useState([]);
-    const [centro, setCentro] = useState([]);
     const { load } = useContext(AuthContext);
 
     const fetchTotal = async () => {
@@ -25,27 +20,9 @@ export const Home = ({ navigation }) => {
     };
 
     const fetchData = async () => {
-
         const tituloList = await getTitulo();
         setTitulos(tituloList);
-        const apagar = titulos.filter((numero) => numero?.tipo.endsWith("APAGAR"));
-        const areceber = titulos.filter((numero) => numero?.tipo.endsWith("ARECEBER"));
-        setTitle([apagar?.length, areceber?.length]);
-
     };
-    console.log("setTitle", title);
-
-    // const fetchDataCentro = async () => {
-
-    //     const centroList = await getCentroDeCusto();
-    //     setCentro(centroList);
-    //     const apagar = centro.filter((numero) => numero?.descricao);
-    //     const areceber = centro.filter((numero) => numero?.descricao);
-    //     setCentroCusto([apagar.length, areceber.length]);
-
-    // };
-    // console.log("setTitle",title);
-
 
     useEffect(() => {
         setTimeout(() => {
@@ -65,30 +42,13 @@ export const Home = ({ navigation }) => {
 
                 <View style={styles.dash1}>
 
-                    <View style={styles.titleDash3}>
+                <View style={styles.titleDash3}>
                         <View style={styles.dash}>
                             <VictoryPie
                                 width={170}
                                 innerRadius={50}
                                 theme={VictoryTheme.material}
-                                data={title} x="quarter" y="earnings"
-                                style={{
-                                    labels: {
-                                        display: 'none'
-                                    }
-                                }}
-                            />
-                            <Text style={styles.titleDash}>{titulos.length}</Text>
-                        </View>
-                        <Text style={styles.titleDash2}>Títulos</Text>
-                    </View>
-                    <View style={styles.titleDash3}>
-                        <View style={styles.dash}>
-                            <VictoryPie
-                                width={170}
-                                innerRadius={50}
-                                theme={VictoryTheme.material}
-                                data={titulos.map((numero) => numero.valor)} x="quarter" y="earnings"
+                                data={[(Math.floor(total?.totalAreceber * 100).toFixed(0) / 100).toFixed(2), (Math.floor(total?.totalApagar * 100).toFixed(0) / 100).toFixed(2)]} x="quarter" y="earnings"
                                 style={{
                                     labels: {
                                         display: 'none'
@@ -99,13 +59,34 @@ export const Home = ({ navigation }) => {
                         </View>
                         <Text style={styles.titleDash2}>A pagar</Text>
                     </View>
+
                     <View style={styles.titleDash3}>
                         <View style={styles.dash}>
                             <VictoryPie
                                 width={170}
                                 innerRadius={50}
                                 theme={VictoryTheme.material}
-                                data={titulos.map((numero) => numero.valor)} x="quarter" y="earnings"
+                                data={[titulos.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("APAGAR")).length,
+                                titulos.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("ARECEBER")).length
+                                ]} x="quarter" y="earnings"
+                                style={{
+                                    labels: {
+                                        display: 'none'
+                                    }
+                                }}
+                            />
+                            <Text style={styles.titleDash}>{titulos.filter((titulo) => !titulo?.dataPagamento).length}</Text>
+                        </View>
+                        <Text style={styles.titleDash2}>Títulos</Text>
+                    </View>
+                    
+                    <View style={styles.titleDash3}>
+                        <View style={styles.dash}>
+                            <VictoryPie
+                                width={170}
+                                innerRadius={50}
+                                theme={VictoryTheme.material}
+                                data={[(Math.floor(total?.totalApagar * 100).toFixed(0) / 100).toFixed(2), (Math.floor(total?.totalAreceber * 100).toFixed(0) / 100).toFixed(2)]} x="quarter" y="earnings"
                                 style={{
                                     labels: {
                                         display: 'none'

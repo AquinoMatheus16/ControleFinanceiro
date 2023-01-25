@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
 
     containerMian: {
         flex: 1,
-        backgroundColor: '#0C609C',
+        backgroundColor: 'gray',
         alignItems: 'center'
     },
 
@@ -33,10 +33,9 @@ export const styles = StyleSheet.create({
     },
 
     containerTouchableOpacity: {
-        width: 100,
+        width: 120,
         padding: 10,
         backgroundColor: '#FFFFFF',
-        marginTop: 40,
         borderRadius: 15,
         alignItems: 'center'
     },
@@ -44,17 +43,6 @@ export const styles = StyleSheet.create({
     textoTouchableOpacity: {
         fontSize: 17,
         color: '#000000'
-    },
-
-    container: {
-        width: 300,
-        justifyContent: 'center',
-        minHeight: 400,
-        backgroundColor: '#FFFFFF',
-        padding: 15,
-        borderRadius: 10,
-        marginBottom: 30,
-        marginTop: 30
     },
 
     texto: {
@@ -90,18 +78,18 @@ export const styles = StyleSheet.create({
 
     containerCard: {
         flex: 1,
-        marginTop: 5,
-        width: '100%',
-        alignItems: 'center'
+        marginBottom: 2
     },
 
     stilo: {
         flexDirection: "row",
         justifyContent: "space-evenly",
-        alignItems: "flex-start",
+        alignContent: "center",
+        alignItems: "center",
         width: 300,
-        height: 90,
-        marginTop: 5,
+        height: 50,
+        marginTop: 10
+        
     },
 
     textInputDate: {
@@ -109,15 +97,29 @@ export const styles = StyleSheet.create({
     },
 
     valores: {
-        width: "100%",
+        width: "90%",
         flexDirection: "column",
         alignItems: "center",
-        marginTop: 5
+        marginTop: 8,
+        marginBottom: 5,
+        backgroundColor: '#0C609C',
+        borderRadius: 10,
+        padding: 5
         
     },
 
     valor: {
         marginRight: 0
-    }
+    },
+
+    homeDashboardtopo: {
+        width: '100%',
+        height: '40%',
+        backgroundColor: '#0C609C',
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
 
 });

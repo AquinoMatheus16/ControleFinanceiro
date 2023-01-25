@@ -47,9 +47,12 @@ export const RecuperarSenha = ({ navigation }) => {
 
   return (
     <View style={styles.containerPrincipal}>
-      <View style={styles.containerLogin}>
+      <View style={styles.homeDashboardtopo}>
 
         <Image source={logo} style={styles.imagemLogo} />
+
+      </View>
+      <View style={styles.containerLogin}>
 
         <Text style={styles.titulo}>Esqueceu sua Senha?</Text>
 
@@ -68,7 +71,11 @@ export const RecuperarSenha = ({ navigation }) => {
         {errors.envioEmail && <Text style={styles.textError}>{errors.envioEmail?.message}</Text>}
 
         <TouchableOpacity onPress={handleSubmit(enviaToken)}>
-          <Text style={styles.entrar}>ENVIAR</Text>
+          <Text style={styles.enviar}>ENVIAR</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('AtualizarSenha')}>
+          <Text style={styles.enviar}>ATUALIZAR</Text>
         </TouchableOpacity>
 
         <ModalSuccessful isVisible={mostrarModal} textoModal={'E-mail enviado com sucesso!'} />

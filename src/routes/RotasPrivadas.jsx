@@ -65,6 +65,7 @@ export const RotasPrivadas = () => {
             <NetworkInformation />
             <Tab.Navigator
                 screenOptions={({ route }) => ({
+                    
                     tabBarIcon: ({ focused }) => {
                         let iconName;
                         let iconColor;
@@ -125,7 +126,7 @@ export const RotasPrivadas = () => {
 
             <StatusBar
                 barStyle='light-content'
-                backgroundColor='#5d5e5f'
+                backgroundColor='#0C609C'
                 translucent={false}
                 networkActivityIndicatorVisible={true}
             />

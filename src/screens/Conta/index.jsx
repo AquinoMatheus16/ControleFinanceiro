@@ -32,7 +32,7 @@ export const Conta = () => {
 
                 <TouchableOpacity>
                     <View >
-                        {fot ? <Image source={{ uri: fot }} style={styles.homeDashboard} /> : <EvilIcons name="user" size={200} style={styles.icon} color="#ffffff" />}
+                        {fot ? <Image source={{ uri: fot }} style={styles.homeDashboard} /> : <EvilIcons name="user" size={170} style={styles.icon} color="#ffffff" />}
                     </View>
                 </TouchableOpacity>
 

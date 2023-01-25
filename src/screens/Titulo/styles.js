@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
 
     touchableOpacity: {
         width: 150,
-        height: 40,
+        height: 50,
         backgroundColor: '#FFFFFF',
         alignItems: 'center',
         justifyContent: 'center',
@@ -48,9 +48,11 @@ export const styles = StyleSheet.create({
     },
 
     containerFlatList: {
+        flex: 1,
+        marginBottom: 2
         // marginBottom: 225,
         // width: 300,
-        height: 450
+        // height: 450,
         // marginBottom: 310
     },
 

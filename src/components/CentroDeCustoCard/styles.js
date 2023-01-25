@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     containerMain: {
         width: 300,
         alignItems: 'center',
-        marginTop: 20,
+        marginTop: 5,
         borderRadius: 20,
         padding: 10,
         backgroundColor: '#FFFFFF',
@@ -20,9 +20,10 @@ export const styles = StyleSheet.create({
 
     textoTitulo: {
         fontSize: 22,
-        width: '50%',
+        width: '80%',
         textAlign: 'center',
         borderBottomColor: '#000000',
-        marginBottom: 25
+        marginBottom: 25,
+        color: '#E91E63'
     }
 });

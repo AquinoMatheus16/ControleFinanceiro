@@ -7,6 +7,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Loading } from '../../components/Loading';
+import { Image } from 'react-native';
+import carteira from '../../img/carteira.png'
 
 const schema = yup.object({
   email: yup.string().email("E-mail inválido").required("Informe o email"),
@@ -37,7 +39,7 @@ export const Login = ({ navigation }) => {
   return (
     <View style={styles.containerPrincipal}>
       <View style={styles.containerTopo}>
-
+        <Image source={carteira} style={styles.logoContainer} />
       </View>
 
       <View style={styles.containerMain}>
@@ -76,17 +78,17 @@ export const Login = ({ navigation }) => {
           <Text style={styles.texto}>esqueci minha senha</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleSubmit(handleLogin)}>
+        <TouchableOpacity style={styles.touch} onPress={handleSubmit(handleLogin)}>
           <Text style={styles.entrar}>ENTRAR</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Cadastrar')}>
-          <Text style={styles.cadastro}>Cadastre-se</Text>
-        </TouchableOpacity>
 
         <Loading isLoading={isLoading} />
 
       </View>
+        <TouchableOpacity style={styles.touch} onPress={() => navigation.navigate('Cadastrar')}>
+          <Text style={styles.cadastro}>Cadastre-se</Text>
+        </TouchableOpacity>
     </View>
   );
 };

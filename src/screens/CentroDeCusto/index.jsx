@@ -54,7 +54,7 @@ export const CentroDeCusto = () => {
             <KeyboardAvoidingView behavior="padding" style={styles.containerInput}>
                 <EvilIcons name="search" size={24} color="#FFFFFF" />
                 <TextInput
-                    style={styles.textInput} placeholder="Pequisar"
+                    style={styles.textInput} placeholder="Pequisar centro de custo"
                     value={busca}
                     onChangeText={e => setBusca(e)}
                 />

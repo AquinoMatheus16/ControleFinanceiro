@@ -4,71 +4,27 @@ export const styles = StyleSheet.create({
 
     containerPrincipal: {
         flex: 1,
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#0C609C',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: 500
+        backgroundColor: 'gray',
     },
 
     containerLogin: {
-        width: '85%',
-        height: '65%',
-        backgroundColor: '#0C609C',
-        display: 'flex',
-        justifyContent: 'center',
+        backgroundColor: 'gray',
+        width: '100%',
+        height: '40%',
         alignItems: 'center',
-        flexDirection: 'column',
-        borderRadius: 7,
+        justifyContent: 'space-evenly'
     },
 
-    input: {
-        height: 35,
-        width: '90%',
-        margin: 12,
-        // borderWidth: 1,
-        borderBottomWidth: 1,
-        borderBottomColor: '#000000',
-        padding: 10,
-        borderRadius: 10,
-        // paddingRight: 8
-        paddingLeft: 20
-    },
-
-    // botaoEntrar: {
-    //     backgroundColor: '#ef4036',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     padding: 5,
-    //     width: 100,
-    //     height: 30,
-    //     borderRadius: 10,
-    //     marginTop: 30,
-    //     color: '#FFFFFF'
-    // },
-
-    entrar: {
-        backgroundColor: '#ef4036',
+    enviar: {
+        backgroundColor: '#0C609C',
         textAlign: 'center',
         textAlignVertical: 'center',
-        padding: 5,
-        width: 100,
-        height: 30,
+        width: 150,
+        height: 50,
         borderRadius: 10,
         marginTop: 30,
         color: '#FFFFFF',
-        color: 'white',
         fontWeight: 'bold'
-    },
-
-    logoContainer: {
-        width: 210,
-        height: 40,
-        backgroundColor: 'white',
-        borderRadius: 10,
-        marginBottom: 100
     },
 
     imagemLogo: {
@@ -78,7 +34,7 @@ export const styles = StyleSheet.create({
     },
 
     tituloTexto: {
-        fontSize: 18,
+        fontSize: 20,
         color: '#FFFFFF'
     },
 
@@ -86,12 +42,25 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         color: '#FFFFFF',
         marginTop: 20,
-        marginBottom: 20
+        marginBottom: 20,
+        fontWeight: '500'
     },
 
     textError: {
         color: '#F32020',
         marginBottom: 5
     },
+
+    homeDashboardtopo: {
+        width: '100%',
+        height: '40%',
+        backgroundColor: '#0C609C',
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        marginBottom: 25,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
 
 });
