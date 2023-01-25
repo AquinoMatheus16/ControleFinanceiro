@@ -18,23 +18,27 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#0C609C',
         padding: 5,
-        width: 100,
-        height: 40,
+        width: 150,
+        height: 50,
         borderRadius: 10,
         marginTop: 30,
     },
 
     touchableOpacityTexto: {
         color: '#FFFFFF',
-        fontSize: 18,
+        fontSize: 20,
     },
 
     homeDashboard: {
         height: 150,
         width: 150,
-        marginTop: 20,
+        marginTop: 50,
         borderRadius: 150,
-        backgroundColor: 'white'
+        backgroundColor: '#fff',
+    },
+
+    icon: {
+        marginTop: 50,
     },
 
     meioCima: {

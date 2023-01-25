@@ -19,10 +19,10 @@ export const styles = StyleSheet.create({
     },
 
     homeContainerMain: {
-        height: '60%',
+        height: 400,
         width: '100%',
         // backgroundColor: '#FF8800',
-        marginTop: 20,
+        justifyContent: 'space-evenly',
         alignItems: 'center'
     },
 
@@ -81,9 +81,9 @@ export const styles = StyleSheet.create({
 
     homeTouchableOpacity: {
         width: 200,
+        height: 50,
         padding: 10,
         backgroundColor: '#FFFFFF',
-        marginTop: 40,
         borderRadius: 15,
         alignItems: 'center',
         borderWidth: 2,
@@ -112,30 +112,6 @@ export const styles = StyleSheet.create({
         marginTop: 30,
     },
 
-    // dash1: {
-    //     flexDirection: 'column',
-    //     justifyContent: 'space-between',
-    //     alignItems: 'center',
-    //     // backgroundColor: "green",
-    //     width: '33%',
-    //     height: 300,
-    // },
-
-    // dash2: {
-    //     flexDirection: 'column',
-    //     justifyContent: 'space-between',
-    //     alignItems: 'center',
-    //     // backgroundColor: "gray",
-    //     width: '33%',
-    //     height: 300,
-    // },
-    // dash3: {
-    //     alignItems: 'center',
-    //     backgroundColor: "red",
-    //     width: '33%',
-    //     height: 200,
-    //     marginBottom: 20
-    // },
     titleDash: {
         color: "black",
         position: "absolute",
@@ -150,6 +126,7 @@ export const styles = StyleSheet.create({
     
     titleDash2: {
         color: '#FFFFFF',
+        marginTop: 5
         
     },
     

@@ -4,24 +4,15 @@ export const styles = StyleSheet.create({
 
     containerPrincipal: {
         flex: 1,
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#0C609C',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: 500
+        backgroundColor: 'gray'
     },
 
     containerLogin: {
-        width: '85%',
-        height: '65%',
-        backgroundColor: '#0C609C',
-        display: 'flex',
-        justifyContent: 'center',
+        backgroundColor: 'gray',
+        width: '100%',
+        height: '50%',
         alignItems: 'center',
-        flexDirection: 'column',
-        borderRadius: 7
+        justifyContent: 'space-evenly'
     },
 
     input: {
@@ -30,27 +21,39 @@ export const styles = StyleSheet.create({
         margin: 12,
         // borderWidth: 1,
         borderBottomWidth: 1,
-        borderBottomColor: '#000000',
+        borderBottomColor: 'white',
         padding: 10,
         borderRadius: 10,
         // paddingRight: 8
-        paddingLeft:20
-    },
-
-    botaoEntrar: {
-        backgroundColor: '#ef4036',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 5,
-        width: 100,
-        height: 30,
-        borderRadius: 10,
+        paddingLeft:20,
         marginTop: 30,
-        color: '#FFFFFF'
+        marginBottom: 30
     },
 
-    entrar: {
-        color: 'white',
+    inputToken: {
+        height: 35,
+        width: '22%',
+        margin: 12,
+        borderWidth: 1,
+        borderColor: 'white',
+        borderBottomWidth: 1,
+        borderBottomColor: 'white',
+        padding: 10,
+        borderRadius: 10,
+        // paddingRight: 8,
+        paddingLeft:20,
+        marginTop: 30,
+        marginBottom: 30,
+    },
+
+    atualizar: {
+        backgroundColor: '#0C609C',
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        width: 150,
+        height: 50,
+        borderRadius: 10,
+        color: '#FFFFFF',
         fontWeight: 'bold'
     },
 
@@ -69,14 +72,40 @@ export const styles = StyleSheet.create({
     },
 
     tituloTexto: {
-        fontSize: 18,
-        color: '#000000'
+        fontSize: 20,
+        color: 'white'
     },
     titulo: {
         fontSize: 20,
-        color: '#000000',
-        marginTop: 20,
-        marginBottom: 20
+        color: 'white',
+        marginBottom: 20,
+        fontWeight: '500'
+    },
+
+    homeDashboardtopo: {
+        width: '100%',
+        height: '40%',
+        backgroundColor: '#0C609C',
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        marginBottom: 25,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    icon: {
+        color: '#0C609C'
+    },
+
+    viewInput: {
+        flexDirection: 'row-reverse',
+        alignItems: 'center',
+    },
+
+    butoes: {
+        alignItems: 'center',
+        width: "80%",
+        height: 50,
     }
 
 });

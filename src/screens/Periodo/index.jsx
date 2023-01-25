@@ -58,82 +58,83 @@ export const Periodo = () => {
 
         <View style={styles.containerMian}>
 
-            <Text style={styles.textoTitulo}>Pesquisar por data de vencimento</Text>
+            <View style={styles.homeDashboardtopo}>
+                <Text style={styles.textoTitulo}>Pesquisar por data de vencimento</Text>
 
-            <Text style={styles.textoNormal}>Período inicial</Text>
-            {datePickerInicial && (
-                <DateTimePicker
-                    style={styles.datePicker}
-                    testID="dateTimePicker"
-                    mode={'date'}
-                    display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                    is24Hour={true}
-                    value={dataInicial}
-                    onChange={dataInicialSelect}
-                />
-            )}
-            <View style={styles.containerDataInput}>
-                <TouchableOpacity style={styles.touchableOpacity2} onPress={() => setDatePickerInicial(true)}>
-                    <AntDesign style={styles.iconInput} name="calendar" size={24} color="#ffffff" />
-                    <TextInput
-                        style={styles.textInputDate}
-                        placeholder={"Digite uma data de início"}
-                        defaultValue={""}
-                        value={dataFormatadaInicial}
-                        dataDetectorTypes={"none"}
-                        editable={false}
+                <Text style={styles.textoNormal}>Período inicial</Text>
+                {datePickerInicial && (
+                    <DateTimePicker
+                        style={styles.datePicker}
+                        testID="dateTimePicker"
+                        mode={'date'}
+                        display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                        is24Hour={true}
+                        value={dataInicial}
+                        onChange={dataInicialSelect}
                     />
-                </TouchableOpacity>
-            </View>
+                )}
+                <View style={styles.containerDataInput}>
+                    <TouchableOpacity style={styles.touchableOpacity2} onPress={() => setDatePickerInicial(true)}>
+                        <AntDesign style={styles.iconInput} name="calendar" size={24} color="#ffffff" />
+                        <TextInput
+                            style={styles.textInputDate}
+                            placeholder={"Digite uma data de início"}
+                            defaultValue={""}
+                            value={dataFormatadaInicial}
+                            dataDetectorTypes={"none"}
+                            editable={false}
+                        />
+                    </TouchableOpacity>
+                </View>
 
-            <Text style={styles.textoNormal}>Período final</Text>
-            {datePickerFinal && (
-                <DateTimePicker
-                    style={styles.datePicker}
-                    testID="dateTimePicker"
-                    mode={'date'}
-                    display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                    is24Hour={true}
-                    value={dataFinal}
-                    onChange={dataFinalSelect}
-                />
-            )}
-            <View style={styles.containerDataInput}>
-                <TouchableOpacity style={styles.touchableOpacity2} onPress={() => setDatePickerFinal(true)}>
-                    <AntDesign style={styles.iconInput} name="calendar" size={24} color="#ffffff" />
-                    <TextInput
-                        style={styles.textInputDate}
-                        placeholder={"Digite uma data final      "}
-                        defaultValue={""}
-                        value={dataFormatadaFinal}
-                        dataDetectorTypes={"none"}
-                        editable={false}
+                <Text style={styles.textoNormal}>Período final</Text>
+                {datePickerFinal && (
+                    <DateTimePicker
+                        style={styles.datePicker}
+                        testID="dateTimePicker"
+                        mode={'date'}
+                        display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                        is24Hour={true}
+                        value={dataFinal}
+                        onChange={dataFinalSelect}
                     />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.stilo}>
-                <TouchableOpacity onPress={() => fetchTotal()} onPressIn={() => setData(true)}>
-                    <View style={styles.containerTouchableOpacity}>
-                        <Text style={styles.textoTouchableOpacity}>A pagar</Text>
-                    </View>
-                </TouchableOpacity>
+                )}
+                <View style={styles.containerDataInput}>
+                    <TouchableOpacity style={styles.touchableOpacity2} onPress={() => setDatePickerFinal(true)}>
+                        <AntDesign style={styles.iconInput} name="calendar" size={24} color="#ffffff" />
+                        <TextInput
+                            style={styles.textInputDate}
+                            placeholder={"Digite uma data final      "}
+                            defaultValue={""}
+                            value={dataFormatadaFinal}
+                            dataDetectorTypes={"none"}
+                            editable={false}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.stilo}>
+                    <TouchableOpacity onPress={() => fetchTotal()} onPressIn={() => setData(true)}>
+                        <View style={styles.containerTouchableOpacity}>
+                            <Text style={styles.textoTouchableOpacity}>A pagar</Text>
+                        </View>
+                    </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => fetchTotal()} onPressIn={() => setData(false)}>
-                    <View style={styles.containerTouchableOpacity}>
-                        <Text style={styles.textoTouchableOpacity}>A receber</Text>
-                    </View>
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={() => fetchTotal()} onPressIn={() => setData(false)}>
+                        <View style={styles.containerTouchableOpacity}>
+                            <Text style={styles.textoTouchableOpacity}>A receber</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </View>
-
             <View style={styles.valores}>
                 <View style={styles.valor}>
-                    <Text >Total A pagar: {dash?.totalApagar}</Text>
+                    <Text >Total A pagar: {(Math.floor(dash?.totalApagar * 100).toFixed(0) / 100).toFixed(2)}</Text>
                 </View>
                 <View style={styles.valor}>
-                    <Text >Total A receber: {dash?.totalAreceber}</Text>
+                    <Text >Total A receber: {(Math.floor(dash?.totalAreceber * 100).toFixed(0) / 100).toFixed(2)}</Text>
                 </View>
                 <View style={styles.valor}>
-                    <Text >Saldo: {dash?.saldo}</Text>
+                    <Text >Saldo: {(Math.floor(dash?.saldo * 100).toFixed(0) / 100).toFixed(2)}</Text>
                 </View>
             </View>
 

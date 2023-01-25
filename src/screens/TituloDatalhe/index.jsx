@@ -119,14 +119,14 @@ export const TitulosDetalhe = ({ route }) => {
         if (item?.dataPagamento === null && item?.tipo === "APAGAR") {
             return (
                 <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => marcar(item)}>
-                    <Text style={styles.touchableOpacityAtualizarTexto}>MARCAR COMO PAGO</Text>
+                    <Text style={styles.touchableOpacityAtualizarTexto}>PAGAR</Text>
                 </TouchableOpacity>
             )
 
         } else if (item?.dataPagamento === null && item?.tipo === "ARECEBER") {
             return (
                 <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => marcar(item)}>
-                    <Text style={styles.touchableOpacityAtualizarTexto}>MARCAR COMO RECEBIDO</Text>
+                    <Text style={styles.touchableOpacityAtualizarTexto}>RECEBER</Text>
                 </TouchableOpacity>
             )
         }
@@ -155,15 +155,17 @@ export const TitulosDetalhe = ({ route }) => {
 
                 {item?.observacao === null ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
 
-                {buttonMostrarPagar()}
+                <View style={styles.buttons}>
+                    {buttonMostrarPagar()}
 
-                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Atualizar Título", { item: item })}>
-                    <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Atualizar Título", { item: item })}>
+                        <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity style={styles.touchableOpacityDeletar} onPress={() => setMostrarModalConfirm(true)}>
-                    <Text style={styles.touchableOpacityDeletarTexto}>DELETAR</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity style={styles.touchableOpacityDeletar} onPress={() => setMostrarModalConfirm(true)}>
+                        <Text style={styles.touchableOpacityDeletarTexto}>DELETAR</Text>
+                    </TouchableOpacity>
+                </View>
 
                 <ModalConfirm
                     isVisible={mostrarModalConfirm}

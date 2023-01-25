@@ -38,14 +38,14 @@ export const styles = StyleSheet.create({
     },
 
     textoTitulo: {
-        marginLeft: '25%',
         fontSize: 22,
-        width: '50%',
+        width: '100%',
         textAlign: 'center',
         color: '#000000',
         borderBottomWidth: 1,
         borderBottomColor: '#000000',
-        marginBottom: 10
+        marginBottom: 10,
+        color: '#E91E63'
     }
 
 });

@@ -33,40 +33,44 @@ export const styles = StyleSheet.create({
     },
 
     textoTitulo: {
-        marginLeft: '25%',
         fontSize: 30,
-        width: '50%',
+        width: '100%',
         textAlign: 'center',
         color: '#000000',
-        marginBottom: 50
+        marginBottom: 50,
+        color: '#E91E63'
     },
 
     touchableOpacityAtualizar: {
         padding: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        width: '100%',
+        height: 50,
+        backgroundColor: '#0CD105',
+        marginTop: 10,
+        padding: 15,
+        textAlign: 'center',
+        borderRadius: 10,
     },
 
     touchableOpacityAtualizarTexto: {
-        width: '50%',
-        backgroundColor: '#0CD105',
-        padding: 10,
-        textAlign: 'center',
-        borderRadius: 10,
-        color: '#FFFFFF'
+        fontWeight: "500"
     },
 
     touchableOpacityDeletar: {
         padding: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        width: '100%',
+        height: 50,
+        backgroundColor: '#FC0000',
+        marginTop: 10,
+        padding: 15,
+        textAlign: 'center',
+        borderRadius: 10,
     },
 
     touchableOpacityDeletarTexto: {
-        width: '50%',
-        backgroundColor: '#FC0000',
-        padding: 10,
-        textAlign: 'center',
-        borderRadius: 10,
-        color: '#FFFFFF'
+        fontWeight: "500"
     },
 
     touchableOpacityPagar: {
@@ -118,6 +122,10 @@ export const styles = StyleSheet.create({
 
     bt: {
         flexDirection: "row"
+    },
+
+    buttons: {
+        alignItems: "center",
     }
 
 });
