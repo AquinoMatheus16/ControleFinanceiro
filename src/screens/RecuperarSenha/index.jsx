@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { styles } from './styles';
 import logo from "../../img/cadeado.png"
-import { api } from '../../services/api';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -10,6 +9,7 @@ import { InputGeral } from '../../components/InputGeral';
 import { ModalSuccessful } from '../../components/ModalSuccessful';
 import { ModalFailed } from '../../components/ModalFailed';
 import { Loading } from '../../components/Loading';
+import { postRecover } from '../../services/usuario';
 
 const schema = yup.object({
   envioEmail: yup.string().email("E-mail inválido").required("Informe o email")
@@ -29,15 +29,18 @@ export const RecuperarSenha = ({ navigation }) => {
     try {
 
       setIsLoading(true)
-      await api.post(`/api/usuarios/recover/${data.envioEmail}`);
-      setMostrarModal(true);
+      await postRecover(data.envioEmail);
       setIsLoading(false)
+      setMostrarModal(true);
+
       setTimeout(() => {
-        navigation.goBack();
+        navigation.navigate('AtualizarSenha');
+        setMostrarModal(false);
       }, 2000);
 
     } catch (error) {
       // console.error('error: ', error);
+      setIsLoading(false);
       setMostrarModalFailed(true);
       setTimeout(() => {
         setMostrarModalFailed(false);
@@ -48,10 +51,9 @@ export const RecuperarSenha = ({ navigation }) => {
   return (
     <View style={styles.containerPrincipal}>
       <View style={styles.homeDashboardtopo}>
-
         <Image source={logo} style={styles.imagemLogo} />
-
       </View>
+
       <View style={styles.containerLogin}>
 
         <Text style={styles.titulo}>Esqueceu sua Senha?</Text>

@@ -20,7 +20,7 @@ export const NetworkInformation = () => {
                 setIsVisible(false)
             }, 2000);
             setMessageConnection('Conectado!');
-            setBackgroundCollor('#3846D4');
+            setBackgroundCollor('#1b6dc1');
             setIcon(true);
         } else {
             setIsVisible(true);
@@ -28,7 +28,7 @@ export const NetworkInformation = () => {
                 setIsVisible(false)
             }, 2000);
             setMessageConnection('Desconectado!');
-            setBackgroundCollor('#B6470D');
+            setBackgroundCollor('#B60D0D');
             setIcon(false);
         }
     }

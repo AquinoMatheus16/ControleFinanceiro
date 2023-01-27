@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
 
     containerMian: {
         flex: 1,
-        backgroundColor: 'gray',
+        backgroundColor: '#E5E5E5',
         alignItems: 'center'
     },
 
@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
 
     scrollView: {
         flex: 1,
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
     },
 
     containerDataInput: {
@@ -89,7 +89,7 @@ export const styles = StyleSheet.create({
         width: 300,
         height: 50,
         marginTop: 10
-        
+
     },
 
     textInputDate: {
@@ -102,20 +102,23 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 8,
         marginBottom: 5,
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         borderRadius: 10,
         padding: 5
-        
     },
 
     valor: {
-        marginRight: 0
+        marginRight: 0,
+    },
+
+    textoValores: {
+        color: '#FFFFFF'
     },
 
     homeDashboardtopo: {
         width: '100%',
         height: '40%',
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         alignItems: 'center',

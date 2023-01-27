@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
 
     scrollView: {
         flex: 1,
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
     },
 
     containerMain: {
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#000000',
         marginBottom: 10,
-        color: '#E91E63'
+        color: '#1b6dc1'
     }
 
 });

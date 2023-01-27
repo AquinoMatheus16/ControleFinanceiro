@@ -15,7 +15,7 @@ import { Loading } from '../../components/Loading';
 const schema = yup.object({
   nome: yup.string().min(3, "O nome deve ter pelo menos 3 digitos").required("Informe o nome"),
   email: yup.string().email("E-mail inválido").required("Informe o email"),
-  senha: yup.string().min(4, "A senha deve ter pelo menos 4 digitos").required("Informe a senha"),
+  senha: yup.string().min(6, "A senha deve ter pelo menos 6 digitos").required("Informe a senha"),
   confirmaSenha: yup.string().oneOf([yup.ref("senha"), null], "Senhas e confirma senha não sao iguais").required("Informe o confirma senha")
 });
 
@@ -54,7 +54,6 @@ export const Cadastrar = ({ navigation }) => {
         confirmaSenha: data.confirmaSenha,
         foto: image
       };
-      // console.log('novoUsuario:', novoUsuario);
 
       setIsLoading(true);
       await postUsuario(novoUsuario);

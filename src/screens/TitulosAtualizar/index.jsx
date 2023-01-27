@@ -138,17 +138,8 @@ export const TitulosAtualizar = ({ route }) => {
             }, 120);
 
         } catch (error) {
-            console.error("Erro: " + error);
-            Alert.alert(
-                'Aviso',
-                'Erro ao atualizar.',
-                [
-                    {
-                        text: "OK",
-                        onPress: () => null
-                    }
-                ]
-            );
+            // console.error("Erro: " + error);
+            setIsLoading(false);
         };
     };
 

@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
 
     containerMian: {
         flex: 1,
-        backgroundColor: 'gray',
+        backgroundColor: '#E5E5E5',
         alignItems: 'center'
     },
 
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     homeDashboardtopo: {
         width: '100%',
         height: '30%',
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         alignItems: 'center',

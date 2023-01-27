@@ -55,7 +55,8 @@ export const CentroDeCustoAtualizar = ({ route }) => {
 
         } catch (error) {
 
-            console.error("Erro: " + error);
+            // console.error("Erro: " + error);
+            setIsLoading(false);
             setMostrarModalErro(true);
         };
     };

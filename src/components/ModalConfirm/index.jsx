@@ -10,7 +10,7 @@ export const ModalConfirm = ({ isVisible, textoModal, onPressCancel, onPressConf
         <Modal
             isVisible={isVisible}
             hasBackdrop={true}
-            deviceHeight={1}
+            deviceHeight={0.1}
             style={styles.modal}
         >
             <View style={styles.modalMain}>

@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
 
     containerPrincipal: {
         flex: 1,
-        backgroundColor: 'gray',
+        backgroundColor: '#E5E5E5',
     },
 
     containerLogin: {
@@ -22,7 +22,6 @@ export const styles = StyleSheet.create({
         width: '100%',
         height: 400,
         display: 'flex',
-        justifyContent:'space-evenly',
         alignItems: 'center',
         flexDirection: 'column',
     },
@@ -30,7 +29,7 @@ export const styles = StyleSheet.create({
     containerTopo: {
         width: '100%',
         height: '40%',
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         marginBottom: 25,
@@ -39,12 +38,13 @@ export const styles = StyleSheet.create({
     },
 
     texto: {
-        color: 'white',
-        fontWeight: 'bold'
+        color: '#707070',
+        fontWeight: 'bold',
+        marginTop: 10,
     },
 
     entrar: {
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         textAlign: 'center',
         textAlignVertical: 'center',
         padding: 5,
@@ -52,11 +52,12 @@ export const styles = StyleSheet.create({
         height: 50,
         borderRadius: 10,
         color: '#FFFFFF',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginTop: 30
     },
 
     cadastro: {
-        color: '#FFFFFF',
+        color: '#707070',
         fontWeight: 'bold',
         fontSize: 18,
     },
@@ -66,13 +67,15 @@ export const styles = StyleSheet.create({
         height: 200
     },
 
-    // imagemLogo: {
-    //     flex: 1,
-    // },
-
-    tituloTexto: {
+    tituloTextoEmail: {
         fontSize: 18,
-        color: '#FFFFFF',
+        color: '#000000',
+    },
+
+    tituloTextoSenha: {
+        fontSize: 18,
+        color: '#000000',
+        marginTop: 20
     },
 
     textError: {
@@ -80,9 +83,7 @@ export const styles = StyleSheet.create({
         marginBottom: 5
     },
 
-    touch: {
-        marginTop: 20,
-        marginBottom: 35,
+    touchableOpacityCadastro: {
         alignItems: 'center',
     }
 });

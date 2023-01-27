@@ -4,11 +4,11 @@ export const styles = StyleSheet.create({
 
     containerPrincipal: {
         flex: 1,
-        backgroundColor: 'gray',
+        backgroundColor: '#E5E5E5',
     },
 
     containerLogin: {
-        backgroundColor: 'gray',
+        backgroundColor: '#E5E5E5',
         width: '100%',
         height: '40%',
         alignItems: 'center',
@@ -16,11 +16,11 @@ export const styles = StyleSheet.create({
     },
 
     enviar: {
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         textAlign: 'center',
         textAlignVertical: 'center',
         width: 150,
-        height: 50,
+        height: 40,
         borderRadius: 10,
         marginTop: 30,
         color: '#FFFFFF',
@@ -35,12 +35,13 @@ export const styles = StyleSheet.create({
 
     tituloTexto: {
         fontSize: 20,
-        color: '#FFFFFF'
+        color: '#2F2F2F',
+        paddingBottom: 5
     },
 
     titulo: {
         fontSize: 20,
-        color: '#FFFFFF',
+        color: '#151515',
         marginTop: 20,
         marginBottom: 20,
         fontWeight: '500'
@@ -48,13 +49,14 @@ export const styles = StyleSheet.create({
 
     textError: {
         color: '#F32020',
-        marginBottom: 5
+        marginBottom: 5,
+        paddingTop: 10
     },
 
     homeDashboardtopo: {
         width: '100%',
         height: '40%',
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         marginBottom: 25,

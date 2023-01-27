@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
 
     scrollView: {
         flex: 1,
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#000000',
         marginBottom: 50,
-        color: '#E91E63'
+        color: '#1b6dc1'
     },
 
     touchableOpacityAtualizar: {
@@ -54,7 +54,8 @@ export const styles = StyleSheet.create({
     },
 
     touchableOpacityAtualizarTexto: {
-        fontWeight: "500"
+        fontWeight: "500",
+        color:'#FFFFFF'
     },
 
     touchableOpacityDeletar: {
@@ -70,7 +71,8 @@ export const styles = StyleSheet.create({
     },
 
     touchableOpacityDeletarTexto: {
-        fontWeight: "500"
+        fontWeight: "500",
+        color:'#FFFFFF'
     },
 
     touchableOpacityPagar: {
@@ -113,7 +115,7 @@ export const styles = StyleSheet.create({
     },
 
     marcador: {
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         width: 10,
         height: 18,
         marginRight: 5,

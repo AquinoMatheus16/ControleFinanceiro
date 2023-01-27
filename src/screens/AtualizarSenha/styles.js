@@ -4,13 +4,12 @@ export const styles = StyleSheet.create({
 
     containerPrincipal: {
         flex: 1,
-        backgroundColor: 'gray'
+        backgroundColor: '#E5E5E5'
     },
 
     containerLogin: {
-        backgroundColor: 'gray',
+        backgroundColor: '#E5E5E5',
         width: '100%',
-        height: '50%',
         alignItems: 'center',
         justifyContent: 'space-evenly'
     },
@@ -19,13 +18,11 @@ export const styles = StyleSheet.create({
         height: 35,
         width: '90%',
         margin: 12,
-        // borderWidth: 1,
         borderBottomWidth: 1,
         borderBottomColor: 'white',
         padding: 10,
         borderRadius: 10,
-        // paddingRight: 8
-        paddingLeft:20,
+        paddingLeft: 20,
         marginTop: 30,
         marginBottom: 30
     },
@@ -40,21 +37,22 @@ export const styles = StyleSheet.create({
         borderBottomColor: 'white',
         padding: 10,
         borderRadius: 10,
-        // paddingRight: 8,
-        paddingLeft:20,
+        paddingLeft: 20,
         marginTop: 30,
         marginBottom: 30,
     },
 
     atualizar: {
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         textAlign: 'center',
         textAlignVertical: 'center',
         width: 150,
         height: 50,
         borderRadius: 10,
         color: '#FFFFFF',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginTop: 30,
+        marginBottom: '25%'
     },
 
     logoContainer: {
@@ -73,19 +71,21 @@ export const styles = StyleSheet.create({
 
     tituloTexto: {
         fontSize: 20,
-        color: 'white'
+        color: '#363636',
+        paddingTop: 10
     },
+
     titulo: {
         fontSize: 20,
-        color: 'white',
+        color: '#141414',
         marginBottom: 20,
         fontWeight: '500'
     },
 
     homeDashboardtopo: {
         width: '100%',
-        height: '40%',
-        backgroundColor: '#0C609C',
+        padding: 40,
+        backgroundColor: '#1b6dc1',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         marginBottom: 25,
@@ -94,7 +94,7 @@ export const styles = StyleSheet.create({
     },
 
     icon: {
-        color: '#0C609C'
+        color: '#1b6dc1'
     },
 
     viewInput: {
@@ -102,10 +102,18 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
 
-    butoes: {
-        alignItems: 'center',
-        width: "80%",
-        height: 50,
-    }
+    textError: {
+        color: '#F32020',
+        marginBottom: 5
+    },
+
+    textInput: {
+        borderBottomWidth: 1,
+        padding: 5,
+        width: '80%',
+        marginBottom: 5,
+        color: '#353535',
+        textAlign: 'center',
+    },
 
 });

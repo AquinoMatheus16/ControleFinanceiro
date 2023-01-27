@@ -39,7 +39,8 @@ export const CentroDeCustoDetalhe = ({ route }) => {
             }, 120);
 
         } catch (e) {
-            console.error(e);
+            // console.error(e);
+            setIsLoading(false);
             setMostrarModalErro(true);
         }
     };
@@ -53,11 +54,11 @@ export const CentroDeCustoDetalhe = ({ route }) => {
                 {item?.observacao === null ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
 
                 <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => navigation.navigate("Atualizar Centro De Custo", { item: item })}>
-                    <Text style={styles.touchableOpacityAtualizarTexto}>ATUALIZAR</Text>
+                    <Text style={styles.touchableOpacityTexto}>ATUALIZAR</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.touchableOpacityDeletar} onPress={() => setMostrarModalConfirm(true)}>
-                    <Text style={styles.touchableOpacityDeletarTexto}>DELETAR</Text>
+                    <Text style={styles.touchableOpacityTexto}>DELETAR</Text>
                 </TouchableOpacity>
 
                 <ModalConfirm

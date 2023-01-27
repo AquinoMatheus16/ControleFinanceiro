@@ -17,6 +17,7 @@ import { CentroDeCustoCadastrar } from '../screens/CentroDeCustoCadastrar';
 import { FontAwesome, FontAwesome5, Feather, Ionicons } from '@expo/vector-icons';
 import { CentroDeCustoDetalhe } from '../screens/CentroDeCustoDetalhe';
 import { NetworkInformation } from '../components/NetworkInformation';
+import { ContaAtualizar } from '../screens/ContaAtualizar';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
@@ -46,7 +47,7 @@ const TituloStake = () => {
     )
 };
 
-const CentroDecUstoStake = () => {
+const CentroDecustoStake = () => {
 
     return (
         <Stack.Navigator>
@@ -54,6 +55,16 @@ const CentroDecUstoStake = () => {
             <Stack.Screen name='Cadastrar Centro De Custo' component={CentroDeCustoCadastrar} options={{ headerShown: true }} />
             <Stack.Screen name='Atualizar Centro De Custo' component={CentroDeCustoAtualizar} options={{ headerShown: true }} />
             <Stack.Screen name='Centro De Custo Detalhe' component={CentroDeCustoDetalhe} options={{ headerShown: false }} />
+        </Stack.Navigator>
+    )
+};
+
+const ContatoStake = () => {
+
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name='ContaStake' component={Conta} options={{ headerShown: false }} />
+            <Stack.Screen name='Atualizar conta' component={ContaAtualizar} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 };
@@ -106,7 +117,7 @@ export const RotasPrivadas = () => {
 
                 <Tab.Screen
                     name="CentroDeCusto"
-                    component={CentroDecUstoStake}
+                    component={CentroDecustoStake}
                     options={{ headerShown: false }}
                 />
 
@@ -118,7 +129,7 @@ export const RotasPrivadas = () => {
 
                 <Tab.Screen
                     name="Conta"
-                    component={Conta}
+                    component={ContatoStake}
                     options={{ headerShown: false }}
                 />
 
@@ -126,7 +137,7 @@ export const RotasPrivadas = () => {
 
             <StatusBar
                 barStyle='light-content'
-                backgroundColor='#0C609C'
+                backgroundColor='#1b6dc1'
                 translucent={false}
                 networkActivityIndicatorVisible={true}
             />
