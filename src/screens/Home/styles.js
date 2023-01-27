@@ -4,14 +4,14 @@ export const styles = StyleSheet.create({
 
     homeContainer: {
         flex: 1,
-        backgroundColor: 'gray',
+        backgroundColor: '#E5E5E5',
         alignItems: 'center',
     },
 
     homeDashboardtopo: {
         width: '100%',
         height: '40%',
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         alignItems: 'center',
@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
     homeContainerMain: {
         height: 400,
         width: '100%',
-        // backgroundColor: '#FF8800',
         justifyContent: 'space-evenly',
         alignItems: 'center'
     },
@@ -31,7 +30,6 @@ export const styles = StyleSheet.create({
         fontWeight: '700',
         color: '#FFFFFF',
         textAlign: 'center',
-        // marginTop: 10
     },
 
     homeTexto2: {
@@ -58,7 +56,6 @@ export const styles = StyleSheet.create({
 
     homeDivInput: {
         width: '90%',
-        // backgroundColor: '#0909',
         flexDirection: 'row',
         borderBottomWidth: 1,
         borderBottomColor: '#FFFFFF'
@@ -76,7 +73,6 @@ export const styles = StyleSheet.create({
 
     homeIcon: {
         marginTop: 10,
-        // backgroundColor: '#030099'
     },
 
     homeTouchableOpacity: {
@@ -86,8 +82,8 @@ export const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         borderRadius: 15,
         alignItems: 'center',
-        borderWidth: 2,
-        borderColor: 'black'
+        borderWidth: 1,
+        borderColor: '#0D0C0C'
     },
 
     homeTextoTouchable: {
@@ -108,7 +104,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: "space-evenly",
         alignItems: "center",
-        // backgroundColor: "green",
         marginTop: 30,
     },
 
@@ -121,19 +116,17 @@ export const styles = StyleSheet.create({
         fontSize: 10,
         fontWeight: '900',
         color: '#FFFFFF',
-        // backgroundColor: "gray",
     },
-    
+
     titleDash2: {
         color: '#FFFFFF',
         marginTop: 5
-        
+
     },
-    
+
     titleDash3: {
         flexDirection: 'column',
         alignItems: 'center',
-        
     }
 
 });

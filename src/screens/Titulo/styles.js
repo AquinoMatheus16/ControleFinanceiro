@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
 
     containerMain: {
-        backgroundColor: 'gray',
+        backgroundColor: '#E5E5E5',
         alignItems: 'center',
         flex: 1
     },
@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
     },
 
     navTouch: {
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         width: 80,
         height: 30,
         marginTop: 30,
@@ -93,7 +93,7 @@ export const styles = StyleSheet.create({
     containerTopo: {
         width: '100%',
         minHeight: '40%',
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         alignItems: 'center',

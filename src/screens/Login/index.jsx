@@ -8,7 +8,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Loading } from '../../components/Loading';
 import { Image } from 'react-native';
-import carteira from '../../img/carteira.png'
+import carteira from '../../img/logo-app-icon.png';
+import { ModalFailed } from '../../components/ModalFailed';
 
 const schema = yup.object({
   email: yup.string().email("E-mail inválido").required("Informe o email"),
@@ -18,6 +19,7 @@ const schema = yup.object({
 export const Login = ({ navigation }) => {
 
   const [isLoading, setIsLoading] = useState(false);
+  const [mostarModalFailed, setMostarModalFailed] = useState(false);
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
@@ -31,9 +33,13 @@ export const Login = ({ navigation }) => {
       setIsLoading(false);
 
     } catch (error) {
-      console.error('Error: ', error);
-    }
+      setIsLoading(false);
 
+      setMostarModalFailed(true);
+      setTimeout(() => {
+        setMostarModalFailed(false);
+      }, 1500);
+    }
   };
 
   return (
@@ -44,7 +50,7 @@ export const Login = ({ navigation }) => {
 
       <View style={styles.containerMain}>
 
-        <Text style={styles.tituloTexto}>E-mail</Text>
+        <Text style={styles.tituloTextoEmail}>E-mail</Text>
         <Controller
           control={control}
           name="email"
@@ -58,7 +64,7 @@ export const Login = ({ navigation }) => {
         />
         {errors.email && <Text style={styles.textError}>{errors.email?.message}</Text>}
 
-        <Text style={styles.tituloTexto}>Senha</Text>
+        <Text style={styles.tituloTextoSenha}>Senha</Text>
         <Controller
           control={control}
           name="senha"
@@ -78,17 +84,17 @@ export const Login = ({ navigation }) => {
           <Text style={styles.texto}>esqueci minha senha</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.touch} onPress={handleSubmit(handleLogin)}>
+        <TouchableOpacity onPress={handleSubmit(handleLogin)}>
           <Text style={styles.entrar}>ENTRAR</Text>
         </TouchableOpacity>
 
-
-        <Loading isLoading={isLoading} />
-
       </View>
-        <TouchableOpacity style={styles.touch} onPress={() => navigation.navigate('Cadastrar')}>
-          <Text style={styles.cadastro}>Cadastre-se</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.touchableOpacityCadastro} onPress={() => navigation.navigate('Cadastrar')}>
+        <Text style={styles.cadastro}>Cadastre-se</Text>
+      </TouchableOpacity>
+
+      <Loading isLoading={isLoading} />
+      <ModalFailed isVisible={mostarModalFailed} textoModal={'Usuário e/ou senha inválidos'} />
     </View>
   );
 };

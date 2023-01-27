@@ -7,13 +7,19 @@ export const getUsuario = async () => {
     try {
         const token = await AsyncStorage.getItem("@app_token")
         const { data } = await api.get(`/api/usuarios`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
-        // console.log(data)
 
         return data;
     } catch (e) {
         console.error(`Blaa: ${e}`);
     }
 };
+
+// GET
+export const getToken = async (token) => {
+
+    const getToken = await api.get(`/api/usuarios/token/${token}`);
+    return getToken;
+}
 
 // GET ID
 export const getUsuarioId = async (id) => {
@@ -35,16 +41,26 @@ export const postUsuario = async (novoUsuario) => {
     return usuario;
 };
 
-// PUT
-export const putUsuario = async (usuario) => {
-    try {
-        const token = await AsyncStorage.getItem("@app_token")
-        const putUsuario = await api.put(`/api/usuarios/${usuario.id}`, usuario, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
+// POST RECOVER
+export const postRecover = async (envioEmail) => {
 
-        return putUsuario;
-    } catch (e) {
-        console.error(e);
-    }
+    const emailRecover = await api.post(`/api/usuarios/recover/${envioEmail}`);
+    return emailRecover;
+}
+
+// PUT SENHA
+export const putSenha = async (token, senhaAtualizada) => {
+
+    const putSenha = await api.put(`/api/usuarios/novaSenha/${token}`, senhaAtualizada, { headers: { "Accept": "application/json" } });
+    return putSenha;
+}
+
+// PUT
+export const putUsuario = async (usuario, novoUsuario) => {
+
+    const token = await AsyncStorage.getItem("@app_token")
+    const putUsuario = await api.put(`/api/usuarios/${usuario.id}`, novoUsuario, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
+    return putUsuario;
 };
 
 // DELETE

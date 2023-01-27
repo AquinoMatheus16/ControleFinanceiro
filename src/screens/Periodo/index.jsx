@@ -128,13 +128,13 @@ export const Periodo = () => {
             </View>
             <View style={styles.valores}>
                 <View style={styles.valor}>
-                    <Text >Total A pagar: {(Math.floor(dash?.totalApagar * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                    <Text style={styles.textoValores}>Total A pagar: {(Math.floor(dash?.totalApagar * 100).toFixed(0) / 100).toFixed(2)}</Text>
                 </View>
                 <View style={styles.valor}>
-                    <Text >Total A receber: {(Math.floor(dash?.totalAreceber * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                    <Text style={styles.textoValores}>Total A receber: {(Math.floor(dash?.totalAreceber * 100).toFixed(0) / 100).toFixed(2)}</Text>
                 </View>
                 <View style={styles.valor}>
-                    <Text >Saldo: {(Math.floor(dash?.saldo * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                    <Text style={styles.textoValores}>Saldo: {(Math.floor(dash?.saldo * 100).toFixed(0) / 100).toFixed(2)}</Text>
                 </View>
             </View>
 

@@ -10,7 +10,7 @@ export const ModalFailed = ({ isVisible, textoModal, onPress }) => {
         <Modal
             isVisible={isVisible}
             hasBackdrop={true}
-            deviceHeight={1}
+            deviceHeight={0.1}
             style={styles.modal}
         >
             <View style={styles.modalMain}>

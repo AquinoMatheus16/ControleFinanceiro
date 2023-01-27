@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         height: '100%',
-        backgroundColor: 'gray',
+        backgroundColor: '#E5E5E5',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -16,9 +16,9 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         padding: 5,
-        width: 150,
+        width: 170,
         height: 50,
         borderRadius: 10,
         marginTop: 30,
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     },
 
     meioCima: {
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         width: '100%',
         height: '40%',
         alignItems: 'center',
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     },
 
     meioBaixo: {
-        backgroundColor: 'gray',
+        backgroundColor: '#E5E5E5',
         width: '100%',
         height: '40%',
         alignItems: 'center'
@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
     inputDados: {
         minWidth: 250,
         height: 30,
-        marginTop: 20,
+        marginTop: 15,
         alignItems: 'center'
     }
 })

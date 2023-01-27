@@ -24,6 +24,6 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         borderBottomColor: '#000000',
         marginBottom: 10,
-        color: '#E91E63'
+        color: '#1b6dc1'
     }
 });

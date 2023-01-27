@@ -134,8 +134,8 @@ export const TituloCadastra = () => {
             }, 160);
 
         } catch (error) {
-            console.error("Error error: ", error);
-
+            // console.error("Error: ", error);
+            setIsLoading(false);
             mostrarModalErro(true);
         };
     };

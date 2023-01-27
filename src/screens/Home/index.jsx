@@ -103,15 +103,6 @@ export const Home = ({ navigation }) => {
 
             <View style={styles.homeContainerMain}>
 
-                {/* <View style={styles.homeDivInput}>
-                    <EvilIcons style={styles.homeIcon} name="search" size={30} color="white" />
-                    <TextInput
-                        style={styles.homeInput}
-                        placeholder="Pesquisar"
-                        placeholderTextColor="#c5c5c5"
-                    />
-                </View> */}
-
                 <Text style={styles.homeTexto2}>Pesquisar</Text>
 
                 <TouchableOpacity onPress={() => navigation.navigate('TitulosApagar')}>

@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
         padding: 5,
         width: '80%',
         marginBottom: 5,
-        color: '#FFFFFF',
+        color: '#353535',
         textAlign: 'center',
     },
 });

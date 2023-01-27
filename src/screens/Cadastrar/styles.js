@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         height: '100%',
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     containerLogin: {
         width: '85%',
         height: '65%',
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

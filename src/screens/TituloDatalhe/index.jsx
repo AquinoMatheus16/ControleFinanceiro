@@ -48,16 +48,7 @@ export const TitulosDetalhe = ({ route }) => {
 
         } catch (e) {
             console.error(e);
-            Alert.alert(
-                'Aviso',
-                'Não possível deletar o título.',
-                [
-                    {
-                        text: "OK",
-                        onPress: () => null
-                    }
-                ]
-            );
+            setIsLoading(false);
         }
     };
 

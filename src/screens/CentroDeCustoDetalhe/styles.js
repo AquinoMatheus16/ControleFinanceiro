@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
 
     containerMain: {
         flex: 1,
-        backgroundColor: '#0C609C',
+        backgroundColor: '#1b6dc1',
         alignItems: 'center',
     },
 
@@ -33,9 +33,8 @@ export const styles = StyleSheet.create({
     },
 
     textoTitulo: {
-        marginLeft: '25%',
         fontSize: 22,
-        width: '80%',
+        width: '100%',
         textAlign: 'center',
         borderBottomColor: '#000000',
         marginBottom: 10
@@ -46,15 +45,11 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         height: 50,
-        backgroundColor: '#0CD105',
+        backgroundColor: '#1AB115',
         marginTop: 10,
         padding: 15,
         textAlign: 'center',
         borderRadius: 10,
-    },
-
-    touchableOpacityAtualizarTexto: {
-        fontWeight: "500"
     },
 
     touchableOpacityDeletar: {
@@ -69,7 +64,8 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
     },
 
-    touchableOpacityDeletarTexto: {
-        fontWeight: "500"
+    touchableOpacityTexto: {
+        fontWeight: "500",
+        color: '#FFFFFF'
     },
 });

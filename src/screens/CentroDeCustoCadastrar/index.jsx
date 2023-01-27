@@ -57,11 +57,9 @@ export const CentroDeCustoCadastrar = () => {
             return;
 
         } catch (error) {
-            console.error(error);
-
-            // setTimeout(() => {
+            // console.error(error);
+            setIsLoading(false);
             setMostrarModalErro(true)
-            // }, 4000);
         };
     };
 
