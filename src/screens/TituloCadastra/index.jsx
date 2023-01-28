@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { SelectList } from 'react-native-dropdown-select-list';
 import { postTitulo } from "../../services/titulo";
@@ -71,7 +71,6 @@ export const TituloCadastra = () => {
                 })
                 setData(newArray)
                 setCentroDeCustoSalvos(response)
-                // console.log("centroDeCustoSalvos: ", centroDeCustoSalvos);
             })
             .catch((e) => {
                 console.log(e)
@@ -103,7 +102,6 @@ export const TituloCadastra = () => {
 
     const post = async (data) => {
         try {
-            // console.log("Data: ", data);
 
             const novoTitulo = {
                 descricao: data.descricao,
@@ -113,7 +111,6 @@ export const TituloCadastra = () => {
                 centroDeCusto: centroDeCustoJson,
                 observacao: data.observacao
             }
-            // console.log("centroDeCustoJson 2: ", centroDeCustoJson);
 
             JSON.stringify(novoTitulo);
 

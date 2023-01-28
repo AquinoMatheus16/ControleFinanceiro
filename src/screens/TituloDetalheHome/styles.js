@@ -42,8 +42,6 @@ export const styles = StyleSheet.create({
         width: '100%',
         textAlign: 'center',
         color: '#000000',
-        borderBottomWidth: 1,
-        borderBottomColor: '#000000',
         marginBottom: 10,
         color: '#1b6dc1'
     }

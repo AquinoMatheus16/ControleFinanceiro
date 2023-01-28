@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, Alert } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { format } from "date-fns";
 import { useNavigation } from "@react-navigation/native";
@@ -17,6 +17,9 @@ export const TitulosDetalhe = ({ route }) => {
 
     const [mostrarModal, setMostrarModal] = useState(false);
     const [mostrarModalConfirm, setMostrarModalConfirm] = useState(false);
+    const [mostrarModalConfirmDesmarcar, setMostrarModalConfirmDesmarcar] = useState(false);
+    const [mostrarModalMarcar, setMostrarModalMarcar] = useState(false);
+    const [mostrarModalMarcarReceber, setMostrarModalMarcarReceber] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const dataC = new Date(item?.dataCadastro)
@@ -52,40 +55,56 @@ export const TitulosDetalhe = ({ route }) => {
         }
     };
 
-    const marcar = (item) => {
-        setLoad(true)
-        putPagar(item)
-        setTimeout(() => {
-            setLoad(false)
-        }, 250);
-        setTimeout(() => {
-            setLoad(false)
-            navigation.goBack()
-        }, 500);
+    const marcar = async (item) => {
+        try {
+            setLoad(true);
+
+            await putPagar(item);
+            setMostrarModalMarcarReceber(true);
+
+            setTimeout(() => {
+                setLoad(false);
+            }, 250);
+
+            setTimeout(() => {
+                setLoad(false);
+                setMostrarModalMarcarReceber(false);
+                navigation.goBack();
+            }, 1500);
+        } catch (error) {
+            console.error(error);
+        }
+
     }
 
-    const desmarcar = (item) => {
-        setLoad(true)
-        Alert.alert(
-            "Aviso",
-            item.tipo === "APAGAR" ? "Deseja desmarcar como pago?" : "Deseja desmarcar como recebido?",
-            [
-                {
-                    text: "Cancelar",
-                    onPress: () => null,
-                    style: "cancel"
+    const desmarcar = async (item) => {
+        try {
+            await putDespagar(item);
 
-                },
-                { text: "OK", onPress: () => putDespagar(item, setTimeout(() => { setLoad(false) }, 250), setTimeout(() => { navigation.goBack() }, 1000)) }
-            ]
-        );
+            setMostrarModalMarcar(true);
+
+            setLoad(true);
+
+            setTimeout(() => {
+                navigation.goBack();
+                setMostrarModalMarcar(false);
+            }, 1000);
+
+            setTimeout(() => {
+                setLoad(false);
+            }, 250);
+
+
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     const buttonMostrar = () => {
 
         if (item?.dataPagamento != null && item?.tipo === "APAGAR") {
             return (
-                <TouchableOpacity onPress={() => desmarcar(item)}>
+                <TouchableOpacity onPress={() => setMostrarModalConfirmDesmarcar(true)}>
                     <View style={styles.marcarPago}>
                         <View style={styles.marcador}></View>
                         <Text>PAGO</Text>
@@ -95,7 +114,7 @@ export const TitulosDetalhe = ({ route }) => {
 
         } else if (item?.dataPagamento != null && item?.tipo === "ARECEBER") {
             return (
-                <TouchableOpacity onPress={() => desmarcar(item)}>
+                <TouchableOpacity onPress={() => setMostrarModalConfirmDesmarcar(true)}>
                     <View style={styles.marcar}>
                         <View style={styles.marcador}></View>
                         <Text>RECEBIDO</Text>
@@ -165,9 +184,26 @@ export const TitulosDetalhe = ({ route }) => {
                     textoModal={'Deseja mesmo deletar o título?'}
                 />
 
+                <ModalConfirm
+                    isVisible={mostrarModalConfirmDesmarcar}
+                    onPressCancel={() => setMostrarModalConfirmDesmarcar(false)}
+                    onPressConfirm={() => desmarcar(item)}
+                    textoModal={item.tipo === "APAGAR" ? "Deseja desmarcar como pago?" : "Deseja desmarcar como recebido?"}
+                />
+
                 <ModalSuccessful
                     isVisible={mostrarModal}
                     textoModal={'Título deletado com sucesso.'}
+                />
+
+                <ModalSuccessful
+                    isVisible={mostrarModalMarcar}
+                    textoModal={'Título desmarcado com sucesso!'}
+                />
+
+                <ModalSuccessful
+                    isVisible={mostrarModalMarcarReceber}
+                    textoModal={'Título marcado com sucesso!'}
                 />
 
                 <Loading isLoading={isLoading} />

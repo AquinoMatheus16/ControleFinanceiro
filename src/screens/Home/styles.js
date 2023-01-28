@@ -99,7 +99,7 @@ export const styles = StyleSheet.create({
     },
 
     dash1: {
-        width: '90%',
+        width: '83%',
         height: 100,
         flexDirection: 'row',
         justifyContent: "space-evenly",

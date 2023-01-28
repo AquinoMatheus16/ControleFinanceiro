@@ -2,6 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
 
+    scrollView:{
+        backgroundColor: '#E5E5E5'
+    },
+
     containerPrincipal: {
         flex: 1,
         backgroundColor: '#E5E5E5'
@@ -84,6 +88,7 @@ export const styles = StyleSheet.create({
 
     homeDashboardtopo: {
         width: '100%',
+        height: '40%',
         padding: 40,
         backgroundColor: '#1b6dc1',
         borderBottomLeftRadius: 30,

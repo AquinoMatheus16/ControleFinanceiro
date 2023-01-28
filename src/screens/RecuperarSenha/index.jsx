@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
-import logo from "../../img/cadeado.png"
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -10,6 +9,7 @@ import { ModalSuccessful } from '../../components/ModalSuccessful';
 import { ModalFailed } from '../../components/ModalFailed';
 import { Loading } from '../../components/Loading';
 import { postRecover } from '../../services/usuario';
+import { EvilIcons } from '@expo/vector-icons';
 
 const schema = yup.object({
   envioEmail: yup.string().email("E-mail inválido").required("Informe o email")
@@ -51,7 +51,7 @@ export const RecuperarSenha = ({ navigation }) => {
   return (
     <View style={styles.containerPrincipal}>
       <View style={styles.homeDashboardtopo}>
-        <Image source={logo} style={styles.imagemLogo} />
+        <EvilIcons name="lock" size={200} color="#FFFFFF" />
       </View>
 
       <View style={styles.containerLogin}>
@@ -74,10 +74,6 @@ export const RecuperarSenha = ({ navigation }) => {
 
         <TouchableOpacity onPress={handleSubmit(enviaToken)}>
           <Text style={styles.enviar}>ENVIAR</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => navigation.navigate('AtualizarSenha')}>
-          <Text style={styles.enviar}>ATUALIZAR</Text>
         </TouchableOpacity>
 
         <ModalSuccessful isVisible={mostrarModal} textoModal={'E-mail enviado com sucesso!'} />
