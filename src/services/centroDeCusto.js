@@ -7,11 +7,10 @@ export const getCentroDeCusto = async () => {
     try {
         const token = await AsyncStorage.getItem("@app_token")
         const { data } = await api.get(`/api/centrodecustos`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
-        // console.log("Response: ", data)
 
         return data;
     } catch (e) {
-        console.error(`Blaa: ${e}`);
+        console.error(e);
     }
 };
 
@@ -20,7 +19,6 @@ export const getCentroDeCustoId = async (centroDeCusto) => {
     try {
         const token = await AsyncStorage.getItem("@app_token")
         const { data } = await api.get(`/api/centrodecustos/${centroDeCusto.id}`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
-        // console.log(data)
 
         return data;
     } catch (e) {

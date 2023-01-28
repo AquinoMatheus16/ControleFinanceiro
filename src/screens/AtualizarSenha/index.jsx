@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Image, Text, TouchableOpacity, View, ScrollView } from "react-native";
+import { Text, TouchableOpacity, View, ScrollView } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { styles } from "./styles";
-import logo from "../../img/cadeado.png";
 import { MaterialIcons } from '@expo/vector-icons';
 import { getToken, putSenha } from "../../services/usuario";
 import { useForm, Controller } from 'react-hook-form';
@@ -11,6 +10,7 @@ import * as yup from 'yup';
 import { Loading } from "../../components/Loading";
 import { ModalFailed } from "../../components/ModalFailed";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
+import { EvilIcons } from '@expo/vector-icons';
 
 const schema = yup.object({
     senha: yup.string().min(6, "A senha deve ter pelo menos 6 digitos").required("Informe a senha"),
@@ -79,10 +79,10 @@ export const AtualizarSenha = ({ navigation }) => {
     }
 
     return (
-        <ScrollView>
+        <ScrollView style={styles.scrollView}>
             <View style={styles.containerPrincipal}>
                 <View style={styles.homeDashboardtopo}>
-                    <Image source={logo} style={styles.imagemLogo} />
+                    <EvilIcons name="unlock" size={200} color="#FFFFFF" />
                 </View>
 
                 <View style={styles.containerLogin}>

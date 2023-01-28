@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
         width: '100%',
         textAlign: 'center',
         color: '#000000',
-        marginBottom: 50,
+        marginBottom: 20,
         color: '#1b6dc1'
     },
 

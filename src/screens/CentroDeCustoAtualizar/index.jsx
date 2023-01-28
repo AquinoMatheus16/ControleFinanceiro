@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useState } from "react";
-import { ScrollView, Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { InputGeral } from "../../components/InputGeral";
 import { Loading } from "../../components/Loading";
 import { ModalFailed } from "../../components/ModalFailed";

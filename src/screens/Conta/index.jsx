@@ -19,7 +19,6 @@ export const Conta = () => {
         const usuario = JSON.parse(data);
         setFot(usuario.foto)
         setUser(usuario)
-        // console.log('data', data);
         return usuario.id;
     }
 

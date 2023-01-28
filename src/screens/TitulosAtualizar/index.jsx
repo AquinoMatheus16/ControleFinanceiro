@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
-import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { getCentroDeCusto } from "../../services/centroDeCusto";
 import { putTitulo } from "../../services/titulo";

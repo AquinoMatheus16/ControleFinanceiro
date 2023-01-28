@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
 
     const loginContext = async (email, senha) => {
         const { data } = await login(email, senha)
-        console.log(data)
+
         if (data.token && data.usuario) {
             setUser(data.usuario)
             api.defaults.headers['Authorization'] = `Bearer ${data.token}`

@@ -3,7 +3,7 @@ import { styles } from "./styles";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { getDashBoardTotal } from "../../services/dashboard";
-import { VictoryPie, VictoryTheme } from "victory-native";
+import { VictoryPie, VictoryTheme, VictoryTooltip } from "victory-native";
 import { getTitulo } from "../../services/titulo";
 
 export const Home = ({ navigation }) => {
@@ -18,6 +18,26 @@ export const Home = ({ navigation }) => {
         setTotal(total);
 
     };
+
+    const cor = [
+        { key: '1', value: '#47B2F9' },
+        { key: '2', value: '#104BA4' },
+    ]
+
+    const valorDash1 = [
+        { key: '1', label: "A receber", value: total?.totalAreceber },
+        { key: '2', label: "A pagar", value: total?.totalApagar },
+    ]
+
+    const valorDash2 = [
+        { key: '1', label: "A pagar", value: total?.totalApagar },
+        { key: '2', label: "A receber", value: total?.totalAreceber },
+    ]
+
+    const valorDashTitulo = [
+        { key: '1', label: titulos.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("APAGAR")).length, value: titulos.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("APAGAR")).length },
+        { key: '2', label: titulos.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("ARECEBER")).length, value: titulos.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("ARECEBER")).length },
+    ]
 
     const fetchData = async () => {
         const tituloList = await getTitulo();
@@ -42,18 +62,26 @@ export const Home = ({ navigation }) => {
 
                 <View style={styles.dash1}>
 
-                <View style={styles.titleDash3}>
+                    <View style={styles.titleDash3}>
                         <View style={styles.dash}>
                             <VictoryPie
                                 width={170}
                                 innerRadius={50}
                                 theme={VictoryTheme.material}
-                                data={[(Math.floor(total?.totalAreceber * 100).toFixed(0) / 100).toFixed(2), (Math.floor(total?.totalApagar * 100).toFixed(0) / 100).toFixed(2)]} x="quarter" y="earnings"
+                                colorScale={cor.map(color => color.value)}
+                                data={valorDash2} x="label" y="value"
                                 style={{
                                     labels: {
-                                        display: 'none'
+                                        fill: '#000000',
+                                        angle: -90
+                                    },
+                                    data: {
+                                        stroke: 'none'
                                     }
                                 }}
+                                labelComponent={
+                                    <VictoryTooltip renderInPortal={false} />
+                                }
                             />
                             <Text style={styles.titleDash}>R$: {(Math.floor(total?.totalApagar * 100).toFixed(0) / 100).toFixed(2)}</Text>
                         </View>
@@ -66,32 +94,46 @@ export const Home = ({ navigation }) => {
                                 width={170}
                                 innerRadius={50}
                                 theme={VictoryTheme.material}
-                                data={[titulos.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("APAGAR")).length,
-                                titulos.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("ARECEBER")).length
-                                ]} x="quarter" y="earnings"
+                                colorScale={cor.map(color => color.value)}
+                                data={valorDashTitulo} x="label" y="value"
                                 style={{
                                     labels: {
-                                        display: 'none'
+                                        fill: '#000000',
+                                        angle: -90
+                                    },
+                                    data: {
+                                        stroke: 'none'
                                     }
                                 }}
+                                labelComponent={
+                                    <VictoryTooltip renderInPortal={false} />
+                                }
                             />
                             <Text style={styles.titleDash}>{titulos.filter((titulo) => !titulo?.dataPagamento).length}</Text>
                         </View>
                         <Text style={styles.titleDash2}>Títulos</Text>
                     </View>
-                    
+
                     <View style={styles.titleDash3}>
                         <View style={styles.dash}>
                             <VictoryPie
                                 width={170}
                                 innerRadius={50}
                                 theme={VictoryTheme.material}
-                                data={[(Math.floor(total?.totalApagar * 100).toFixed(0) / 100).toFixed(2), (Math.floor(total?.totalAreceber * 100).toFixed(0) / 100).toFixed(2)]} x="quarter" y="earnings"
+                                colorScale={cor.map(color => color.value)}
+                                data={valorDash1} x="label" y="value"
                                 style={{
                                     labels: {
-                                        display: 'none'
+                                        fill: '#000000',
+                                        angle: -90
+                                    },
+                                    data: {
+                                        stroke: 'none'
                                     }
                                 }}
+                                labelComponent={
+                                    <VictoryTooltip renderInPortal={false} />
+                                }
                             />
                             <Text style={styles.titleDash}>R$: {(Math.floor(total?.totalAreceber * 100).toFixed(0) / 100).toFixed(2)}</Text>
                         </View>

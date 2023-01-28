@@ -1,8 +1,7 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import { styles } from "./styles";
 import { format } from "date-fns";
 import { ScrollView } from "react-native-gesture-handler";
-import { putPagar } from "../../services/titulo";
 
 export const TituloDetalheHome = ({ route }) => {
 
