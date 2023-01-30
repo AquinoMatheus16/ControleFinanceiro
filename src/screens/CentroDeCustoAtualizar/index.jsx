@@ -67,7 +67,7 @@ export const CentroDeCustoAtualizar = ({ route }) => {
 
                 <Text style={styles.texto}>Descrição</Text>
                 <InputGeral
-                    placeholder={"Descrção"}
+                    placeholder={"Descrição"}
                     onChangeText={setDescricao}
                     value={descricao}
                     onFocus={() => setErroDescricao(false)}
@@ -87,7 +87,7 @@ export const CentroDeCustoAtualizar = ({ route }) => {
                     <Text>ATUALIZAR</Text>
                 </TouchableOpacity>
 
-                <ModalSuccessful isVisible={mostrarModal} textoModal={'Centro de custo atualizado com suecsso!'} />
+                <ModalSuccessful isVisible={mostrarModal} textoModal={'Centro de custo atualizado com sucesso!'} />
                 <ModalFailed onPress={() => setMostrarModalErro(false)} isVisible={mostrarModalErro} textoModal={"Erro ao atualizar centro de custo."} />
                 <Loading isLoading={isLoading} />
 

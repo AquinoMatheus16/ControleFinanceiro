@@ -1,7 +1,7 @@
 import { Text, TextInput } from "react-native";
 import { styles } from "./styles";
 
-export const InputGeral = ({ placeholder, onChangeText, value, keyboardType, multiline, numberOfLines, onFocus, defaultValue, editable, secureTextEntry }) => {
+export const InputGeral = ({ placeholder, onChangeText, value, keyboardType, multiline, numberOfLines, onFocus, defaultValue, editable, onChange, secureTextEntry }) => {
 
     return (
         <TextInput
@@ -16,6 +16,7 @@ export const InputGeral = ({ placeholder, onChangeText, value, keyboardType, mul
             secureTextEntry={secureTextEntry}
             defaultValue={defaultValue}
             editable={editable}
+            onChange={onChange}
             textAlign={'center'}
         />
     )

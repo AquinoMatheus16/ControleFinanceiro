@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "gastosPessoaisMobile",
-    "slug": "gastosPessoaisMobile",
+    "name": "Gestão financeira pessoal",
+    "slug": "Gestão financeira",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/img/logo-app-icon.png",

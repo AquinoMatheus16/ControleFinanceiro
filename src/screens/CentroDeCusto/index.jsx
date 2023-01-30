@@ -44,21 +44,21 @@ export const CentroDeCusto = () => {
     return (
 
         <View style={styles.containerMain}>
-              <View style={styles.containerTopo}>
-            <Text style={styles.textoTitulo}>Centro De Custos</Text>
+            <View style={styles.containerTopo}>
+                <Text style={styles.textoTitulo}>Centros De Custo</Text>
 
-            <TouchableOpacity onPress={() => navigation.navigate("Cadastrar Centro De Custo")} style={styles.touchableOpacity}>
-                <Text style={styles.touchableOpacityTexto}>Cadastar</Text>
-            </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Cadastrar Centro De Custo")} style={styles.touchableOpacity}>
+                    <Text style={styles.touchableOpacityTexto}>Cadastar</Text>
+                </TouchableOpacity>
 
-            <KeyboardAvoidingView behavior="padding" style={styles.containerInput}>
-                <EvilIcons name="search" size={24} color="#FFFFFF" />
-                <TextInput
-                    style={styles.textInput} placeholder="Pequisar centro de custo"
-                    value={busca}
-                    onChangeText={e => setBusca(e)}
-                />
-            </KeyboardAvoidingView>
+                <KeyboardAvoidingView behavior="padding" style={styles.containerInput}>
+                    <EvilIcons name="search" size={24} color="#FFFFFF" />
+                    <TextInput
+                        style={styles.textInput} placeholder="Pesquisar centro de custo"
+                        value={busca}
+                        onChangeText={e => setBusca(e)}
+                    />
+                </KeyboardAvoidingView>
             </View>
 
             <View style={styles.containerFlatList}>
