@@ -8,6 +8,7 @@ import { useContext, useState } from "react";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { ModalConfirm } from "../../components/ModalConfirm";
 import { Loading } from "../../components/Loading";
+import { ConverterValor } from "../../common/ConverterValor";
 
 export const TitulosDetalhe = ({ route }) => {
 
@@ -128,14 +129,14 @@ export const TitulosDetalhe = ({ route }) => {
 
         if (item?.dataPagamento === null && item?.tipo === "APAGAR") {
             return (
-                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => marcar(item)}>
+                <TouchableOpacity style={styles.touchableOpacityReceber} onPress={() => marcar(item)}>
                     <Text style={styles.touchableOpacityAtualizarTexto}>PAGAR</Text>
                 </TouchableOpacity>
             )
 
         } else if (item?.dataPagamento === null && item?.tipo === "ARECEBER") {
             return (
-                <TouchableOpacity style={styles.touchableOpacityAtualizar} onPress={() => marcar(item)}>
+                <TouchableOpacity style={styles.touchableOpacityReceber} onPress={() => marcar(item)}>
                     <Text style={styles.touchableOpacityAtualizarTexto}>RECEBER</Text>
                 </TouchableOpacity>
             )
@@ -153,7 +154,7 @@ export const TitulosDetalhe = ({ route }) => {
 
                 {item?.centroDeCusto === null ? "" : <Text style={styles.texto}>Centro de custo: {item?.centroDeCusto.descricao}</Text>}
 
-                {item?.valor === null ? "" : <Text style={styles.texto}>Valor: {item?.valor}</Text>}
+                {item?.valor === null ? "" : <Text style={styles.texto}>Valor: <ConverterValor valor={(Math.floor(""+item?.valor * 100).toFixed(0) / 100).toFixed(2)} /></Text>}
 
                 {item?.tipo === null ? "" : <Text style={styles.texto}>Tipo: {item?.tipo}</Text>}
 

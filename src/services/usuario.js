@@ -26,7 +26,7 @@ export const getUsuarioId = async (id) => {
     try {
         const token = await AsyncStorage.getItem("@app_token")
         const { data } = await api.get(`/api/usuarios/${id}`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
-
+    
         return data;
     } catch (e) {
         console.error(e);

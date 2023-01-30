@@ -60,7 +60,11 @@ export const styles = StyleSheet.create({
     inputDados: {
         minWidth: 250,
         height: 30,
-        marginTop: 15,
+        marginTop: 5,
         alignItems: 'center'
+    },
+
+    entrar: {
+        fontWeight: '900'
     }
 })

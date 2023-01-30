@@ -2,6 +2,7 @@ import { Text, View } from "react-native";
 import { styles } from "./styles";
 import { format } from "date-fns";
 import { ScrollView } from "react-native-gesture-handler";
+import { ConverterValor } from "../../common/ConverterValor";
 
 export const TituloDetalheHome = ({ route }) => {
 
@@ -26,7 +27,7 @@ export const TituloDetalheHome = ({ route }) => {
 
                     {item?.centroDeCusto === null ? "" : <Text style={styles.texto}>Centro de custo: {item?.centroDeCusto.descricao}</Text>}
 
-                    {item?.valor === null ? "" : <Text style={styles.texto}>Valor: {item?.valor}</Text>}
+                    {item?.valor === null ? "" : <Text style={styles.texto}>Valor: <ConverterValor valor={(Math.floor(""+item?.valor * 100).toFixed(0) / 100).toFixed(2)} /></Text>}
 
                     {item?.tipo === null ? "" : <Text style={styles.texto}>Tipo: {item?.tipo}</Text>}
 

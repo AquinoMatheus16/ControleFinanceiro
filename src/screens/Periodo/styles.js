@@ -9,13 +9,13 @@ export const styles = StyleSheet.create({
     },
 
     textoTitulo: {
-        marginTop: 20,
+        marginTop: 15,
         fontSize: 22,
         color: '#FFFFFF'
     },
 
     textoNormal: {
-        marginTop: 20,
+        marginTop: 10,
         fontSize: 20,
         color: '#FFFFFF'
     },
@@ -93,7 +93,7 @@ export const styles = StyleSheet.create({
     },
 
     textInputDate: {
-        color: '#FFFFFF'
+        color: '#353535'
     },
 
     valores: {
@@ -122,7 +122,8 @@ export const styles = StyleSheet.create({
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingBottom: 20
     },
 
 });

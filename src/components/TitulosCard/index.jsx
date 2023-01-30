@@ -2,6 +2,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { format } from "date-fns";
 import { useNavigation } from "@react-navigation/native";
+import { ConverterValor } from "../../common/ConverterValor";
 
 export const TitulosCard = ({ item }) => {
 
@@ -18,7 +19,7 @@ export const TitulosCard = ({ item }) => {
 
                 {item?.centroDeCusto === null ? "" : <Text style={styles.texto}>Centro de custo: {item?.centroDeCusto.descricao}</Text>}
 
-                {item?.valor === null ? "" : <Text style={styles.texto}>Valor: {item?.valor}</Text>}
+                {item?.valor === null ? "" : <Text style={styles.texto}>Valor: <ConverterValor valor={(Math.floor(""+item?.valor * 100).toFixed(0) / 100).toFixed(2)} /></Text>}
 
                 {item?.dataVencimento === null ? "" : <Text style={styles.texto}>Data vencimento: {formatdataVencimento}</Text>}
 

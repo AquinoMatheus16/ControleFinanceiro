@@ -12,14 +12,6 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: 20
     },
-
-    // containerInput: {
-    //     width: '80%',
-    //     alignItems: 'center',
-    //     padding: 10,
-    //     borderRadius: 10
-    // },
-
     textInput: {
         borderBottomWidth: 1,
         borderBottomColor: '#FFFFFF',
@@ -83,7 +75,7 @@ export const styles = StyleSheet.create({
     },
 
     textInputDate: {
-        color: '#FFFFFF'
+        color: '#353535'
     },
 
     iconInput: {
@@ -93,7 +85,6 @@ export const styles = StyleSheet.create({
     },
 
     textError: {
-        // alignSelf: 'flex-start',
         color: '#F32020',
         marginBottom: 5
     },
@@ -107,6 +98,16 @@ export const styles = StyleSheet.create({
 
     touchableOpacity2: {
         flexDirection: 'row'
-    }
+    },
+
+    input: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#FFFFFF',
+        padding: 5,
+        width: '80%',
+        marginBottom: 5,
+        color: '#353535',
+        textAlign: 'center',
+      },
 
 });

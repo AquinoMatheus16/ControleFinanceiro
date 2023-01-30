@@ -108,12 +108,11 @@ export const styles = StyleSheet.create({
     },
 
     titleDash: {
-        color: "black",
         position: "absolute",
         textAlign: 'center',
         textAlignVertical: 'center',
         width: '100%',
-        fontSize: 10,
+        fontSize: 9,
         fontWeight: '900',
         color: '#FFFFFF',
     },
