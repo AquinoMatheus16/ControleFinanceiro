@@ -72,9 +72,9 @@ export const CentroDeCustoCadastrar = () => {
                 <Controller
                     control={control}
                     name="descricao"
-                    render={({ field: { onChange, onBlur, value } }) => (
+                    render={({ field: { onChange, value } }) => (
                         <InputGeral
-                            placeholder={'Descrção'}
+                            placeholder={'Descrição'}
                             onChangeText={onChange}
                             value={value}
                         />
@@ -86,7 +86,7 @@ export const CentroDeCustoCadastrar = () => {
                 <Controller
                     control={control}
                     name="observacao"
-                    render={({ field: { onChange, onBlur, value } }) => (
+                    render={({ field: { onChange, value } }) => (
                         <InputGeral
                             placeholder={'Observação'}
                             multiline={true}
@@ -102,7 +102,7 @@ export const CentroDeCustoCadastrar = () => {
                     <Text>CADASTRAR</Text>
                 </TouchableOpacity>
 
-                <ModalSuccessful isVisible={mostrarModal} textoModal={"Centro De Custo cadastrado com suecsso!"} />
+                <ModalSuccessful isVisible={mostrarModal} textoModal={"Centro De Custo cadastrado com sucesso!"} />
                 <ModalFailed onPress={() => setMostrarModalErro(false)} isVisible={mostrarModalErro} textoModal={"Erro ao cadastrar Centro De Custo."} />
                 <Loading isLoading={isLoading} />
 

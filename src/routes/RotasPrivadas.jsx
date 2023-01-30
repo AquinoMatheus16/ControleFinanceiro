@@ -88,12 +88,12 @@ export const RotasPrivadas = () => {
                             iconColor = focused ? '#f30000' : '#000000';
                             return <FontAwesome name="user-circle-o" size={24} color={iconColor} />;
 
-                        } else if (route.name === 'Titulo') {
+                        } else if (route.name === 'Títulos') {
                             iconName = focused ? 'ios-list' : 'ios-list-outline';
                             iconColor = focused ? '#f30000' : '#000000';
                             return <FontAwesome5 name="list-alt" size={24} color={iconColor} />;
 
-                        } else if (route.name === 'CentroDeCusto') {
+                        } else if (route.name === 'Centros De Custo') {
                             iconName = focused ? 'ios-list' : 'ios-list-outline';
                             iconColor = focused ? '#f30000' : '#000000';
                             return <Feather name="list" size={24} color={iconColor} />;
@@ -116,13 +116,13 @@ export const RotasPrivadas = () => {
                 />
 
                 <Tab.Screen
-                    name="CentroDeCusto"
+                    name="Centros De Custo"
                     component={CentroDecustoStake}
                     options={{ headerShown: false }}
                 />
 
                 <Tab.Screen
-                    name="Titulo"
+                    name="Títulos"
                     component={TituloStake}
                     options={{ headerShown: false }}
                 />
