@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
     },
 
     textInputDate: {
-        color: '#FFFFFF'
+        color: '#353535'
     },
 
     iconInput: {
@@ -92,4 +92,14 @@ export const styles = StyleSheet.create({
         color: '#F32020',
         marginBottom: 5
     },
+
+    input: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#FFFFFF',
+        padding: 5,
+        width: '80%',
+        marginBottom: 5,
+        color: '#353535',
+        textAlign: 'center',
+    }
 });

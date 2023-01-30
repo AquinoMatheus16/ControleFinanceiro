@@ -73,17 +73,17 @@ export const ContaAtualizar = ({ route }) => {
                 foto: foto,
             }
 
-            const novoUser = {
-                nome: nome,
-                email: email,
-                foto: foto,
-                dataCadastro: user.dataCadastro,
-                id: user.id
-            }
+            // const novoUser = {
+            //     nome: nome,
+            //     email: email,
+            //     foto: foto,
+            //     dataCadastro: user.dataCadastro,
+            //     id: user.id
+            // }
 
             setIsLoading(true);
             await putUsuario(user, novoUsuario);
-            await AsyncStorage.setItem("@app_user", JSON.stringify(novoUser))
+            // await AsyncStorage.setItem("@app_user", JSON.stringify(novoUser))
             setIsLoading(false);
 
             setMostrarModal(true);

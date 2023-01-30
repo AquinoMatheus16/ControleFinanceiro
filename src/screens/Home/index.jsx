@@ -5,6 +5,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { getDashBoardTotal } from "../../services/dashboard";
 import { VictoryPie, VictoryTheme, VictoryTooltip } from "victory-native";
 import { getTitulo } from "../../services/titulo";
+import { ConverterValor } from "../../common/ConverterValor";
 
 export const Home = ({ navigation }) => {
 
@@ -50,7 +51,7 @@ export const Home = ({ navigation }) => {
             fetchTotal();
         }, 100);
     }, [load]);
-
+    
     return (
 
         <View style={styles.homeContainer}>
@@ -58,7 +59,7 @@ export const Home = ({ navigation }) => {
             <View style={styles.homeDashboardtopo}>
 
                 <Text style={styles.homeTexto}>Saldo</Text>
-                <Text style={styles.homeNumero}>R$: {(Math.floor(total?.saldo * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                <Text style={styles.homeNumero}>R$: {<ConverterValor valor={""+(Math.floor(total?.saldo * 100).toFixed(0) / 100).toFixed(2)}/>}</Text>
 
                 <View style={styles.dash1}>
 
@@ -83,7 +84,7 @@ export const Home = ({ navigation }) => {
                                     <VictoryTooltip renderInPortal={false} />
                                 }
                             />
-                            <Text style={styles.titleDash}>R$: {(Math.floor(total?.totalApagar * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                            <Text style={styles.titleDash}>R$: {<ConverterValor valor={""+(Math.floor(total?.totalApagar * 100).toFixed(0) / 100).toFixed(2)}/>}</Text>
                         </View>
                         <Text style={styles.titleDash2}>A pagar</Text>
                     </View>
@@ -135,7 +136,7 @@ export const Home = ({ navigation }) => {
                                     <VictoryTooltip renderInPortal={false} />
                                 }
                             />
-                            <Text style={styles.titleDash}>R$: {(Math.floor(total?.totalAreceber * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                            <Text style={styles.titleDash}>R$: {<ConverterValor valor={""+(Math.floor(total?.totalAreceber * 100).toFixed(0) / 100).toFixed(2)}/>}</Text>
                         </View>
                         <Text style={styles.titleDash2}>A receber</Text>
                     </View>

@@ -7,6 +7,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { AntDesign } from '@expo/vector-icons';
 import { format } from "date-fns";
 import { TitulosCard } from "../../components/TitulosCard";
+import { ConverterValor } from "../../common/ConverterValor";
 
 export const Periodo = () => {
 
@@ -128,13 +129,13 @@ export const Periodo = () => {
             </View>
             <View style={styles.valores}>
                 <View style={styles.valor}>
-                    <Text style={styles.textoValores}>Total A pagar: {(Math.floor(dash?.totalApagar * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                    <Text style={styles.textoValores}>Total A pagar: {<ConverterValor valor={""+(Math.floor(dash?.totalApagar * 100).toFixed(0) / 100).toFixed(2)} />}</Text>
                 </View>
                 <View style={styles.valor}>
-                    <Text style={styles.textoValores}>Total A receber: {(Math.floor(dash?.totalAreceber * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                    <Text style={styles.textoValores}>Total A receber: {<ConverterValor valor={""+(Math.floor(dash?.totalAreceber * 100).toFixed(0) / 100).toFixed(2)} />}</Text>
                 </View>
                 <View style={styles.valor}>
-                    <Text style={styles.textoValores}>Saldo: {(Math.floor(dash?.saldo * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                    <Text style={styles.textoValores}>Saldo: {<ConverterValor valor={""+(Math.floor(dash?.saldo * 100).toFixed(0) / 100).toFixed(2)} />}</Text>
                 </View>
             </View>
 

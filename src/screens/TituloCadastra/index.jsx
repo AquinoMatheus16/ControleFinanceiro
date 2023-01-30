@@ -16,6 +16,7 @@ import { InputGeral } from "../../components/InputGeral";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { ModalFailed } from "../../components/ModalFailed";
 import { Loading } from "../../components/Loading";
+import { TextInputMask } from 'react-native-masked-text'
 
 const schema = yup.object({
     descricao: yup.string().min(2, "A descrição deve ter pelo menos 2 digitos").required("Informe a descrição"),
@@ -95,22 +96,27 @@ export const TituloCadastra = () => {
 
     const validarData = () => {
         if (dataFormatada === '') {
-            setErrorDataVencimento("Informe a data de vencimento")
-            return;
+            return setErrorDataVencimento("Informe a data de vencimento");
         }
     };
 
     const post = async (data) => {
+
+        if (dataFormatada === '') {
+            return setErrorDataVencimento("Informe a data de vencimento");
+        }
+
         try {
 
             const novoTitulo = {
                 descricao: data.descricao,
                 tipo: data.tipo,
-                valor: (Math.floor(data.valor * 100).toFixed(0) / 100).toFixed(2),
+                valor: ""+data.valor.split('.').join('').replace(',', '.'),
                 dataVencimento: dataVencimento,
                 centroDeCusto: centroDeCustoJson,
                 observacao: data.observacao
             }
+
 
             JSON.stringify(novoTitulo);
 
@@ -146,7 +152,7 @@ export const TituloCadastra = () => {
                 <Controller
                     control={control}
                     name="tipo"
-                    render={({ field: { onChange, onBlur, value } }) => (
+                    render={({ field: { onChange } }) => (
                         <SelectList
                             style={styles.selectListTipo}
                             setSelected={(val) => setSelectedTipo(val)}
@@ -155,8 +161,8 @@ export const TituloCadastra = () => {
                             save="value"
                             boxStyles={{ borderRadius: 10, width: 320, borderColor: '#FFFFFf', justifyContent: 'center' }}
                             dropdownStyles={{ borderRadius: 5, borderColor: '#FFFFFf', alignItems: 'center' }}
-                            dropdownTextStyles={{ color: '#FFFFFF' }}
-                            inputStyles={{ color: '#FFFFFF' }}
+                            dropdownTextStyles={{ color: '#353535' }}
+                            inputStyles={{ color: '#353535' }}
                             searchPlaceholder='Pesquisar'
                             placeholder='Tipo'
                         />
@@ -168,7 +174,7 @@ export const TituloCadastra = () => {
                 <Controller
                     control={control}
                     name="centroDeCusto"
-                    render={({ field: { onChange, onBlur, value } }) => (
+                    render={({ field: { onChange } }) => (
                         <SelectList
                             setSelected={(val) => setSelected(val)}
                             onSelect={() => onChange(selected)}
@@ -176,8 +182,8 @@ export const TituloCadastra = () => {
                             save='value'
                             boxStyles={{ borderRadius: 10, width: 320, borderColor: '#FFFFFf', justifyContent: 'center' }}
                             dropdownStyles={{ borderRadius: 5, borderColor: '#FFFFFf', alignItems: 'center' }}
-                            dropdownTextStyles={{ color: '#FFFFFF' }}
-                            inputStyles={{ color: '#FFFFFF' }}
+                            dropdownTextStyles={{ color: '#353535' }}
+                            inputStyles={{ color: '#353535' }}
                             notFoundText={'Não existem centros de custos'}
                             searchPlaceholder='Pesquisar'
                             placeholder='Centro de custo'
@@ -204,12 +210,22 @@ export const TituloCadastra = () => {
                     control={control}
                     name="valor"
                     render={({ field: { onChange, onBlur, value } }) => (
-                        <InputGeral
-                            placeholder={"Valor"}
-                            keyboardType={"numeric"}
-                            onChangeText={onChange}
-                            value={value}
-                        />
+
+                        <TextInputMask
+                        type={'money'}
+                        options={{
+                            precision: 2,
+                            separator: ',',
+                            delimiter: '.',
+                            unit: '',
+                            suffixUnit: ''
+                        }}
+                        
+                        onChangeText={onChange}
+                        value={value}
+                        style={styles.input}
+                        placeholder={"Valor"}
+                    />
                     )}
                 />
                 {errors.valor && <Text style={styles.textError}>{errors.valor?.message}</Text>}
@@ -245,7 +261,7 @@ export const TituloCadastra = () => {
                 <Controller
                     control={control}
                     name="observacao"
-                    render={({ field: { onChange, onBlur, value } }) => (
+                    render={({ field: { onChange, value } }) => (
                         <InputGeral
                             placeholder={"Observação"}
                             multiline

@@ -53,6 +53,18 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
     },
 
+    touchableOpacityReceber: {
+        padding: 10,
+        alignItems: 'center',
+        width: '100%',
+        height: 50,
+        backgroundColor: '#F0B800',
+        marginTop: 10,
+        padding: 15,
+        textAlign: 'center',
+        borderRadius: 10,
+    },
+
     touchableOpacityAtualizarTexto: {
         fontWeight: "500",
         color:'#FFFFFF'
@@ -115,7 +127,7 @@ export const styles = StyleSheet.create({
     },
 
     marcador: {
-        backgroundColor: '#1b6dc1',
+        backgroundColor: '#F0B800',
         width: 10,
         height: 18,
         marginRight: 5,

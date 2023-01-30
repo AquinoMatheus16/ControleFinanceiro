@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native"
 import { FlatList } from "react-native-gesture-handler";
+import { ConverterValor } from "../../common/ConverterValor";
 import { TitulosCard } from "../../components/TitulosCard";
 import { getDashBoardTotal } from "../../services/dashboard";
 import { getTitulo } from "../../services/titulo";
@@ -41,7 +42,7 @@ export const TitulosAreceber = () => {
             <View style={styles.containerMian}>
                 <View style={styles.homeDashboardtopo}>
                     <Text style={styles.textoTotal}>Total a receber</Text>
-                    <Text style={styles.textoNumero}>R$: {(Math.floor(total.totalAreceber * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                    <Text style={styles.textoNumero}>R$: {<ConverterValor valor={""+(Math.floor(total.totalAreceber * 100).toFixed(0) / 100).toFixed(2)} />}</Text>
 
                     <Text style={styles.textoTitulo}>Títulos a receber</Text>
                 </View>

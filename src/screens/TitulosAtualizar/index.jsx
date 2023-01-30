@@ -12,13 +12,16 @@ import { AntDesign } from '@expo/vector-icons';
 import { InputGeral } from "../../components/InputGeral";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { Loading } from "../../components/Loading";
+import { TextInputMask } from "react-native-masked-text";
+import { ConverterValor } from "../../common/ConverterValor";
 
 export const TitulosAtualizar = ({ route }) => {
 
     const { item } = route.params;
     const [descricao, setDescricao] = useState(item.descricao);
     const [observacao, setObservacao] = useState(item.observacao);
-    const [valor, setValor] = useState('' + item.valor);
+    const [valor, setValor] = useState((Math.floor(""+item?.valor * 100).toFixed(0) / 100).toFixed(2));
+    const [valores, setValores] = useState('');
     const [dataVencimento, setDataVencimento] = useState(new Date(item.dataVencimento));
     const [tipo, setTipo] = useState('');
 
@@ -113,7 +116,7 @@ export const TitulosAtualizar = ({ route }) => {
             const novoTitulo = {
                 descricao: descricao,
                 tipo: tipo,
-                valor: (Math.floor(valor * 100).toFixed(0) / 100).toFixed(2),
+                valor: (Math.floor(valor.split('.').join('').replace(',', '.') * 100).toFixed(0) / 100).toFixed(2),
                 dataVencimento: dataVencimento,
                 centroDeCusto: centroDeCustoJson,
                 observacao: observacao
@@ -142,7 +145,7 @@ export const TitulosAtualizar = ({ route }) => {
             setIsLoading(false);
         };
     };
-
+    console.log(valor);
     return (
         <ScrollView style={styles.scrollView}>
             <View style={styles.containerMain}>
@@ -156,8 +159,8 @@ export const TitulosAtualizar = ({ route }) => {
                     onSelect={() => setTipo(selectedTipo)}
                     boxStyles={{ borderRadius: 10, width: 320, borderColor: '#FFFFFf', justifyContent: 'center' }}
                     dropdownStyles={{ borderRadius: 5, borderColor: '#FFFFFf', alignItems: 'center' }}
-                    dropdownTextStyles={{ color: '#FFFFFF' }}
-                    inputStyles={{ color: '#FFFFFF' }}
+                    dropdownTextStyles={{ color: '#353535' }}
+                    inputStyles={{ color: '#353535' }}
                     searchPlaceholder='Pesquisar'
                     placeholder='Tipo'
                     defaultOption={{ key: item.tipo, value: item.tipo }}
@@ -171,27 +174,37 @@ export const TitulosAtualizar = ({ route }) => {
                     onSelect={() => setCentroDeCusto(selected)}
                     boxStyles={{ borderRadius: 10, width: 320, borderColor: '#FFFFFf', justifyContent: 'center' }}
                     dropdownStyles={{ borderRadius: 5, borderColor: '#FFFFFf', alignItems: 'center' }}
-                    dropdownTextStyles={{ color: '#FFFFFF' }}
-                    inputStyles={{ color: '#FFFFFF' }}
+                    dropdownTextStyles={{ color: '#353535' }}
+                    inputStyles={{ color: '#353535' }}
                     searchPlaceholder='Pesquisar'
                     placeholder='Centro de custo'
                     defaultOption={{ key: item.id, value: item.centroDeCusto.descricao }}
                 />
 
-                <Text style={styles.texto}>Descrção</Text>
+                <Text style={styles.texto}>Descrição</Text>
                 <InputGeral
-                    placeholder={"Descrção"}
+                    placeholder={"Descrição"}
                     onChangeText={setDescricao}
                     value={descricao}
                 />
                 {erroDescricaoBoolean ? <Text style={styles.textError}>Informe a descrição</Text> : ''}
 
                 <Text style={styles.texto}>Valor</Text>
-                <InputGeral
-                    placeholder={"Valor"}
-                    keyboardType={"numeric"}
+
+                <TextInputMask
+                    type={'money'}
+                    options={{
+                        precision: 2,
+                        separator: ',',
+                        delimiter: '.',
+                        unit: '',
+                        suffixUnit: ''
+                    }}
+
                     onChangeText={setValor}
                     value={valor}
+                    style={styles.input}
+                    placeholder={"Valor"}
                 />
                 {erroValorBoolean ? <Text style={styles.textError}>Informe o valor</Text> : ''}
 

@@ -4,6 +4,7 @@ import { TitulosCard } from "../../components/TitulosCard";
 import { useEffect, useState } from "react";
 import { getTitulo } from "../../services/titulo";
 import { getDashBoardTotal } from "../../services/dashboard";
+import { ConverterValor } from "../../common/ConverterValor";
 
 export const TitulosApagar = () => {
 
@@ -40,7 +41,7 @@ export const TitulosApagar = () => {
             <View style={styles.containerMian}>
                 <View style={styles.homeDashboardtopo}>
                     <Text style={styles.textoTotal}>Total a pagar</Text>
-                    <Text style={styles.textoNumero}>R$: {(Math.floor(total.totalApagar * 100).toFixed(0) / 100).toFixed(2)}</Text>
+                    <Text style={styles.textoNumero}>R$: {<ConverterValor valor={""+(Math.floor(total.totalApagar * 100).toFixed(0) / 100).toFixed(2)} />}</Text>
 
                     <Text style={styles.textoTitulo}>Títulos a pagar</Text>
                 </View>
