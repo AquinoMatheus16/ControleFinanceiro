@@ -1,13 +1,13 @@
 {
   "expo": {
     "name": "Gestão financeira pessoal",
-    "slug": "Gestão financeira",
+    "slug": "gestaoFinanceira",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/img/logo-app-icon.png",
+    "icon": "./assets/icon-logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/img/logo-app-splash.png",
+      "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#1b6dc1"
     },
@@ -22,9 +22,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/img/logo-app-Icon.png",
+        "foregroundImage": "./assets/icon-logo.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.gestaofinanceirapessoal.gestaoFinanceira"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -38,6 +39,11 @@
           }
         ]
       ]
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d3d9babb-39ab-4271-b79f-b24b53413346"
+      }
     }
   }
 }

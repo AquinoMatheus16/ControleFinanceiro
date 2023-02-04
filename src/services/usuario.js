@@ -62,14 +62,14 @@ export const putUsuario = async (usuario, novoUsuario) => {
     return putUsuario;
 };
 
-// DELETE
-// export const deleteUsuario = async (id) => {
-//     try {
-//         const token = await AsyncStorage.getItem("@app_token")
-//         const deleteUsuario = await api.delete(`/api/usuarios/${id}`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
+//DELETE
+export const deleteUsuario = async (id) => {
+    try {
+        const token = await AsyncStorage.getItem("@app_token")
+        const deleteUsuario = await api.delete(`/api/usuarios/${id}`, { headers: { "Authorization": `${token}`, "Accept": "application/json" } })
 
-//         return deleteUsuario;
-//     } catch (e) {
-//         console.error(e);
-//     }
-// };
+        return deleteUsuario;
+    } catch (e) {
+        console.error(e);
+    }
+};

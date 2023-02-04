@@ -45,10 +45,10 @@ export const CentroDeCusto = () => {
 
         <View style={styles.containerMain}>
             <View style={styles.containerTopo}>
-                <Text style={styles.textoTitulo}>Centros De Custo</Text>
+                <Text style={styles.textoTitulo}>Centros de Custo</Text>
 
                 <TouchableOpacity onPress={() => navigation.navigate("Cadastrar Centro De Custo")} style={styles.touchableOpacity}>
-                    <Text style={styles.touchableOpacityTexto}>Cadastar</Text>
+                    <Text style={styles.touchableOpacityTexto}>Cadastrar</Text>
                 </TouchableOpacity>
 
                 <KeyboardAvoidingView behavior="padding" style={styles.containerInput}>

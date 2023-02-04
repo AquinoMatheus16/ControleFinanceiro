@@ -36,7 +36,7 @@ export const Titulos = () => {
     }, [load]);
 
     useEffect(() => {
-        const resultado = titulos.filter((titulo) =>
+        const resultado = titulos?.filter((titulo) =>
             titulo.descricao.toLowerCase().includes(busca.toLowerCase())
         );
         setItemFiltrado(resultado)
@@ -84,7 +84,7 @@ export const Titulos = () => {
                 <Text style={styles.textoTitulo}>Títulos</Text>
 
                 <TouchableOpacity onPress={() => navigation.navigate("Cadastrar Título")} style={styles.touchableOpacity}>
-                    <Text style={styles.touchableOpacityTexto}>Cadastar</Text>
+                    <Text style={styles.touchableOpacityTexto}>Cadastrar</Text>
                 </TouchableOpacity>
 
                 {/* <KeyboardAvoidingView behavior="padding" style={styles.containerInput}>
