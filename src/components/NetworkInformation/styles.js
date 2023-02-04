@@ -12,6 +12,22 @@ export const styles = StyleSheet.create({
         position: 'absolute',
     },
 
+    conatinerIcon: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    containerComponentUnconnected: {
+        width: '80%',
+        height: 80,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#B60D0D',
+        position: 'absolute',
+        borderRadius: 10
+    },
+
     textMessageConnection: {
         fontSize: 12,
         fontWeight: 'bold',
@@ -25,5 +41,20 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         margin: 0,
     },
+
+    modalUnconnected: {
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 0,
+    },
+
+    containerReconecte: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10
+    }
 
 });

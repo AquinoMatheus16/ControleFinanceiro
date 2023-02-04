@@ -1,6 +1,5 @@
 import { Text, View, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
-import { format } from "date-fns";
 import { useNavigation } from "@react-navigation/native";
 import { deleteTitulo, putDespagar, putPagar } from "../../services/titulo";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -9,6 +8,7 @@ import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { ModalConfirm } from "../../components/ModalConfirm";
 import { Loading } from "../../components/Loading";
 import { ConverterValor } from "../../common/ConverterValor";
+import { ConverterData } from "../../common/ConverterData";
 
 export const TitulosDetalhe = ({ route }) => {
 
@@ -22,15 +22,6 @@ export const TitulosDetalhe = ({ route }) => {
     const [mostrarModalMarcar, setMostrarModalMarcar] = useState(false);
     const [mostrarModalMarcarReceber, setMostrarModalMarcarReceber] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
-    const dataC = new Date(item?.dataCadastro)
-    const formatdataCadastro = format(dataC, "dd/MM/yyyy");
-
-    const dataV = new Date(item?.dataVencimento)
-    const formatdataVencimento = format(dataV, "dd/MM/yyyy");
-
-    const dataP = new Date(item?.dataPagamento)
-    const formatdataPagamento = format(dataP, "dd/MM/yyyy");
 
     const onDelete = async () => {
         try {
@@ -154,15 +145,15 @@ export const TitulosDetalhe = ({ route }) => {
 
                 {item?.centroDeCusto === null ? "" : <Text style={styles.texto}>Centro de custo: {item?.centroDeCusto.descricao}</Text>}
 
-                {item?.valor === null ? "" : <Text style={styles.texto}>Valor: <ConverterValor valor={(Math.floor(""+item?.valor * 100).toFixed(0) / 100).toFixed(2)} /></Text>}
+                {item?.valor === null ? "" : <Text style={styles.texto}>Valor: <ConverterValor valor={(Math.floor("" + item?.valor * 100).toFixed(0) / 100).toFixed(2)} /></Text>}
 
-                {item?.tipo === null ? "" : <Text style={styles.texto}>Tipo: {item?.tipo}</Text>}
+                {item?.tipo === null ? "" : <Text style={styles.texto}>Tipo: {item?.tipo === "APAGAR" ? "A pagar" : "A receber"}</Text>}
 
-                {item?.dataVencimento === null ? "" : <Text style={styles.texto}>Data vencimento: {formatdataVencimento}</Text>}
+                {item?.dataVencimento === null ? "" : <Text style={styles.texto}>Data vencimento: {ConverterData(item?.dataVencimento)}</Text>}
 
-                {item?.dataCadastro === null ? "" : <Text style={styles.texto}>Data cadastro: {formatdataCadastro}</Text>}
+                {item?.dataCadastro === null ? "" : <Text style={styles.texto}>Data cadastro: {ConverterData(item?.dataCadastro)}</Text>}
 
-                {item?.dataPagamento === null ? "" : item?.tipo === "APAGAR" ? <Text style={styles.texto}>Data pagamento: {formatdataPagamento}</Text> : <Text style={styles.texto}>Data recebimento: {formatdataPagamento}</Text>}
+                {item?.dataPagamento === null ? "" : item?.tipo === "APAGAR" ? <Text style={styles.texto}>Data pagamento: {ConverterData(item?.dataPagamento)}</Text> : <Text style={styles.texto}>Data recebimento: {ConverterData(item?.dataPagamento)}</Text>}
 
                 {item?.observacao === null ? "" : <Text style={styles.texto}>Observação: {item?.observacao}</Text>}
 
