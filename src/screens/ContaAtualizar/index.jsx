@@ -5,21 +5,25 @@ import { useNavigation } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { EvilIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import { putUsuario } from "../../services/usuario";
+import { deleteUsuario, putUsuario } from "../../services/usuario";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Loading } from "../../components/Loading";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ModalFailed } from "../../components/ModalFailed";
+import { ModalConfirm } from "../../components/ModalConfirm";
 
 export const ContaAtualizar = ({ route }) => {
 
     const { user } = route.params;
     const navigation = useNavigation();
-    const { setLoad } = useContext(AuthContext);
+    const { logoutContext, setLoad } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
     const [mostrarModal, setMostrarModal] = useState(false);
+    const [mostrarModalDelete, setMostrarModalDelete] = useState(false);
     const [mostrarModalFalid, setMostrarModalFalid] = useState(false);
+    const [mostrarModalConfirm, setMostrarModalConfirm] = useState(false);
+    const [mostrarModalErro, setMostrarModalErro] = useState(false);
 
     const [nome, setNome] = useState(user?.nome);
     const [email, setEmail] = useState(user?.email);
@@ -73,17 +77,8 @@ export const ContaAtualizar = ({ route }) => {
                 foto: foto,
             }
 
-            // const novoUser = {
-            //     nome: nome,
-            //     email: email,
-            //     foto: foto,
-            //     dataCadastro: user.dataCadastro,
-            //     id: user.id
-            // }
-
             setIsLoading(true);
             await putUsuario(user, novoUsuario);
-            // await AsyncStorage.setItem("@app_user", JSON.stringify(novoUser))
             setIsLoading(false);
 
             setMostrarModal(true);
@@ -105,6 +100,26 @@ export const ContaAtualizar = ({ route }) => {
                 setMostrarModalFalid(false);
             }, 1500);
         };
+    };
+
+    const onDelete = async () => {
+        try {
+            setMostrarModalConfirm(false);
+
+            setIsLoading(true);
+            await deleteUsuario(user.id);
+            setIsLoading(false);
+
+            setMostrarModalDelete(true)
+            setTimeout(() => {
+                logoutContext();
+            }, 2000);
+
+        } catch (e) {
+            // console.error(e);
+            setIsLoading(false);
+            setMostrarModalErro(true);
+        }
     };
 
     return (
@@ -137,8 +152,23 @@ export const ContaAtualizar = ({ route }) => {
                 {erroEmail ? <Text style={styles.textError}>Informe o e-mail</Text> : ''}
 
                 <TouchableOpacity onPress={() => validarInput()}>
-                    <Text style={styles.enviar}>EDITAR</Text>
+                    <Text style={styles.enviar}>SALVAR</Text>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => setMostrarModalConfirm(true)}>
+                    <Text style={styles.enviar}>DELETAR CONTA</Text>
+                </TouchableOpacity>
+
+                <ModalConfirm
+                    isVisible={mostrarModalConfirm}
+                    onPressCancel={() => setMostrarModalConfirm(false)}
+                    onPressConfirm={() => onDelete()}
+                    textoModal={'Deseja mesmo deletar seu usuário? Você perderá o acesso a está conta!'}
+                />
+
+                <ModalSuccessful isVisible={mostrarModalDelete} textoModal={'Usuário deletado com sucesso.'} />
+                <ModalFailed isVisible={mostrarModalErro} textoModal={'Não foi possível deletar o usuário.'} />
+                <Loading isLoading={isLoading} />
+
 
                 <ModalSuccessful isVisible={mostrarModal} textoModal={'Conta editada com sucesso!'} />
                 <ModalFailed isVisible={mostrarModalFalid} textoModal={'Erro ao atualizar'} />

@@ -8,8 +8,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Loading } from '../../components/Loading';
 import { Image } from 'react-native';
-import carteira from '../../img/logo-app-icon.png';
+import carteira from '../../img/icon-logo.png';
 import { ModalFailed } from '../../components/ModalFailed';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 const schema = yup.object({
   email: yup.string().email("E-mail inválido").required("Informe o email"),
@@ -18,6 +19,7 @@ const schema = yup.object({
 
 export const Login = ({ navigation }) => {
 
+  const netInfo = useNetInfo();
   const [isLoading, setIsLoading] = useState(false);
   const [mostarModalFailed, setMostarModalFailed] = useState(false);
   const { control, handleSubmit, formState: { errors } } = useForm({
@@ -34,6 +36,11 @@ export const Login = ({ navigation }) => {
 
     } catch (error) {
       setIsLoading(false);
+
+        if(!netInfo.isConnected) {
+          alert("Sem conexão com a internet");
+          return;
+        }
 
       setMostarModalFailed(true);
       setTimeout(() => {

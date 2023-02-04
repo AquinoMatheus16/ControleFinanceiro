@@ -36,8 +36,8 @@ export const Home = ({ navigation }) => {
     ]
 
     const valorDashTitulo = [
-        { key: '1', label: titulos.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("APAGAR")).length, value: titulos.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("APAGAR")).length },
-        { key: '2', label: titulos.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("ARECEBER")).length, value: titulos.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("ARECEBER")).length },
+        { key: '1', label: titulos?.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("APAGAR")).length, value: titulos?.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("APAGAR")).length },
+        { key: '2', label: titulos?.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("ARECEBER")).length, value: titulos?.filter((titulo) => !titulo?.dataPagamento && titulo?.tipo.endsWith("ARECEBER")).length },
     ]
 
     const fetchData = async () => {
@@ -110,7 +110,7 @@ export const Home = ({ navigation }) => {
                                     <VictoryTooltip renderInPortal={false} />
                                 }
                             />
-                            <Text style={styles.titleDash}>{titulos.filter((titulo) => !titulo?.dataPagamento).length}</Text>
+                            <Text style={styles.titleDash}>{titulos?.filter((titulo) => !titulo?.dataPagamento).length}</Text>
                         </View>
                         <Text style={styles.titleDash2}>Títulos</Text>
                     </View>
