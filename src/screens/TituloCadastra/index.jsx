@@ -47,8 +47,8 @@ export const TituloCadastra = () => {
     const [dataFormatada, setDataFormatada] = useState('');
 
     const selectTipo = [
-        { key: '1', value: 'APAGAR' },
-        { key: '2', value: 'ARECEBER' }
+        { key: 'APAGAR', value: 'A pagar' },
+        { key: 'ARECEBER', value: 'A receber' }
     ]
 
     const { control, handleSubmit, formState: { errors } } = useForm({
@@ -111,12 +111,11 @@ export const TituloCadastra = () => {
             const novoTitulo = {
                 descricao: data.descricao,
                 tipo: data.tipo,
-                valor: ""+data.valor.split('.').join('').replace(',', '.'),
+                valor: "" + data.valor.split('.').join('').replace(',', '.'),
                 dataVencimento: dataVencimento,
                 centroDeCusto: centroDeCustoJson,
                 observacao: data.observacao
             }
-
 
             JSON.stringify(novoTitulo);
 
@@ -125,8 +124,8 @@ export const TituloCadastra = () => {
             await postTitulo(novoTitulo);
             setIsLoading(false);
 
-            setMostrarModal(true)
-            setLoad(true)
+            setMostrarModal(true);
+            setLoad(true);
 
             setTimeout(() => {
                 navigation.goBack();
@@ -158,7 +157,7 @@ export const TituloCadastra = () => {
                             setSelected={(val) => setSelectedTipo(val)}
                             onSelect={() => onChange(selectedTipo)}
                             data={selectTipo}
-                            save="value"
+                            save="key"
                             boxStyles={{ borderRadius: 10, width: 320, borderColor: '#FFFFFf', justifyContent: 'center' }}
                             dropdownStyles={{ borderRadius: 5, borderColor: '#FFFFFf', alignItems: 'center' }}
                             dropdownTextStyles={{ color: '#353535' }}
@@ -212,20 +211,20 @@ export const TituloCadastra = () => {
                     render={({ field: { onChange, onBlur, value } }) => (
 
                         <TextInputMask
-                        type={'money'}
-                        options={{
-                            precision: 2,
-                            separator: ',',
-                            delimiter: '.',
-                            unit: '',
-                            suffixUnit: ''
-                        }}
-                        
-                        onChangeText={onChange}
-                        value={value}
-                        style={styles.input}
-                        placeholder={"Valor"}
-                    />
+                            type={'money'}
+                            options={{
+                                precision: 2,
+                                separator: ',',
+                                delimiter: '.',
+                                unit: '',
+                                suffixUnit: ''
+                            }}
+
+                            onChangeText={onChange}
+                            value={value}
+                            style={styles.input}
+                            placeholder={"Valor"}
+                        />
                     )}
                 />
                 {errors.valor && <Text style={styles.textError}>{errors.valor?.message}</Text>}

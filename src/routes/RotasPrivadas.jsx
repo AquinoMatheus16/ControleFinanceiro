@@ -76,7 +76,6 @@ export const RotasPrivadas = () => {
             <NetworkInformation />
             <Tab.Navigator
                 screenOptions={({ route }) => ({
-                    
                     tabBarIcon: ({ focused }) => {
                         let iconName;
                         let iconColor;
@@ -85,27 +84,26 @@ export const RotasPrivadas = () => {
                             iconName = focused
                                 ? 'ios-information-circle'
                                 : 'ios-information-circle-outline';
-                            iconColor = focused ? '#f30000' : '#000000';
+                            iconColor = focused ? '#1b6dc1' : '#000000';
                             return <FontAwesome name="user-circle-o" size={24} color={iconColor} />;
 
                         } else if (route.name === 'Títulos') {
                             iconName = focused ? 'ios-list' : 'ios-list-outline';
-                            iconColor = focused ? '#f30000' : '#000000';
+                            iconColor = focused ? '#1b6dc1' : '#000000';
                             return <FontAwesome5 name="list-alt" size={24} color={iconColor} />;
 
-                        } else if (route.name === 'Centros De Custo') {
+                        } else if (route.name === 'Centros de Custo') {
                             iconName = focused ? 'ios-list' : 'ios-list-outline';
-                            iconColor = focused ? '#f30000' : '#000000';
+                            iconColor = focused ? '#1b6dc1' : '#000000';
                             return <Feather name="list" size={24} color={iconColor} />;
 
                         } else if (route.name === 'Home') {
                             iconName = focused ? 'ios-list' : 'ios-list-outline';
-                            iconColor = focused ? '#f30000' : '#000000';
+                            iconColor = focused ? '#1b6dc1' : '#000000';
                             return <Ionicons name="home" size={24} color={iconColor} />;
                         }
                     },
-                    tabBarActiveTintColor: 'tomato',
-                    tabBarInactiveTintColor: 'gray',
+                    tabBarInactiveTintColor: '#2D2B2B',
                 })}
             >
 
@@ -116,7 +114,7 @@ export const RotasPrivadas = () => {
                 />
 
                 <Tab.Screen
-                    name="Centros De Custo"
+                    name="Centros de Custo"
                     component={CentroDecustoStake}
                     options={{ headerShown: false }}
                 />

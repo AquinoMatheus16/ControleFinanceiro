@@ -46,9 +46,10 @@ export const TitulosAreceber = () => {
 
                     <Text style={styles.textoTitulo}>Títulos a receber</Text>
                 </View>
+                {titulos?.filter(filtrarPorNaoRecebimento).length === 0 ? <Text style={styles.texto}>Nenhum título a receber cadastrado</Text> : ''}
                 <View style={styles.containerCard}>
                     <FlatList
-                        data={titulos.filter(filtrarPorNaoRecebimento)}
+                        data={titulos?.filter(filtrarPorNaoRecebimento)}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) => <TitulosCard item={item} />}
                         showsVerticalScrollIndicator={false}

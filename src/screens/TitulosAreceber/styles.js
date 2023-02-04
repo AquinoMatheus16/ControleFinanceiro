@@ -54,6 +54,14 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius: 30,
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    },
 
-})
+    texto: {
+        color: '#000000',
+        fontSize: 17,
+        backgroundColor: '#FFFFFF',
+        padding: 10,
+        borderRadius: 10,
+        marginTop: 30
+    }
+});

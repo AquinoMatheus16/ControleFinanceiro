@@ -12,17 +12,13 @@ export const TitulosApagar = () => {
     const [total, setTotal] = useState("");
 
     const fetchData = async () => {
-
         const tituloList = await getTitulo();
         setTitulos(tituloList);
-
     };
 
     const fetchTotal = async () => {
-
         const total = await getDashBoardTotal();
         setTotal(total);
-
     };
 
     useEffect(() => {
@@ -41,13 +37,14 @@ export const TitulosApagar = () => {
             <View style={styles.containerMian}>
                 <View style={styles.homeDashboardtopo}>
                     <Text style={styles.textoTotal}>Total a pagar</Text>
-                    <Text style={styles.textoNumero}>R$: {<ConverterValor valor={""+(Math.floor(total.totalApagar * 100).toFixed(0) / 100).toFixed(2)} />}</Text>
+                    <Text style={styles.textoNumero}>R$: {<ConverterValor valor={"" + (Math.floor(total.totalApagar * 100).toFixed(0) / 100).toFixed(2)} />}</Text>
 
                     <Text style={styles.textoTitulo}>Títulos a pagar</Text>
                 </View>
+                {titulos?.filter(filtrarPorNaoPagamento).length === 0 ? <Text style={styles.texto}>Nenhum título a pagar cadastrado</Text> : ''}
                 <View style={styles.containerCard}>
                     <FlatList
-                        data={titulos.filter(filtrarPorNaoPagamento)}
+                        data={titulos?.filter(filtrarPorNaoPagamento)}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) => <TitulosCard item={item} />}
                         showsVerticalScrollIndicator={false}
