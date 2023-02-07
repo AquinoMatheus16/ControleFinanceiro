@@ -5,21 +5,29 @@ import { useEffect, useState } from "react";
 import { getTitulo } from "../../services/titulo";
 import { getDashBoardTotal } from "../../services/dashboard";
 import { ConverterValor } from "../../common/ConverterValor";
+import { Loading } from "../../components/Loading";
 
 export const TitulosApagar = () => {
 
     const [titulos, setTitulos] = useState([]);
     const [total, setTotal] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [mostrarMensagem, setMostrarMensagem] = useState(false);
 
     const fetchData = async () => {
+        setIsLoading(true);
         const tituloList = await getTitulo();
+        setIsLoading(false);
+        if (titulos?.filter(filtrarPorNaoPagamento).length === 0) {
+            setMostrarMensagem(true);
+        }
         setTitulos(tituloList);
-    };
+    }
 
     const fetchTotal = async () => {
         const total = await getDashBoardTotal();
         setTotal(total);
-    };
+    }
 
     useEffect(() => {
         fetchData();
@@ -41,7 +49,7 @@ export const TitulosApagar = () => {
 
                     <Text style={styles.textoTitulo}>Títulos a pagar</Text>
                 </View>
-                {titulos?.filter(filtrarPorNaoPagamento).length === 0 ? <Text style={styles.texto}>Nenhum título a pagar cadastrado</Text> : ''}
+                {mostrarMensagem ? titulos?.filter(filtrarPorNaoPagamento).length === 0 ? <Text style={styles.texto}>Nenhum título a pagar cadastrado</Text> : '' : ''}
                 <View style={styles.containerCard}>
                     <FlatList
                         data={titulos?.filter(filtrarPorNaoPagamento)}
@@ -52,6 +60,7 @@ export const TitulosApagar = () => {
                     />
                 </View>
             </View>
+            <Loading isLoading={isLoading} />
         </>
-    )
-};
+    );
+}

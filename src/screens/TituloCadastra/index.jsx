@@ -16,7 +16,7 @@ import { InputGeral } from "../../components/InputGeral";
 import { ModalSuccessful } from "../../components/ModalSuccessful";
 import { ModalFailed } from "../../components/ModalFailed";
 import { Loading } from "../../components/Loading";
-import { TextInputMask } from 'react-native-masked-text'
+import { TextInputMask } from 'react-native-masked-text';
 
 const schema = yup.object({
     descricao: yup.string().min(2, "A descrição deve ter pelo menos 2 digitos").required("Informe a descrição"),
@@ -70,35 +70,35 @@ export const TituloCadastra = () => {
                 let newArray = response.map((item) => {
                     return { key: item.id, value: item.descricao }
                 })
-                setData(newArray)
-                setCentroDeCustoSalvos(response)
+                setData(newArray);
+                setCentroDeCustoSalvos(response);
             })
             .catch((e) => {
                 console.log(e)
-            })
-    };
+            });
+    }
 
     const centroDeCustoId = () => {
         centroDeCustoSalvos.map(item => {
             if (item.descricao === selected) {
                 setCentroDeCustoJson(item)
             }
-        })
-    };
+        });
+    }
 
     useEffect(() => {
-        getCentroDeCustos()
-    }, []);
+        getCentroDeCustos();
+    }, [data]);
 
     useEffect(() => {
-        centroDeCustoId()
+        centroDeCustoId();
     }, [selected]);
 
     const validarData = () => {
         if (dataFormatada === '') {
             return setErrorDataVencimento("Informe a data de vencimento");
         }
-    };
+    }
 
     const post = async (data) => {
 
@@ -132,7 +132,7 @@ export const TituloCadastra = () => {
             }, 2000);
 
             setTimeout(() => {
-                setLoad(false)
+                setLoad(false);
             }, 160);
 
         } catch (error) {
@@ -183,7 +183,7 @@ export const TituloCadastra = () => {
                             dropdownStyles={{ borderRadius: 5, borderColor: '#FFFFFf', alignItems: 'center' }}
                             dropdownTextStyles={{ color: '#353535' }}
                             inputStyles={{ color: '#353535' }}
-                            notFoundText={'Não existem centros de custos'}
+                            notFoundText={'Não existem centros de custo cadastrados'}
                             searchPlaceholder='Pesquisar'
                             placeholder='Centro de custo'
                         />
@@ -282,5 +282,5 @@ export const TituloCadastra = () => {
 
             </View>
         </ScrollView >
-    )
-};
+    );
+}
