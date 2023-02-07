@@ -18,6 +18,9 @@ import { FontAwesome, FontAwesome5, Feather, Ionicons } from '@expo/vector-icons
 import { CentroDeCustoDetalhe } from '../screens/CentroDeCustoDetalhe';
 import { NetworkInformation } from '../components/NetworkInformation';
 import { ContaAtualizar } from '../screens/ContaAtualizar';
+import { useContext, useEffect } from 'react';
+import { api } from '../services/api';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
@@ -69,7 +72,26 @@ const ContatoStake = () => {
     )
 };
 
+
 export const RotasPrivadas = () => {
+
+    const { logoutContext } = useContext(AuthContext);
+    
+    const valida = () => {
+        api.interceptors.response.use(
+            response => Promise.resolve(response),
+            error => {
+                alert("token expirado!")
+                if (error.response.status === 403) {
+                    setTimeout(() => {
+                        logoutContext()
+                    }, 2000)
+                }
+    })}
+
+    useEffect(() => {
+        valida()
+    }, [])
 
     return (
         <>

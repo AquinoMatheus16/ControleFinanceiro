@@ -46,6 +46,7 @@ export const styles = StyleSheet.create({
         width: '100%',
         height: '40%',
         alignItems: 'center',
+        justifyContent: "space-between",
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
     },
@@ -65,6 +66,7 @@ export const styles = StyleSheet.create({
     },
 
     entrar: {
-        fontWeight: '900'
+        fontWeight: '900',
+        color: "#fff"
     }
 })

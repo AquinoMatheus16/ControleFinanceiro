@@ -10,7 +10,7 @@ export const getDashBoardTotal = async () => {
 
         return data;
     } catch (e) {
-        console.error(e);
+        // console.error(e);
     }
 };
 

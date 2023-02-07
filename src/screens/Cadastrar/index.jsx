@@ -54,7 +54,6 @@ export const Cadastrar = ({ navigation }) => {
         confirmaSenha: data.confirmaSenha,
         foto: image
       };
-      console.log(novoUsuario);
 
       setIsLoading(true);
       await postUsuario(novoUsuario);
@@ -68,14 +67,6 @@ export const Cadastrar = ({ navigation }) => {
 
     } catch (error) {
       console.error('error:', error);
-
-      console.log('error1:', error.dataHora);
-      console.log('error2:', error.status);
-      console.log('error4:', error.message);
-      console.log('error JSON',JSON.stringify(error))
-      // console.log('error1:', error.response.data);
-      // console.log('error2:', error.response.status);
-      // console.log('error3:', error.response.headers);
 
       setIsLoading(false);
       setMostrarModalFailed(true);

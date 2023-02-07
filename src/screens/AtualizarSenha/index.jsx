@@ -110,6 +110,7 @@ export const AtualizarSenha = ({ navigation }) => {
                                 onChangeText={onChange}
                                 value={value}
                                 editable={desabilitar}
+                                secureTextEntry={true}
                             />
                         )}
                     />

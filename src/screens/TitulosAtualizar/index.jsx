@@ -21,10 +21,9 @@ export const TitulosAtualizar = ({ route }) => {
     const [descricao, setDescricao] = useState(item.descricao);
     const [observacao, setObservacao] = useState(item.observacao);
     const [valor, setValor] = useState((Math.floor(""+item?.valor * 100).toFixed(0) / 100).toFixed(2));
-    const [valores, setValores] = useState('');
     const [dataVencimento, setDataVencimento] = useState(new Date(item.dataVencimento));
     const [tipo, setTipo] = useState('');
-
+    const [mostrarModalErro, setMostrarModalErro] = useState(false);
     const [centroDeCusto, setCentroDeCusto] = useState(item.centroDeCusto);
     const [data, setData] = useState([]);
     const [centroDeCustoSalvos, setCentroDeCustoSalvos] = useState([]);
@@ -141,11 +140,10 @@ export const TitulosAtualizar = ({ route }) => {
             }, 120);
 
         } catch (error) {
-            // console.error("Erro: " + error);
             setIsLoading(false);
+            mostrarModalErro(true);
         };
     };
-    console.log(valor);
     return (
         <ScrollView style={styles.scrollView}>
             <View style={styles.containerMain}>
@@ -248,6 +246,7 @@ export const TitulosAtualizar = ({ route }) => {
                 </TouchableOpacity>
 
                 <ModalSuccessful isVisible={mostrarModal} textoModal={"Título atualizado com suecsso!"} />
+                <ModalFailed onPress={() => setMostrarModalErro(false)} isVisible={mostrarModalErro} textoModal={"Erro ao atualizar."} />
                 <Loading isLoading={isLoading} />
 
             </View>
