@@ -8,7 +8,7 @@ Repositório dedicado a criação do aplicativo Gestão Financeira Pessoal.
 
 ## Instalando Gestão Financeira Pessoal
 
-[Play Store](https://pip.pypa.io/en/stable/)
+[Play Store](https://play.google.com/store/apps/details?id=com.gestaofinanceirapessoal.gestaoFinanceira)
 
 <!-- ## Usando -->
 
