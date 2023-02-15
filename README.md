@@ -3,7 +3,7 @@
 Repositório dedicado a criação do aplicativo Gestão Financeira Pessoal.
 
 <h2 align="flex-start">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="../src/img/image-back.png" />
+  <img alt="Logo" title="#Logo" src="./src/img/image-back.png" />
 </h2>
 
 ## Instalando Gestão Financeira Pessoal
